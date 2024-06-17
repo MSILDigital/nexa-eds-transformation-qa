@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p135331-e1341966.adobeaemcloud.com/bin/franklin.delivery/msildigital/msil-eds-transformation/feature-adb-575"
+    url: "https://author-p135331-e1341966.adobeaemcloud.com/bin/franklin.delivery/msildigital/msil-eds-transformation/main"
     type: "markup"
     suffix: ".html"
