@@ -185,5 +185,16 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "contact",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
   }
 ]
