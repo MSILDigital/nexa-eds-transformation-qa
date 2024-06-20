@@ -27,13 +27,20 @@
       "title",
       "hero",
       "cards",
-      "columns"
+      "columns",
+      "sign-in"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "sign-in",
+    "components": [
+      "ctaWithIcon"
     ]
   }
 ]
