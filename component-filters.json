@@ -29,14 +29,22 @@
       "cards",
       "columns",
       "logo",
-      "columns",
-      "teaser"
+      "teaser",
+      "ctaWithIcon",
+      "contact",
+      "link-grid"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "contact",
+    "components": [
+      "ctaWithIcon"
     ]
   }
 ]
