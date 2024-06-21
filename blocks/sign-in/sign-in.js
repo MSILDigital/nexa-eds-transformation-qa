@@ -1,18 +1,19 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const signIn = block.querySelector('.sign-in > div:first-child > div');
+  const [signInEl, desktopImageEl, mobileImageEl, desktopAltTextEl, mobileAltTextEl, signInTargetEl, ...ctasEl] = block.children;
+  const signIn = signInEl.querySelector('div');
   const link = signIn.querySelector('p.button-container a');
   if (signIn.querySelector('h4') || link) { signIn.querySelector('p.button-container')?.remove(); }
   signIn.classList.add('sign-in-teaser__desc-content');
 
   const ctaText = link?.textContent?.trim() || '';
   const href = link?.href || '#';
-  const desktopSrc = block.querySelector('.sign-in div:nth-of-type(2) > div > picture > img')?.src;
-  const desktopAltText = block.querySelector('.sign-in div:nth-of-type(4) > div > p')?.textContent?.trim() || 'desktopImage';
-  const mobileSrc = block.querySelector('.sign-in div:nth-of-type(3) > div > picture > img')?.src;
-  const mobileAltText = block.querySelector('.sign-in div:nth-of-type(5) > div > p')?.textContent?.trim() || 'mobileImage';
-  const signInTarget = block.querySelector('.sign-in div:nth-of-type(6) > div > p')?.textContent?.trim() || '_self';
+  const desktopSrc = desktopImageEl.querySelector('img')?.src;
+  const desktopAltText = desktopAltTextEl?.textContent?.trim() || 'desktopImage';
+  const mobileSrc = mobileImageEl.querySelector('img')?.src;
+  const mobileAltText = mobileAltTextEl?.textContent?.trim() || 'mobileImage';
+  const signInTarget = signInTargetEl?.textContent?.trim() || '_self';
 
   const mobileSignInHtml = `
         <div class="sign-in-teaser">
@@ -28,7 +29,7 @@ export default function decorate(block) {
         </div>
     `;
 
-  const ctaElements = Array.from(block.querySelectorAll('.sign-in > div:nth-last-child(-n+2)')).map((element) => {
+  const ctaElements = ctasEl.map((element) => {
     const [imageEl, altTextEl, ctaTextEl, linkEl, targetEl] = element.children;
     const imgSrc = imageEl?.querySelector('img')?.src;
     const altText = altTextEl?.textContent?.trim() || 'icon';
