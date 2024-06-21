@@ -187,13 +187,56 @@
     ]
   },
   {
-    "id": "contact",
+    "id": "sign-in",
     "fields": [
       {
-        "component": "text-input",
+        "component": "richtext",
+        "name": "rte",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
         "valueType": "string",
-        "name": "title",
-        "label": "Title"
+        "name": "desktopImage",
+        "label": "Desktop Image",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "mobileImage",
+        "label": "Mobile Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "desktopAltText",
+        "label": "Desktop Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "mobileAltText",
+        "label": "Mobile Alt Text"
+      },
+      {
+        "component": "select",
+        "name": "target",
+        "value": "",
+        "label": "Open Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
       }
     ]
   },

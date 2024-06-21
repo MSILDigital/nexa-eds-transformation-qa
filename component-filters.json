@@ -28,7 +28,7 @@
       "hero",
       "cards",
       "columns",
-      "contact"
+      "sign-in"
     ]
   },
   {
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "id": "contact",
+    "id": "sign-in",
     "components": [
       "ctaWithIcon"
     ]
