@@ -27,13 +27,32 @@
       "title",
       "hero",
       "cards",
-      "columns"
+      "columns",
+      "logo",
+      "teaser",
+      "ctaWithIcon",
+      "contact",
+      "link-grid",
+      "sign-in",
+      "icontitle"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "contact",
+    "components": [
+      "ctaWithIcon"
+    ]
+  },
+  {
+    "id": "sign-in",
+    "components": [
+      "ctaWithIcon"
     ]
   }
 ]
