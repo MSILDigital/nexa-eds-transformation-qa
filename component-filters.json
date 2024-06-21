@@ -34,7 +34,9 @@
       "contact",
       "link-grid",
       "sign-in",
-      "icontitle"
+      "icontitle",
+      "teaser-list",
+      "immersive-teaser"
     ]
   },
   {
@@ -53,6 +55,18 @@
     "id": "sign-in",
     "components": [
       "ctaWithIcon"
+    ]
+  },
+  {
+    "id": "teaser-list",
+    "components": [
+      "teaser"
+    ]
+  },
+  {
+    "id": "immersive-teaser",
+    "components": [
+      "teaser"
     ]
   }
 ]
