@@ -28,6 +28,11 @@
       "hero",
       "cards",
       "columns",
+      "logo",
+      "teaser",
+      "ctaWithIcon",
+      "contact",
+      "link-grid",
       "sign-in"
     ]
   },
@@ -35,6 +40,12 @@
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "contact",
+    "components": [
+      "ctaWithIcon"
     ]
   },
   {

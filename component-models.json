@@ -286,5 +286,112 @@
         ]
       }
     ]
+  },
+  {
+    "id": "ctaWithIcon",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "alt",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text-input",
+        "name": "ctaText",
+        "label": "CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "href",
+        "label": "CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "target",
+        "value": "",
+        "label": "Open Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "contact",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "link-list",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "Column 1",
+        "name": "col1"
+      },
+      {
+        "component": "richtext",
+        "name": "rte",
+        "label": "Rich Text - List",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "Column 2",
+        "name": "col2"
+      },
+      {
+        "component": "richtext",
+        "name": "rte2",
+        "label": "Rich Text - List",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "Column 3",
+        "name": "col3"
+      },
+      {
+        "component": "richtext",
+        "name": "rte3",
+        "label": "Rich Text - List",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "Column 4",
+        "name": "col4"
+      },
+      {
+        "component": "richtext",
+        "name": "rte4",
+        "label": "Rich Text - List",
+        "valueType": "string"
+      }
+    ]
   }
 ]
