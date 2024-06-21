@@ -187,85 +187,49 @@
     ]
   },
   {
-    "id": "logo",
+    "id": "contact",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "ctaWithIcon",
     "fields": [
       {
         "component": "reference",
         "valueType": "string",
-        "name": "logoImage",
-        "label": "Logo Image",
+        "name": "icon",
+        "label": "Icon",
         "multi": false
       },
       {
-        "component": "text-input",
+        "component": "text",
+        "valueType": "string",
         "name": "alt",
-        "value": "",
-        "label": "Alt Text",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text-input",
+        "name": "ctaText",
+        "label": "CTA Text",
         "valueType": "string"
       },
       {
         "component": "aem-content",
         "valueType": "string",
         "name": "href",
-        "label": "Link"
-      }
-    ]
-  },
-  {
-    "id": "teaser",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text-input",
-        "name": "alt",
-        "value": "",
-        "label": "Alt Text",
-        "valueType": "string"
-      },
-      {
-        "component": "text-input",
-        "name": "pretitle",
-        "value": "",
-        "label": "Pretitle",
-        "valueType": "string"
-      },
-      {
-        "component": "text-input",
-        "name": "title",
-        "value": "",
-        "label": "Title",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "name": "description",
-        "value": "",
-        "label": "Description",
-        "valueType": "string"
-      },
-      {
-        "component": "text-input",
-        "name": "primaryText",
-        "label": "Primary CTA Text",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "primaryLink",
-        "label": "Primary CTA Link"
+        "label": "CTA Link"
       },
       {
         "component": "select",
-        "name": "primaryTarget",
+        "name": "target",
         "value": "",
-        "label": "Open Primary Link in New Page ?",
+        "label": "Open Link in New Page ?",
         "valueType": "string",
         "options": [
           {
@@ -275,78 +239,6 @@
           {
             "name": "No",
             "value": "_self"
-          }
-        ]
-      },
-      {
-        "component": "text-input",
-        "name": "secondaryText",
-        "label": "Secondary CTA Text",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "secondaryLink",
-        "label": "Secondary CTA Link"
-      },
-      {
-        "component": "select",
-        "name": "secondaryTarget",
-        "value": "",
-        "label": "Open Secondary Link in New Page ?",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Yes",
-            "value": "_blank"
-          },
-          {
-            "name": "No",
-            "value": "_self"
-          }
-        ]
-      },
-      {
-        "component": "multiselect",
-        "name": "style",
-        "label": "Style",
-        "valueType": "string",
-        "maxSize": 2,
-        "options": [
-          {
-            "name": "Theme",
-            "children": [
-              {
-                "name": "Light",
-                "value": "light-teaser"
-              },
-              {
-                "name": "Dark",
-                "value": "dark-teaser"
-              }
-            ]
-          },
-          {
-            "name": "Type",
-            "children": [
-              {
-                "name": "Buyers Guide",
-                "value": "buyers-guide-teaser"
-              },
-              {
-                "name": "Finance Card",
-                "value": "finance-card-teaser"
-              },
-              {
-                "name": "Header Teaser",
-                "value": "header-image-teaser"
-              },
-              {
-                "name": "Text Only Teaser",
-                "value": "text-only-teaser"
-              }
-            ]
           }
         ]
       }

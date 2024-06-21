@@ -28,15 +28,19 @@
       "hero",
       "cards",
       "columns",
-      "logo",
-      "columns",
-      "teaser"
+      "contact"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "contact",
+    "components": [
+      "ctaWithIcon"
     ]
   }
 ]
