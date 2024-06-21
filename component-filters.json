@@ -32,7 +32,9 @@
       "teaser",
       "ctaWithIcon",
       "contact",
-      "link-grid"
+      "link-grid",
+      "sign-in",
+      "icontitle"
     ]
   },
   {
@@ -43,6 +45,12 @@
   },
   {
     "id": "contact",
+    "components": [
+      "ctaWithIcon"
+    ]
+  },
+  {
+    "id": "sign-in",
     "components": [
       "ctaWithIcon"
     ]
