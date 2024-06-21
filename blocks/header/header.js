@@ -67,10 +67,11 @@ export default async function decorate(block) {
   userDropdownDiv.append(contact);
   const userDropdown = nav.querySelector('.sign-in-wrapper');
   const userAccountLinkItems = userDropdownDiv.querySelectorAll('.user__account>a');
+  const signInTeaser = nav.querySelector('.sign-in-teaser');
 
   const desktopHeader = `
-    <div class="navbar">
-      <div class="nav-hamburger">
+    <div class="navbar navbar-nexa">
+      <div class="nav-hamburger nav-hamburger-nexa">
       <button type="button" aria-controls="nav" aria-label="Open navigation">
         <span class="nav-hamburger-icon"></span>
       </button>
@@ -79,7 +80,7 @@ export default async function decorate(block) {
       <div class="links"></div>
       <div class="right" id="nav-right">
         <div class="location">Gurgaon &#9662;</div>
-        <img id="user-img" src="" alt="user" />
+        <img id="user-img" src="../../icons/account_circle.svg" alt="user" />
         ${userDropdown.outerHTML}
       </div>
       <div class="car">${carIcon}</div>
@@ -88,11 +89,11 @@ export default async function decorate(block) {
   `;
 
   const mobileHeader = `
-    <div id="menu" class="menu">
-      <div class="menu-header">
-        <div class="back-arrow"><img src="" alt="back" /></div>
+    <div id="menu" class="menu menu-nexa">
+      <div class="menu-header menu-header-nexa">
+        <div class="back-arrow"><img src="../../icons/chevron_left_white.svg" alt="back" /></div>
         <span class="menu-title">Menu</span>
-        <span class="close-icon"><img src="" alt="close" /></span>
+        <span class="close-icon"><img src="../../icons/close_white.svg" alt="close" /></span>
       </div>
       <ul class="menu-list"></ul>
     </div>
@@ -116,6 +117,8 @@ export default async function decorate(block) {
   const linkEl = document.querySelector('.links');
   const menuList = document.querySelector('.menu-list');
 
+  menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
+
   list.forEach((el, i) => {
     linkEl.innerHTML += `<div class="link-title"><span>${el.heading}</span></div> ${el.content || el.teaser ? `<div class="desktop-panel panel ${el.heading.toLowerCase()}">${el.content || ''}${el.teaser || ''}</div>` : ''}`;
     if (i === 0) return;
@@ -124,7 +127,7 @@ export default async function decorate(block) {
     `;
   });
 
-  userAccountLinkItems.forEach((el) => {
+  Array.from(userAccountLinkItems).slice(1).forEach((el) => {
     menuList.innerHTML += `<li>${el.outerHTML}</li>`;
   });
 
