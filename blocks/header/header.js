@@ -80,7 +80,7 @@ export default async function decorate(block) {
       <div class="links"></div>
       <div class="right" id="nav-right">
         <div class="location">Gurgaon &#9662;</div>
-        <img id="user-img" src="../../../icons/account_circle.svg" alt="user" />
+        <div id="user-img"></div>
         ${userDropdown.outerHTML}
       </div>
       <div class="car">${carIcon}</div>
@@ -91,9 +91,9 @@ export default async function decorate(block) {
   const mobileHeader = `
     <div id="menu" class="menu menu-nexa">
       <div class="menu-header menu-header-nexa">
-        <div class="back-arrow"><img src="../../../icons/chevron_left_white.svg" alt="back" /></div>
+        <div class="back-arrow"></div>
         <span class="menu-title">Menu</span>
-        <span class="close-icon"><img src="../../../icons/close_white.svg" alt="close" /></span>
+        <span class="close-icon"></span>
       </div>
       <ul class="menu-list"></ul>
     </div>
