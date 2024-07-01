@@ -45,11 +45,11 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  Array.from(nav.querySelectorAll('.nav-link')).forEach((el) => {
-    const heading = el.querySelector('h2');
+  Array.from(nav.querySelectorAll('nav > div.section:not(:first-child):not(:last-child)')).forEach((el) => {
+    const heading = el.querySelector('.icontitle :is(h1,h2,h3,h4,h5,h6)');
     const icon = el.querySelector('.icon');
     const iconClicked = el.querySelector('.iconClicked');
-    const content = el.querySelector('.link-grid-wrapper');
+    const [content] = Array.from(el.children).slice(1);
     const teaser = el.querySelector('.teaser-wrapper');
 
     list.push({
@@ -61,7 +61,7 @@ export default async function decorate(block) {
     });
   });
   const logo = nav.querySelector('.logo-wrapper');
-  const carIcon = nav.querySelector('.nav-cars-container .icon').innerHTML;
+  const carIcon = nav.children[1].querySelector('.icon').innerHTML;
   const userDropdownDiv = nav.querySelector('.sign-in-wrapper .user__dropdown');
   const contact = nav.querySelector('.contact-wrapper');
   userDropdownDiv.append(contact);
