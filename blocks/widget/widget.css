@@ -1,14 +1,26 @@
+.widget-container {
+    position: relative;
+}
+.widget.block {
+    position: absolute;
+    top: 84px;
+    right: 64px;
+    z-index: 10;
+}
 .widget{
+    display:none;
+    @media(min-width:1024px){
+    display:block;
     width:250px;
     position:relative;
+    }
 }
 .widget__links {
-    position: absolute; /* Position absolutely to not affect the layout */
-    top: 100%; /* Position below the icon */
+    position: absolute;
+    top: 100%;
     left: 0;
-    width: 100%; /* Make it full width */
-    z-index: 10; /* Ensure it's above other content */
-    background-color: white; /* Set a background color if needed */
+    width: 100%;
+    z-index: 10;
 }
 .widget__icon{
     display:flex;
@@ -48,11 +60,11 @@
 }
 .widget__links ul li:last-child{
     clip-path: polygon(100% 0, 100% 79%, 90% 100%, 0 100%, 0 0);
+    border-bottom:none;
 }
 .widget__links ul li:hover {
-    /* background-color:red; */
-    background-color:#FFFFFF;
     background:unset;
+    background-color:#FFFFFF;
     p{
         color:#18171A;
     }
