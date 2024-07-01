@@ -80,7 +80,7 @@ export default async function decorate(block) {
       <div class="links"></div>
       <div class="right" id="nav-right">
         <div class="location">Gurgaon &#9662;</div>
-        <div id="user-img"></div>
+        <div id="user-img"/>
         ${userDropdown.outerHTML}
       </div>
       <div class="car">${carIcon}</div>
