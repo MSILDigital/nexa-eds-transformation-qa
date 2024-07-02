@@ -299,15 +299,15 @@
           }
         },
         {
-          "title": "CTA with Changing Icon",
-          "id": "ctaWithChangingIcon",
+          "title": "Dynamic Icon CTA",
+          "id": "dynamicIconCTA",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "CTA with Changing Icon",
-                  "model": "ctaWithChangingIcon",
+                  "name": "Dynamic Icon CTA",
+                  "model": "dynamicIconCTA",
                   "target": "_self"
                 }
               }

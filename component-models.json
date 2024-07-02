@@ -725,7 +725,7 @@
     ]
   },
   {
-    "id": "ctaWithChangingIcon",
+    "id": "dynamicIconCTA",
     "fields": [
       {
         "component": "reference",
