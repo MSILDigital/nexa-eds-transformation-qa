@@ -158,7 +158,3 @@ main pre {
 a:any-link {
   text-decoration: none;
 }
-
-html {
-  scroll-behavior: smooth;
-}
