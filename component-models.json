@@ -789,7 +789,7 @@
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "ctaLink",
+        "name": "href",
         "label": "CTA Link"
       },
       {
@@ -825,6 +825,15 @@
         "valueType": "string",
         "name": "ctaText",
         "label": "CTA Text",
+        "condition": {
+          "===": [ { "var": "ctaVisibility" }, true ]
+        }
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA Link",
         "condition": {
           "===": [ { "var": "ctaVisibility" }, true ]
         }
@@ -936,23 +945,6 @@
         "valueType": "string",
         "name": "subText",
         "label": "Sub text"
-      },
-      {
-        "component": "select",
-        "name": "target",
-        "value": "",
-        "label": "Open Link in New Page ?",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Yes",
-            "value": "_blank"
-          },
-          {
-            "name": "No",
-            "value": "_self"
-          }
-        ]
       }
     ]
   }
