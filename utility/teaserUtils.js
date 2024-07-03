@@ -23,7 +23,7 @@ const teaser = {
       secondaryCtaLinkEl,
       secondaryCtaTargetEl,
       themeEl,
-      themeTypeEl
+      themeTypeEl,
     ] = block.children;
     const image = imageEl?.querySelector('picture');
     if (image) {
@@ -46,10 +46,10 @@ const teaser = {
                      </div>
                    `;
     }
-    if(theme) {
+    if (theme) {
       block.classList.add(theme);
     }
-    if(themeType) {
+    if (themeType) {
       block.classList.add(themeType);
     }
     block.innerHTML = '';
