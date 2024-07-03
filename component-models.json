@@ -732,5 +732,142 @@
         ]
       }
     ]
+  },
+  {
+    "id": "hero-banner-carousel",
+    "fields": [
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "ctaVisibility",
+        "label": "Enable CTA"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "CTA Text",
+        "condition": {
+          "===": [ { "var": "ctaVisibility" }, true ]
+        }
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA Link",
+        "condition": {
+          "===": [ { "var": "ctaVisibility" }, true ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "hero-banner-carousel-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video",
+        "multi": false
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "allowMobileVideo",
+        "label": "Separate Video for Mobile"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "videoMobile",
+        "label": "Mobile Video",
+        "multi": false,
+        "condition": {
+          "===": [ { "var": "allowMobileVideo" }, true ]
+        }
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "addMobileImage",
+        "label": "Separate Image for Mobile"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "mobileImage",
+        "label": "Mobile Image",
+        "multi": false,
+        "condition": {
+          "===": [ { "var": "addMobileImage" }, true ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "altText",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subTitle",
+        "label": "Sub Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "subText",
+        "label": "Sub text"
+      }
+    ]
   }
 ]

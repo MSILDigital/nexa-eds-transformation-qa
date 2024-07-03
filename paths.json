@@ -1,6 +1,7 @@
 {
   "mappings": [
     "/content/nexa-eds-transformation/:/",
-    "/content/nexa-eds-transformation/metadata:/metadata.json"
+    "/content/nexa-eds-transformation/metadata:/metadata.json",
+    "/content/nexa-eds-transformation/placeholders:/placeholders.json"
   ]
 }

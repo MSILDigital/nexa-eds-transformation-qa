@@ -68,5 +68,11 @@
     "components": [
       "teaser"
     ]
+  },
+  {
+    "id": "hero-banner-carousel",
+    "components": [
+      "hero-banner-carousel-item"
+    ]
   }
 ]
