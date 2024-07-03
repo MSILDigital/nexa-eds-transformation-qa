@@ -36,7 +36,8 @@
       "sign-in",
       "icontitle",
       "teaser-list",
-      "immersive-teaser"
+      "immersive-teaser",
+      "widget"
     ]
   },
   {
@@ -67,6 +68,12 @@
     "id": "immersive-teaser",
     "components": [
       "teaser"
+    ]
+  },
+  {
+    "id": "widget",
+    "components": [
+      "dynamicIconCTA"
     ]
   },
   {

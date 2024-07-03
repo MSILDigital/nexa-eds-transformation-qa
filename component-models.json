@@ -734,6 +734,84 @@
     ]
   },
   {
+    "id": "widget",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "iconclicked",
+        "label": "Icon Clicked",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "dynamicIconCTA",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "iconclicked",
+        "label": "Icon Clicked"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "alt",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text-input",
+        "name": "ctaText",
+        "label": "CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "target",
+        "value": "",
+        "label": "Open Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "hero-banner-carousel",
     "fields": [
       {
@@ -747,15 +825,6 @@
         "valueType": "string",
         "name": "ctaText",
         "label": "CTA Text",
-        "condition": {
-          "===": [ { "var": "ctaVisibility" }, true ]
-        }
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "ctaLink",
-        "label": "CTA Link",
         "condition": {
           "===": [ { "var": "ctaVisibility" }, true ]
         }
@@ -867,6 +936,23 @@
         "valueType": "string",
         "name": "subText",
         "label": "Sub text"
+      },
+      {
+        "component": "select",
+        "name": "target",
+        "value": "",
+        "label": "Open Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
       }
     ]
   }
