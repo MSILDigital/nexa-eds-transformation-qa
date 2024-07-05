@@ -17,11 +17,11 @@ export default async function decorate(block) {
   block.textContent = '';
   const footer = document.createElement('div');
 
-  const topSection = fragment.firstElementChild;
   while (fragment.firstElementChild) {
     footer.append(fragment.firstElementChild);
   }
 
+  const topSection = footer.querySelector('.footer-top-section');
   const linkGridSection = footer.querySelector('.link-grid-wrapper');
   const contactUsSection = footer.querySelector(
     '.footer-center-section .default-content-wrapper',
@@ -30,21 +30,22 @@ export default async function decorate(block) {
     '.footer-center-section .contact-wrapper',
   );
   const bottomSection = footer.querySelector('.footer-bottom-section');
-  const bottomFirstSection = bottomSection.querySelectorAll(
+  const bottomFirstSection = bottomSection?.querySelectorAll(
     '.columns-wrapper > div > div > div',
   );
-  const bottomSecondSection = bottomSection.querySelector(
+  const bottomSecondSection = bottomSection?.querySelector(
     '.default-content-wrapper',
   );
-  const contactUsHeadingSection = contactUsSection.removeChild(
-    contactUsSection.querySelector('h3'),
-  );
 
-  contactUsHeadingSection.classList.add('contactUs__Heading');
-  contactUsSection.querySelector('p').classList.add('tollfree__element');
+  const contactUsHeadingSection = contactUsSection?.querySelector('h3');
+  if (contactUsHeadingSection) {
+    contactUsSection?.removeChild(contactUsHeadingSection);
+    contactUsHeadingSection.classList.add('contactUs__Heading');
+  }
+  contactUsSection?.querySelector('p')?.classList?.add('tollfree__element');
 
   const bottomSectionHtmlText = [];
-  bottomFirstSection.forEach((bottomElement) => {
+  bottomFirstSection?.forEach((bottomElement) => {
     const pElement = bottomElement.querySelectorAll('p');
     let pElementString = '';
     pElement.forEach((pStr) => {
@@ -53,8 +54,37 @@ export default async function decorate(block) {
     bottomSectionHtmlText.push(pElementString);
   });
 
+  let bottomFirstSectionHtml = '';
+  const columnCount = 2;
+  if (bottomSectionHtmlText.length === columnCount) {
+    bottomFirstSectionHtml = `
+      <div class="row">
+        <div class="col-md-6">
+          <div class="footer__info-left">
+            ${bottomSectionHtmlText[0]}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="footer__info-right">
+            ${bottomSectionHtmlText[1]}
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    bottomFirstSectionHtml = `
+      <div class="row">
+        <div class="col-md-12">
+          <div class="footer__info-left">
+            ${(bottomFirstSectionHtml) ? bottomSectionHtmlText[0] : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   let bottomSecondSectionHtml = '<div class="row">';
-  bottomSecondSection.querySelectorAll('p').forEach((bottomElement) => {
+  bottomSecondSection?.querySelectorAll('p')?.forEach((bottomElement) => {
     const anchor = bottomElement.querySelector('a');
     if (anchor) {
       bottomSecondSectionHtml += ` <li><a href=${anchor.href}>${anchor.textContent}</a></li>`;
@@ -117,13 +147,13 @@ export default async function decorate(block) {
         ${topSectionHtml}
         <div class="row">
           <div class="col-md-9 footer__columns">
-            ${linkGridSection.innerHTML}
+            ${(linkGridSection) ? linkGridSection.innerHTML : ''}
           </div>
           <div class="col-md-3 footer__columns footer__columns-contact">
-            ${contactUsHeadingSection.outerHTML}
+            ${(contactUsHeadingSection) ? contactUsHeadingSection.outerHTML : ''}
             <div class="contactUs__section hide__section__mobile">
-              ${contactUsSection.outerHTML}
-              ${socialLinks.innerHTML}
+              ${(contactUsSection) ? contactUsSection.outerHTML : ''}
+              ${(socialLinks) ? socialLinks.innerHTML : ''}
             </div>
           </div>
           <div class="col-md-12">
@@ -131,18 +161,7 @@ export default async function decorate(block) {
           </div>
         </div>
         <!-- Footer info text begins -->
-        <div class="row">
-          <div class="col-md-6">
-            <div class="footer__info-left">
-              ${bottomSectionHtmlText[0]}
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="footer__info-right">
-              ${bottomSectionHtmlText[1]}
-            </div>
-          </div>
-        </div>
+        ${bottomFirstSectionHtml}
         <!-- Footer info text end -->
         <!-- Footer copyright begins -->
         ${bottomSecondSectionHtml}
