@@ -146,6 +146,7 @@ main .teaser-container > div {
       }
 
       .primary__btn {
+        width:auto;
         background: var(--primary-main-color);
         color: var(--secondary-main-color);
         text-align: center;
@@ -209,7 +210,7 @@ main .teaser-container > div {
       justify-content: flex-end;
 
       .teaser__title {
-        h3 {
+        .teaser__title-text {
           font-weight: 500;
           font-size: 18px;
         }
@@ -366,7 +367,7 @@ main .teaser-container > div {
         }
         .teaser__title {
           position: relative;
-          h3 {
+          .teaser__title-text {
             color: var(--Tertiary-Light-grey, #f2f2f2);
             font-family: "Kepler Std";
             font-size: 24px;
@@ -440,7 +441,7 @@ main .teaser-container > div {
           display: block;
         }
         .teaser__title {
-          h3 {
+          .teaser__title-text {
             font-weight: 600;
             font-size: 32px;
           }
@@ -500,7 +501,7 @@ main .teaser-container > div {
   }
 }
 
-.light-teaser.buyers-guide-teaser .teaser__title h3 {
+.light-teaser.buyers-guide-teaser .teaser__title .teaser__title-text {
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -647,7 +648,7 @@ main .teaser-container > div {
   width: 75%;
 }
 
-.dark-teaser.buyers-guide-teaser .teaser__title h3 {
+.dark-teaser.buyers-guide-teaser .teaser__title .teaser__title-text {
   font-size: 18px;
   font-weight: 500;
   line-height: 20px;
@@ -708,7 +709,7 @@ main .teaser-container > div {
   width: 50px;
   height: 50px;
 }
-.teaser-list-container h2 {
+.teaser-list-container .teaser-list__title {
   font-family: "Kepler Std";
   font-size: 32px;
   font-style: normal;
@@ -719,19 +720,19 @@ main .teaser-container > div {
   padding-left: 24px;
 }
 @media (min-width: 999px) {
-  .teaser-list-container h2 {
+  .teaser-list-container .teaser-list__title {
     padding-left: 64px;
     font-size: 64px;
     line-height: 72px;
     margin-bottom: 60px;
   }
-  .dark-teaser .teaser__card--unfocused .teaser__content h3 {
+  .dark-teaser .teaser__card--unfocused .teaser__content .teaser__title-text {
     position: relative;
   }
   .dark-teaser
     .teaser__right.teaser__card--unfocused
     .teaser__content
-    h3::after {
+    .teaser__title-text::after {
     content: "";
     position: absolute;
     height: 48px;
@@ -743,7 +744,7 @@ main .teaser-container > div {
   .dark-teaser
     .teaser__left.teaser__card--unfocused
     .teaser__content
-    h3::after {
+    .teaser__title-text::after {
     content: "";
     position: absolute;
     height: 48px;

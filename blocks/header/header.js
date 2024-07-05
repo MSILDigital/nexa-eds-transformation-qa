@@ -80,7 +80,6 @@ export default async function decorate(block) {
       ${logo.outerHTML}
       <div class="links"></div>
       <div class="right" id="nav-right">
-        <div class="location">Gurgaon &#9662;</div>
         <div id="user-img"></div>
         ${userDropdown.outerHTML}
       </div>
@@ -101,7 +100,9 @@ export default async function decorate(block) {
   `;
   const navWrapper = document.createElement('div');
   navWrapper.innerHTML = desktopHeader + mobileHeader;
-  navWrapper.querySelector('.right').insertAdjacentElement('afterbegin', locationHtml);
+  if (locationHtml) {
+    navWrapper.querySelector('.right')?.insertAdjacentElement('afterbegin', locationHtml);
+  }
 
   block.append(navWrapper);
   const navHamburger = document.querySelector('.nav-hamburger');

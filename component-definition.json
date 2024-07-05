@@ -275,7 +275,8 @@
                 "template": {
                   "name": "Teaser List",
                   "filter": "teaser-list",
-                  "model": "teaser-list"
+                  "model": "teaser-list",
+                  "titleType": "h2"
                 }
               }
             }
@@ -292,7 +293,8 @@
                   "name": "Immersive Teaser",
                   "filter": "immersive-teaser",
                   "model": "immersive-teaser",
-                  "title": "Immersive Teaser"
+                  "title": "Immersive Teaser",
+                  "titleType": "h2"
                 }
               }
             }

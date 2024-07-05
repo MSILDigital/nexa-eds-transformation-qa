@@ -24,7 +24,8 @@ export default function decorate(block) {
     }
 
     const pretitle = pretitleEl?.textContent?.trim();
-    const title = titleEl?.textContent?.trim();
+    const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
+    title?.classList?.add('immersive__title');
     const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.outerHTML).join('');
     const cta = (ctaLinkEl) ? ctaUtils.getLink(ctaLinkEl, ctaTextEl, ctaTargetEl) : null;
 
@@ -37,7 +38,7 @@ export default function decorate(block) {
     };
   }
 
-  const immersiveTeaser = getImmersiveTeaser(block);
+  const immersiveTeaser = getImmersiveTeaser();
   const teaserEl = block.children[8];
   let teaserObj;
   if (teaserEl?.innerHTML) {
@@ -49,7 +50,7 @@ export default function decorate(block) {
         ${(immersiveTeaser.image) ? immersiveTeaser.image.outerHTML : ''}
          <div class="immersive__content">
            ${(immersiveTeaser.pretitle) ? `<p>${immersiveTeaser.pretitle}</p>` : ''}
-           ${(immersiveTeaser.title) ? `<h2>${immersiveTeaser.title}</h2>` : ''}
+           ${(immersiveTeaser.title) ? `${immersiveTeaser.title.outerHTML}` : ''}
            ${(immersiveTeaser.description) ? `${immersiveTeaser.description}` : ''}
            ${(immersiveTeaser.cta) ? `<div class="immersive__action">${immersiveTeaser.cta.outerHTML}</div>` : ''}
           </div>

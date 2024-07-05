@@ -20,9 +20,9 @@ export default function decorate(block) {
               </div>
           </div>
       `;
-  const locationButton = document.querySelector('.location-btn');
-  const geoLocationDiv = document.querySelector('.geo-location');
-  const detectLocationCTA = document.querySelector('.detect-location__cta');
+  const locationButton = block.querySelector('.location-btn');
+  const geoLocationDiv = block.querySelector('.geo-location');
+  const detectLocationCTA = block.querySelector('.detect-location__cta');
 
   const citiesObject = {
     Delhi: { latitude: 28.7041, longitude: 77.1025 },
@@ -92,7 +92,7 @@ export default function decorate(block) {
     }
   });
   detectLocationCTA.addEventListener('click', () => {
-    geoLocationDiv.style.display="none";
+    geoLocationDiv.style.display = 'none';
     requestLocationPermission();
   });
 }
