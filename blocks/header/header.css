@@ -83,6 +83,10 @@ header nav a:any-link {
   cursor: pointer;
 }
 
+.nav-hamburger-nexa button {
+  background-color: #f2f2f2;
+}
+
 .nav-hamburger-icon,
 .nav-hamburger-icon::before,
 .nav-hamburger-icon::after {
@@ -282,7 +286,10 @@ header nav .nav-tools {
   height: var(--nav-height);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.navbar-nexa {
+  background-color: #18171a;
+  padding: 0px 64px;
+}
 .navbar .links {
   display: flex;
   height: -webkit-fill-available;
@@ -318,6 +325,28 @@ header nav .nav-tools {
   align-items: center;
   color: #575a5e;
   margin-right: 24px;
+}
+
+.navbar-nexa .right .location {
+  color: #f2f2f2;
+  font-size: 16px;
+  margin-right: 24px;
+}
+
+.navbar-nexa .links .link-title{
+  font-size: 16px;
+}
+
+.navbar-nexa .links .link-title,
+.navbar-nexa .right .location {
+  color: #f2f2f2;
+}
+
+.navbar-nexa .links .link-title:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-bottom: 3px solid #ffffff;
+  font-weight: 500;
 }
 
 .navbar .right {
@@ -357,10 +386,20 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
+.menu-header-nexa {
+  background-color: #18171a;
+}
+
 .menu-header .back-arrow,
 .menu-header .close-icon {
   cursor: pointer;
   font-size: 24px;
+}
+
+.menu-header-nexa .back-arrow,
+.menu-header-nexa .close-icon,
+.menu-header-nexa .menu-title {
+  color: #f2f2f2;
 }
 
 .menu-list {
@@ -471,6 +510,7 @@ body {
 }
 
 .navbar .links .link-title:hover + .desktop-panel,
+.navbar-nexa .links .link-title:hover + .desktop-panel,
 .desktop-panel:hover {
   display: flex;
   opacity: 1;
@@ -496,6 +536,20 @@ body {
   .navbar {
     height: 64px;
   }
+
+  .navbar-nexa {
+    padding: 0px 20px;
+  }
+
+  .navbar-nexa .right .location {
+    font-size: 14px;
+    margin-right: 0;
+  }
+
+  .navbar-nexa .links .link-title{
+    font-size: 14px;
+  }
+
   .navbar .links,
   .navbar .right {
     display: none;
@@ -507,6 +561,18 @@ body {
 
   .nav-hamburger {
     display: flex;
+  }
+
+  .menu-nexa .sign-in-teaser {
+    display: grid;
+    grid-template-columns: 1.5fr auto;
+    width: 100%;
+  }
+
+  .menu-nexa .sign-in-teaser img {
+    float: right;
+    width: 100%;
+    object-fit: cover;
   }
 }
 
@@ -658,82 +724,16 @@ body {
   }
 }
 
-/* nexa */
-.nav-hamburger-nexa button {
-  background-color: #f2f2f2;
-}
-
-.navbar-nexa {
-  background-color: #18171a;
-}
-
-.navbar-nexa .links .link-title,
-.navbar-nexa .right .location {
-  color: #f2f2f2;
-}
-
-.navbar-nexa .links .link-title:hover {
-  background-color: #ffffff;
-  color: #000000;
-  border-bottom: 3px solid #ffffff;
-  font-weight: 500;
-}
-
-.menu-header-nexa {
-  background-color: #18171a;
-}
-
-.menu-header-nexa .back-arrow,
-.menu-header-nexa .close-icon,
-.menu-header-nexa .menu-title {
-  color: #f2f2f2;
-}
-
-.navbar .links .link-title:hover + .desktop-panel,
-.navbar-nexa .links .link-title:hover + .desktop-panel,
-.desktop-panel:hover {
-  display: flex;
-  opacity: 1;
-  visibility: visible;
-}
-.back-arrow{
-  height: 20px;
-  width: 20px;
-  background-image:url("../../icons/chevron_left_white.svg");
-}
-.close-icon{
-  height: 20px;
-  width: 20px;
-  background-image:url("../../icons/close_white.svg");
-}
-
-@media (max-width: 998px) {
-  .menu-nexa .sign-in-teaser {
-    display: grid;
-    grid-template-columns: 1.5fr auto;
-    width: 100%;
-  }
-  
-  .menu-nexa .sign-in-teaser img {
-    float: right;
-    width: 100%;
-    object-fit: cover;
-  }
-}
-
 @media (min-width: 999px) {
-  .nexa.panel,
-  .arena.panel {
+  .nexa.panel {
     padding: 32px 64px;
     background-color: var(--nav-background-color);
   }
-  .nexa.panel .link-grid-column .links-container,
-  .arena.panel .link-grid-column .links-container {
+  .nexa.panel .link-grid-column .links-container {
     flex-direction: row;
     gap: 56px;
   }
-  .nexa.panel .link-grid-column .links-container a,
-  .arena.panel .link-grid-column .links-container a {
+  .nexa.panel .link-grid-column .links-container a {
     color: black;
     min-height: auto;
   }
@@ -741,12 +741,4 @@ body {
   .navbar-nexa .user__account > a {
     border-bottom: 1px solid #f2f2f2f2;
   }
-  #user-img{
-    cursor: pointer;
-    height: 24px;
-    width: 24px;
-    background-image:url("../../icons/account_circle.svg");
-  }
 }
-
-
