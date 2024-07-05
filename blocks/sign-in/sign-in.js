@@ -1,7 +1,15 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const [signInEl, desktopImageEl, mobileImageEl, desktopAltTextEl, mobileAltTextEl, signInTargetEl, ...ctasEl] = block.children;
+  const [
+    signInEl,
+    desktopImageEl,
+    mobileImageEl,
+    desktopAltTextEl,
+    mobileAltTextEl,
+    signInTargetEl,
+    ...ctasEl
+  ] = block.children;
   const signIn = signInEl.querySelector('div');
   const link = signIn.querySelector('p.button-container a');
   if (signIn.querySelector('h4') || link) { signIn.querySelector('p.button-container')?.remove(); }

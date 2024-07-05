@@ -2,8 +2,6 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const list = [];
-const currentURL = window.location.href;
-const isNexa = currentURL.includes('nexa');
 
 function toggleMenu() {
   const x = document.getElementById('menu');
@@ -73,8 +71,8 @@ export default async function decorate(block) {
   const locationHtml = nav.querySelector('.location-wrapper');
 
   const desktopHeader = `
-    <div class="navbar ${isNexa ? 'navbar-nexa' : 'navbar-arena'}">
-      <div class="nav-hamburger ${isNexa && 'nav-hamburger-nexa'}">
+    <div class="navbar navbar-nexa">
+      <div class="nav-hamburger nav-hamburger-nexa">
       <button type="button" aria-controls="nav" aria-label="Open navigation">
         <span class="nav-hamburger-icon"></span>
       </button>
@@ -82,8 +80,8 @@ export default async function decorate(block) {
       ${logo.outerHTML}
       <div class="links"></div>
       <div class="right" id="nav-right">
-        ${!isNexa ? '<div class="language">EN &#9662;</div>' : ''}
-        <img id="user-img" src="../../icons/${isNexa ? 'account_circle' : 'user'}.svg" alt="user" />
+        <div class="location">Gurgaon &#9662;</div>
+        <div id="user-img"></div>
         ${userDropdown.outerHTML}
       </div>
       <div class="car">${carIcon}</div>
@@ -92,11 +90,11 @@ export default async function decorate(block) {
   `;
 
   const mobileHeader = `
-    <div id="menu" class="menu ${isNexa ? 'menu-nexa' : 'menu-arena'}">
-      <div class="menu-header ${isNexa && 'menu-header-nexa'}">
-        <div class="back-arrow"><img src="../../icons/${isNexa ? 'chevron_left_white' : 'chevron_left'}.svg" alt="back" /></div>
+    <div id="menu" class="menu menu-nexa">
+      <div class="menu-header menu-header-nexa">
+        <div class="back-arrow"></div>
         <span class="menu-title">Menu</span>
-        <span class="close-icon"><img src="../../icons/${isNexa ? 'close_white' : 'close'}.svg" alt="close" /></span>
+        <span class="close-icon"></span>
       </div>
       <ul class="menu-list"></ul>
     </div>
@@ -120,7 +118,7 @@ export default async function decorate(block) {
   const linkEl = document.querySelector('.links');
   const menuList = document.querySelector('.menu-list');
 
-  if (isNexa) menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
+  menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
 
   list.forEach((el, i) => {
     const linkTitle = document.createElement('div');
@@ -158,10 +156,8 @@ export default async function decorate(block) {
     ${el.content || el.teaser ? `<div class="panel">${el.content || ''}${el.teaser || ''}</div>` : ''}
     `;
   });
-  (isNexa
-    ? Array.from(userAccountLinkItems).slice(1)
-    : userAccountLinkItems
-  ).forEach((el) => {
+
+  Array.from(userAccountLinkItems).slice(1).forEach((el) => {
     menuList.innerHTML += `<li>${el.outerHTML}</li>`;
   });
 
@@ -169,10 +165,10 @@ export default async function decorate(block) {
 
   const acc = document.getElementsByClassName('accordion');
 
-  for (let i = 0; i < acc.length; i++) {
-    acc[i].addEventListener('click', function (e) {
+  for (let i = 0; i < acc.length; i += 1) {
+    acc[i].addEventListener('click', function accordionClicked(e) {
       this.classList.toggle('active');
-      const index = parseInt(this.getAttribute('id').split('-')[2]);
+      const index = parseInt(e.target.id.split('-')[2], 10);
       const menuListIconWrapper = this.querySelector('.icon');
       const menuListTitle = this.querySelector('.menu-title');
       const { icon, iconClicked } = list[index];

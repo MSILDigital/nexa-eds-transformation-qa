@@ -23,7 +23,7 @@ const teaser = {
       secondaryCtaLinkEl,
       secondaryCtaTargetEl,
       themeEl,
-      themeTypeEl,
+      themeTypeEl
     ] = block.children;
     const image = imageEl?.querySelector('picture');
     if (image) {

@@ -35,7 +35,13 @@
       "link-grid",
       "sign-in",
       "icontitle",
-      "location"
+      "location",
+      "icontitle",
+      "teaser-list",
+      "immersive-teaser",
+      "widget",
+      "hero-banner-carousel",
+      "nexa-world"
     ]
   },
   {
@@ -52,6 +58,36 @@
   },
   {
     "id": "sign-in",
+    "components": [
+      "ctaWithIcon"
+    ]
+  },
+  {
+    "id": "teaser-list",
+    "components": [
+      "teaser"
+    ]
+  },
+  {
+    "id": "immersive-teaser",
+    "components": [
+      "teaser"
+    ]
+  },
+  {
+    "id": "widget",
+    "components": [
+      "dynamicIconCTA"
+    ]
+  },
+  {
+    "id": "hero-banner-carousel",
+    "components": [
+      "hero-banner-carousel-item"
+    ]
+  },
+  {
+    "id": "nexa-world",
     "components": [
       "ctaWithIcon"
     ]

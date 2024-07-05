@@ -264,6 +264,122 @@
               }
             }
           }
+        },
+        {
+          "title": "Teaser List",
+          "id": "teaser-list",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Teaser List",
+                  "filter": "teaser-list",
+                  "model": "teaser-list"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Immersive Teaser",
+          "id": "immersive-teaser",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Immersive Teaser",
+                  "filter": "immersive-teaser",
+                  "model": "immersive-teaser",
+                  "title": "Immersive Teaser"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Widget",
+          "id": "widget",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Widget",
+                  "model": "widget",
+                  "filter": "widget"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Dynamic Icon CTA",
+          "id": "dynamicIconCTA",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Dynamic Icon CTA",
+                  "model": "dynamicIconCTA",
+                  "target": "_self"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Hero Banner Carousel",
+          "id": "hero-banner-carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Hero Banner Carousel",
+                  "model": "hero-banner-carousel",
+                  "filter": "hero-banner-carousel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Hero Banner Carousel Item",
+          "id": "hero-banner-carousel-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Hero Banner Carousel Item",
+                  "model": "hero-banner-carousel-item",
+                  "titleType": "h2",
+                  "allowMobileVideo": false,
+                  "addMobileImage": false
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Nexa World",
+          "id": "nexa-world",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Nexa World",
+                  "filter": "nexa-world",
+                  "model": "nexa-world",
+                  "title": "Nexa World"
+                }
+              }
+            }
+          }
         }
       ]
     }
