@@ -2,6 +2,8 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const list = [];
+const currentURL = window.location.href;
+const isNexa = currentURL.includes('nexa');
 
 function toggleMenu() {
   const x = document.getElementById('menu');
@@ -56,21 +58,23 @@ export default async function decorate(block) {
       heading: heading?.textContent,
       icon: icon?.innerHTML,
       iconClicked: iconClicked?.innerHTML,
-      content: content?.innerHTML,
-      teaser: teaser?.innerHTML,
+      content,
+      teaser,
     });
   });
   const logo = nav.querySelector('.logo-wrapper');
   const carIcon = nav.children[1].querySelector('.icon').innerHTML;
-  const userDropdownDiv = nav.querySelector('.sign-in-wrapper .user__dropdown');
+  const userDropDownDiv = nav.querySelector('.sign-in-wrapper .user__dropdown');
   const contact = nav.querySelector('.contact-wrapper');
-  userDropdownDiv.append(contact);
+  userDropDownDiv.append(contact);
   const userDropdown = nav.querySelector('.sign-in-wrapper');
-  const userAccountLinkItems = userDropdownDiv.querySelectorAll('.user__account>a');
+  const userAccountLinkItems = userDropDownDiv.querySelectorAll('.user__account>a');
+  const signInTeaser = nav.querySelector('.sign-in-teaser');
+  const locationHtml = nav.querySelector('.location-wrapper');
 
   const desktopHeader = `
-    <div class="navbar">
-      <div class="nav-hamburger">
+    <div class="navbar ${isNexa ? 'navbar-nexa' : 'navbar-arena'}">
+      <div class="nav-hamburger ${isNexa && 'nav-hamburger-nexa'}">
       <button type="button" aria-controls="nav" aria-label="Open navigation">
         <span class="nav-hamburger-icon"></span>
       </button>
@@ -78,8 +82,8 @@ export default async function decorate(block) {
       ${logo.outerHTML}
       <div class="links"></div>
       <div class="right" id="nav-right">
-        <div class="location">Gurgaon &#9662;</div>
-        <img id="user-img" src="" alt="user" />
+        ${!isNexa ? '<div class="language">EN &#9662;</div>' : ''}
+        <img id="user-img" src="../../icons/${isNexa ? 'account_circle' : 'user'}.svg" alt="user" />
         ${userDropdown.outerHTML}
       </div>
       <div class="car">${carIcon}</div>
@@ -88,17 +92,18 @@ export default async function decorate(block) {
   `;
 
   const mobileHeader = `
-    <div id="menu" class="menu">
-      <div class="menu-header">
-        <div class="back-arrow"><img src="" alt="back" /></div>
+    <div id="menu" class="menu ${isNexa ? 'menu-nexa' : 'menu-arena'}">
+      <div class="menu-header ${isNexa && 'menu-header-nexa'}">
+        <div class="back-arrow"><img src="../../icons/${isNexa ? 'chevron_left_white' : 'chevron_left'}.svg" alt="back" /></div>
         <span class="menu-title">Menu</span>
-        <span class="close-icon"><img src="" alt="close" /></span>
+        <span class="close-icon"><img src="../../icons/${isNexa ? 'close_white' : 'close'}.svg" alt="close" /></span>
       </div>
       <ul class="menu-list"></ul>
     </div>
   `;
   const navWrapper = document.createElement('div');
   navWrapper.innerHTML = desktopHeader + mobileHeader;
+  navWrapper.querySelector('.right').insertAdjacentElement('afterbegin', locationHtml);
 
   block.append(navWrapper);
   const navHamburger = document.querySelector('.nav-hamburger');
@@ -110,21 +115,53 @@ export default async function decorate(block) {
   });
 
   caricon.addEventListener('click', toggleCarMenu);
-
   document.querySelector('#user-img').addEventListener('click', () => toggleUserDropdown());
 
   const linkEl = document.querySelector('.links');
   const menuList = document.querySelector('.menu-list');
 
+  if (isNexa) menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
+
   list.forEach((el, i) => {
-    linkEl.innerHTML += `<div class="link-title"><span>${el.heading}</span></div> ${el.content || el.teaser ? `<div class="desktop-panel panel ${el.heading.toLowerCase()}">${el.content || ''}${el.teaser || ''}</div>` : ''}`;
+    const linkTitle = document.createElement('div');
+    const desktopPanel = document.createElement('div');
+    const heading = document.createElement('span');
+    linkTitle.classList.add('link-title');
+    heading.textContent = el.heading;
+    linkTitle.append(heading);
+    desktopPanel.classList.add('desktop-panel', 'panel', el.heading?.split(' ')[0].toLowerCase());
+    if (el.content) desktopPanel.append(el.content);
+    if (el.teaser) desktopPanel.append(el.teaser);
+    linkEl.append(linkTitle, desktopPanel);
+    // linkEl.innerHTML += `<div class="link-title">
+    //    <span>${el.heading}</span></div>
+    //    ${el.content || el.teaser ? `<div class="desktop-panel panel ${el.heading.toLowerCase()}">
+    //    ${el.content || ''}${el.teaser || ''}</div>` :''}`;
     if (i === 0) return;
-    menuList.innerHTML += `<li id="menu-item-${i}" class="${el.content ? 'accordion nav-link' : ''} ${el.heading.toLowerCase()}" ><span class="icon">${el.icon}</span> <span class="menu-title">${el.heading}</span></li>
+    // const menuItem = document.createElement("li");
+    // menuItem.id = `menu-item-${i}`;
+    // if (el.content) menuItem.classList.add("accordion", "nav-link");
+    // menuItem.classList.add(el.heading.split(' ')[0].toLowerCase())
+    // const icon = document.createElement("span");
+    // icon.classList.add("icon");
+    // icon.innerHTML = el.icon;
+    // const menuTitle = document.createElement("span");
+    // menuTitle.classList.add("menu-title");
+    // menuTitle.textContent = el.heading;
+    // menuItem.append(icon, menuTitle);
+    // const panel = document.createElement("div");
+    // panel.classList.add("panel");
+    // if (el.content) panel.append(el.content);
+    // if (el.teaser) panel.append(el.teaser);
+    // menuList.append(menuItem, panel);
+    menuList.innerHTML += `<li id="menu-item-${i}" class="${el.content ? 'accordion nav-link' : ''} ${el.heading?.toLowerCase()}" ><span class="icon">${el.icon}</span> <span class="menu-title">${el.heading}</span></li>
     ${el.content || el.teaser ? `<div class="panel">${el.content || ''}${el.teaser || ''}</div>` : ''}
     `;
   });
-
-  userAccountLinkItems.forEach((el) => {
+  (isNexa
+    ? Array.from(userAccountLinkItems).slice(1)
+    : userAccountLinkItems
+  ).forEach((el) => {
     menuList.innerHTML += `<li>${el.outerHTML}</li>`;
   });
 
@@ -132,10 +169,10 @@ export default async function decorate(block) {
 
   const acc = document.getElementsByClassName('accordion');
 
-  for (let i = 0; i < acc.length; i += 1) {
-    acc[i].addEventListener('click', function accordionClicked(e) {
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function (e) {
       this.classList.toggle('active');
-      const index = parseInt(e.target.id.split('-')[2], 10);
+      const index = parseInt(this.getAttribute('id').split('-')[2]);
       const menuListIconWrapper = this.querySelector('.icon');
       const menuListTitle = this.querySelector('.menu-title');
       const { icon, iconClicked } = list[index];
