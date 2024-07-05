@@ -95,7 +95,7 @@ export default function decorate(block) {
     block.classList.add(themeType);
   }
   const commonTitle = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
-  commonTitle?.classList?.add('text-color');
+  commonTitle?.classList?.add('text-color', 'teaser-list__title');
   const teasers = teaserListEl.map((card) => {
     const teaserObj = teaser.getTeaser(card);
     utility.mobileLazyLoading(teaserObj, '.teaser__image img');

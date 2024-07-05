@@ -25,7 +25,7 @@
   overflow-y: hidden;
 }
 
-.teaser-container .teaser-wrapper .teaser__title h3 {
+.teaser-container .teaser-wrapper .teaser__title .teaser__title-text {
   font-family: "Anek Latin";
   font-size: 24px;
   font-style: normal;
@@ -40,7 +40,7 @@
     overflow-x: auto;
     overflow-y: hidden;
   }
-  .teaser-container .teaser-wrapper .teaser__title h3 {
+  .teaser-container .teaser-wrapper .teaser__title .teaser__title-text {
     font-size: 40px;
     font-style: normal;
     font-weight: 800;

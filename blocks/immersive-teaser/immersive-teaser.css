@@ -34,7 +34,7 @@ main .immersive-teaser-container>div {
     text-align: left;
 }
 
-.immersive__wrapper .immersive__content h2 {
+.immersive__wrapper .immersive__content .immersive__title {
     margin: 0;
     margin-bottom: 48px;
     font-size: 64px;
@@ -183,7 +183,7 @@ main .immersive-teaser-container>div {
         max-width: 100%;
     }
 
-    .immersive__wrapper .immersive__content h2 {
+    .immersive__wrapper .immersive__content .immersive__title {
         font-size: 32px;
         font-weight: 600;
         line-height: 40px;

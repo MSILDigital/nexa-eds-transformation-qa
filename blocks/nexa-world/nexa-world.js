@@ -134,8 +134,8 @@ export default function decorate(block) {
       container.style.backgroundImage = `url(${backgroundImage.src})`;
     }
     links.forEach((link) => {
-      link.addEventListener('mouseover', () => {
-        const imgSrc = this.querySelector('img').src;
+      link.addEventListener('mouseover', (e) => {
+        const imgSrc = e.target.querySelector('img').src;
         if (isMobile) {
           container.style.backgroundImage = 'none';
           teaser.style.backgroundImage = `url(${imgSrc})`;

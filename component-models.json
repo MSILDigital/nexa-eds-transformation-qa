@@ -508,6 +508,39 @@
         "valueType": "string"
       },
       {
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
         "component": "richtext",
         "name": "description",
         "value": "",
@@ -573,46 +606,157 @@
         ]
       },
       {
-        "component": "multiselect",
-        "name": "style",
-        "label": "Style",
+        "component": "select",
+        "name": "styleTheme",
+        "label": "Theme",
         "valueType": "string",
-        "maxSize": 2,
         "options": [
           {
-            "name": "Theme",
-            "children": [
-              {
-                "name": "Light",
-                "value": "light-teaser"
-              },
-              {
-                "name": "Dark",
-                "value": "dark-teaser"
-              }
-            ]
+            "name": "Light",
+            "value": "light-teaser"
           },
           {
-            "name": "Type",
-            "children": [
-              {
-                "name": "Buyers Guide",
-                "value": "buyers-guide-teaser"
-              },
-              {
-                "name": "Finance Card",
-                "value": "finance-card-teaser"
-              },
-              {
-                "name": "Header Teaser",
-                "value": "header-image-teaser"
-              },
-              {
-                "name": "Text Only Teaser",
-                "value": "text-only-teaser"
-              }
-            ]
+            "name": "Dark",
+            "value": "dark-teaser"
           }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "themeType",
+        "label": "Theme Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Buyers Guide",
+            "value": "buyers-guide-teaser"
+          },
+          {
+            "name": "Finance Card",
+            "value": "finance-card-teaser"
+          },
+          {
+            "name": "Header Teaser",
+            "value": "header-image-teaser"
+          },
+          {
+            "name": "Text Only Teaser",
+            "value": "text-only-teaser"
+          }
+        ]
+      },
+      {
+        "id": "location",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "fylText",
+            "label": "Find Your Location Text"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "dylText",
+            "label": "Detect Your Location Text"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "searchText",
+            "label": "Search Text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "car-filter",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Sub Title"
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "exshowroomPrefix",
+        "label": "Enter Ex-Showroom Prefix Text"
+      },
+      {
+        "component": "select",
+        "name": "selectVariant",
+        "value": "",
+        "label": "Select Component Variant",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Arena",
+            "value": "arena-variant"
+          },
+          {
+            "name": "Nexa",
+            "value": "nexa-variant"
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "name": "filterSelect",
+        "label": "Select Required Filters",
+        "valueType": "string",
+        "options": [
+          { "name": "Body Types", "value": "bodyType" },
+          { "name": "Fuel Options", "value": "fuelOptions" },
+          { "name": "Technology", "value": "technology" },
+          { "name": "Additional Specifications", "value": "additionalSpecifications" }
         ]
       }
     ]
@@ -628,37 +772,67 @@
         "valueType": "string"
       },
       {
-        "component": "multiselect",
-        "name": "style",
-        "label": "Style",
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
         "valueType": "string",
-        "maxSize": 2,
         "options": [
           {
-            "name": "Theme",
-            "children": [
-              {
-                "name": "Light",
-                "value": "light-teaser-list"
-              },
-              {
-                "name": "Dark",
-                "value": "dark-teaser-list"
-              }
-            ]
+            "name": "h1",
+            "value": "h1"
           },
           {
-            "name": "Type",
-            "children": [
-              {
-                "name": "Finance Card List",
-                "value": "finance-card-list"
-              },
-              {
-                "name": "Arena Card List",
-                "value": "arena-card-list"
-              }
-            ]
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "styleTheme",
+        "label": "Theme",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Light",
+            "value": "light-teaser-list"
+          },
+          {
+            "name": "Dark",
+            "value": "dark-teaser-list"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "themeType",
+        "label": "Theme Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Finance Card List",
+            "value": "finance-card-list"
+          },
+          {
+            "name": "Arena Card List",
+            "value": "arena-card-list"
           }
         ]
       }
@@ -694,6 +868,39 @@
         "value": "",
         "label": "Title",
         "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "richtext",
