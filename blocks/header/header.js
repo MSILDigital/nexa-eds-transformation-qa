@@ -102,7 +102,7 @@ export default async function decorate(block) {
   `;
 
   const mobileHeader = `
-    <div id="menu" class="menu menu-nexa">
+    <div id="menu" class="menu hidden menu-nexa">
       <div class="menu-header menu-header-nexa">
         <div class="back-arrow"></div>
         <span class="menu-title">Menu</span>
