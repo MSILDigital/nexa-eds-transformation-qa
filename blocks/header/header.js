@@ -1,34 +1,20 @@
 import { getMetadata } from '../../scripts/aem.js';
+import utility from '../../utility/utility.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const list = [];
 
 function toggleMenu() {
-  const x = document.getElementById('menu');
-  if (x.style.display === 'block') {
-    x.style.display = 'none';
-  } else {
-    x.style.display = 'block';
-  }
+  document.getElementById('menu').classList.toggle('hidden');
 }
 
 function toggleCarMenu() {
-  const x = document.getElementById('carPanel');
-  if (x.style.display === 'block') {
-    x.style.display = 'none';
-  } else {
-    x.style.display = 'block';
-  }
+  document.getElementById('carFilterMenu').classList.toggle('hidden');
 }
 
 function toggleUserDropdown() {
   const navRight = document.getElementById('nav-right');
-  const x = navRight.querySelector('.sign-in-wrapper');
-  if (x.style.display === 'block') {
-    x.style.display = 'none';
-  } else {
-    x.style.display = 'block';
-  }
+  navRight.querySelector('.sign-in-wrapper').classList.toggle('hidden');
 }
 
 export default async function decorate(block) {
@@ -44,28 +30,49 @@ export default async function decorate(block) {
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
-
-  Array.from(nav.querySelectorAll('nav > div.section:not(:first-child):not(:last-child)')).forEach((el) => {
+  Array.from(
+    nav.querySelectorAll('nav > div.section:not(:first-child):not(:last-child):not(:nth-last-child(2))'),
+  ).forEach((el) => {
     const heading = el.querySelector('.icontitle :is(h1,h2,h3,h4,h5,h6)');
     const icon = el.querySelector('.icon');
     const iconClicked = el.querySelector('.iconClicked');
     const [content] = Array.from(el.children).slice(1);
-    const teaser = el.querySelector('.teaser-wrapper');
+    let teaserWrappers;
+    let combinedTeaserHTML = '';
+    let teaser;
+    if (content?.classList.contains('car-filter-wrapper')) {
+      teaserWrappers = el.querySelectorAll('.teaser-wrapper');
+      teaserWrappers.forEach((teaserWrapper) => {
+        combinedTeaserHTML += teaserWrapper.innerHTML;
+      });
 
+      el.querySelector('.card-list-teaser')?.insertAdjacentHTML(
+        'beforeend',
+        utility.sanitizeHtml(
+          `<div class="teaser-list">${combinedTeaserHTML}</div>`,
+        ),
+      );
+    } else {
+      teaser = el.querySelector('.teaser-wrapper');
+    }
     list.push({
       heading: heading?.textContent,
       icon: icon?.innerHTML,
       iconClicked: iconClicked?.innerHTML,
-      content,
-      teaser,
+      content: content?.firstChild,
+      teaser: teaser?.firstChild ?? '',
     });
   });
   const logo = nav.querySelector('.logo-wrapper');
-  const carIcon = nav.children[1].querySelector('.icon').innerHTML;
-  const userDropDownDiv = nav.querySelector('.sign-in-wrapper .user__dropdown');
+  const carIcon = nav.children[1].querySelector('.icon')?.innerHTML;
+  const carFilter = nav.querySelector('.car-filter');
+  const userDropDownDiv = nav.querySelector(
+    '.sign-in-wrapper .user__dropdown',
+  );
   const contact = nav.querySelector('.contact-wrapper');
   userDropDownDiv.append(contact);
   const userDropdown = nav.querySelector('.sign-in-wrapper');
+  userDropdown.classList.add('hidden');
   const userAccountLinkItems = userDropDownDiv.querySelectorAll('.user__account>a');
   const signInTeaser = nav.querySelector('.sign-in-teaser');
   const locationHtml = nav.querySelector('.location-wrapper');
@@ -83,9 +90,19 @@ export default async function decorate(block) {
         <div id="user-img"></div>
         ${userDropdown.outerHTML}
       </div>
-      <div class="car">${carIcon}</div>
-      <div class="car-panel" id="carPanel">car</div>
+      <div class="car-icon">${carIcon}</div>
     </div>
+    <div class="car-filter-menu hidden ${
+  isNexa ? 'car-filter-nexa' : 'car-filter-arena'
+}" id="carFilterMenu">
+    <div class="car-panel-header">
+      <div></div>
+      <span class="car-text">Cars</span>
+      <span class="car-filter-close"><img src="../../icons/${
+  isNexa ? 'close_white' : 'close'
+}.svg" alt="close" /></span>
+    </div>
+      </div>
   `;
 
   const mobileHeader = `
@@ -108,13 +125,18 @@ export default async function decorate(block) {
   const navHamburger = document.querySelector('.nav-hamburger');
   const backArrow = document.querySelector('.back-arrow');
   const closeIcon = document.querySelector('.close-icon');
-  const caricon = document.querySelector('.navbar .car');
+  const caricon = document.querySelector('.navbar .car-icon');
+  const carFilterClose = document.querySelector('.car-filter-close');
   [navHamburger, backArrow, closeIcon].forEach((element) => {
     element.addEventListener('click', toggleMenu);
   });
 
   caricon.addEventListener('click', toggleCarMenu);
-  document.querySelector('#user-img').addEventListener('click', () => toggleUserDropdown());
+  carFilterClose.addEventListener('click', toggleCarMenu);
+
+  document
+    .querySelector('#user-img')
+    .addEventListener('click', () => toggleUserDropdown());
 
   const linkEl = document.querySelector('.links');
   const menuList = document.querySelector('.menu-list');
@@ -128,35 +150,33 @@ export default async function decorate(block) {
     linkTitle.classList.add('link-title');
     heading.textContent = el.heading;
     linkTitle.append(heading);
-    desktopPanel.classList.add('desktop-panel', 'panel', el.heading?.split(' ')[0].toLowerCase());
+    desktopPanel.classList.add(
+      'desktop-panel',
+      'panel',
+      el.heading?.split(' ')[0].toLowerCase(),
+    );
     if (el.content) desktopPanel.append(el.content);
     if (el.teaser) desktopPanel.append(el.teaser);
     linkEl.append(linkTitle, desktopPanel);
-    // linkEl.innerHTML += `<div class="link-title">
-    //    <span>${el.heading}</span></div>
-    //    ${el.content || el.teaser ? `<div class="desktop-panel panel ${el.heading.toLowerCase()}">
-    //    ${el.content || ''}${el.teaser || ''}</div>` :''}`;
     if (i === 0) return;
-    // const menuItem = document.createElement("li");
-    // menuItem.id = `menu-item-${i}`;
-    // if (el.content) menuItem.classList.add("accordion", "nav-link");
-    // menuItem.classList.add(el.heading.split(' ')[0].toLowerCase())
-    // const icon = document.createElement("span");
-    // icon.classList.add("icon");
-    // icon.innerHTML = el.icon;
-    // const menuTitle = document.createElement("span");
-    // menuTitle.classList.add("menu-title");
-    // menuTitle.textContent = el.heading;
-    // menuItem.append(icon, menuTitle);
-    // const panel = document.createElement("div");
-    // panel.classList.add("panel");
-    // if (el.content) panel.append(el.content);
-    // if (el.teaser) panel.append(el.teaser);
-    // menuList.append(menuItem, panel);
-    menuList.innerHTML += `<li id="menu-item-${i}" class="${el.content ? 'accordion nav-link' : ''} ${el.heading?.toLowerCase()}" ><span class="icon">${el.icon}</span> <span class="menu-title">${el.heading}</span></li>
-    ${el.content || el.teaser ? `<div class="panel">${el.content || ''}${el.teaser || ''}</div>` : ''}
+    menuList.innerHTML += `<li id="menu-item-${i}" class="${
+      el.content?.innerHTML ? 'accordion nav-link' : ''
+    } ${el.heading?.toLowerCase()}" ><span class="icon">${
+      el.icon
+    }</span> <span class="menu-title">${el.heading}</span></li>
+    ${
+  el.content?.innerHTML || el.teaser?.innerHTML
+    ? `<div class="panel">${el.content?.innerHTML || ''}${
+      el.teaser?.innerHTML || ''
+    }</div>`
+    : ''
+}
     `;
   });
+
+  if (!window.matchMedia('(min-width: 999px)').matches) {
+    block.querySelector('.car-filter-menu')?.append(carFilter);
+  }
 
   Array.from(userAccountLinkItems).slice(1).forEach((el) => {
     menuList.innerHTML += `<li>${el.outerHTML}</li>`;
