@@ -92,15 +92,11 @@ export default async function decorate(block) {
       </div>
       <div class="car-icon">${carIcon}</div>
     </div>
-    <div class="car-filter-menu hidden ${
-  isNexa ? 'car-filter-nexa' : 'car-filter-arena'
-}" id="carFilterMenu">
+    <div class="car-filter-menu hidden car-filter-nexa" id="carFilterMenu">
     <div class="car-panel-header">
       <div></div>
       <span class="car-text">Cars</span>
-      <span class="car-filter-close"><img src="../../icons/${
-  isNexa ? 'close_white' : 'close'
-}.svg" alt="close" /></span>
+      <span class="car-filter-close"><img src="../../../icons/close_white.svg" alt="close" /></span>
     </div>
       </div>
   `;
