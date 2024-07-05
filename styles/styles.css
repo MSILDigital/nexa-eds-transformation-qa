@@ -162,3 +162,7 @@ a:any-link {
 html {
   scroll-behavior: smooth;
 }
+
+.hidden {
+  display: none;
+}
