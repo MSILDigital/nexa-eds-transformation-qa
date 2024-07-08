@@ -45,7 +45,7 @@ footer .link-grid-column h3::after {
   right: 0;
   height: 20px;
   width: 20px;
-  background-image: url("../../icons/expand.svg");
+  background-image: url("../../icons/collapes.svg");
 }
 footer .link-grid-column h3.expand::after {
   content: "";
@@ -53,7 +53,7 @@ footer .link-grid-column h3.expand::after {
   right: 0;
   height: 20px;
   width: 20px;
-  background-image: url("../../icons/collapes.svg");
+  background-image: url("../../icons/expand.svg");
 }
 .footer__columns-contact .default-content-wrapper {
   display: block;
