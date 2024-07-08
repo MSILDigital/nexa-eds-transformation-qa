@@ -1,7 +1,7 @@
 /* nexa footer style mobile first*/
 footer {
   background-color: var(--primary-main);
-  padding-top: 20px;
+  padding-top: 0;
   padding-bottom: 20px;
   padding-left: 0px;
   padding-right: 0px;
@@ -45,7 +45,7 @@ footer .link-grid-column h3::after {
   right: 0;
   height: 20px;
   width: 20px;
-  background-image: url("../../icons/collapes.svg");
+  background-image: url("../../icons/expand.svg");
 }
 footer .link-grid-column h3.expand::after {
   content: "";
@@ -53,7 +53,7 @@ footer .link-grid-column h3.expand::after {
   right: 0;
   height: 20px;
   width: 20px;
-  background-image: url("../../icons/expand.svg");
+  background-image: url("../../icons/collapes.svg");
 }
 .footer__columns-contact .default-content-wrapper {
   display: block;
@@ -73,12 +73,13 @@ footer .footer__columns-contact .default-content-wrapper {
   align-items: flex-start;
   gap: 8px 27px;
   align-self: stretch;
-  padding-bottom: 32px;
+  padding-bottom: 24px;
   flex-wrap: wrap;
+  p:first-child {
+    width: 100%;
+  }
 }
-footer .footer__columns-contact .default-content-wrapper .tollfree__element {
-  width: 100%;
-}
+
 footer .footer__columns.footer__columns-contact p {
   color: var(--tertiary-white);
   font-family: "Fira Sans";
@@ -86,7 +87,6 @@ footer .footer__columns.footer__columns-contact p {
   font-style: normal;
   font-weight: 300;
   line-height: 20px;
-
   margin: 0;
 }
 footer .footer__columns.footer__columns-contact p strong {
@@ -144,7 +144,7 @@ footer .user__contact__icons {
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 26px;
+  gap: 0 26px;
   flex-wrap: wrap;
 }
 .footer__copyright-right ul li {
@@ -198,7 +198,7 @@ footer.footer__arena .footer__info-left p {
 footer.footer__arena .footer__info-left {
   padding-top: 15px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 999px) {
   footer {
     padding-top: 64px;
     padding-bottom: 64px;
@@ -212,9 +212,24 @@ footer.footer__arena .footer__info-left {
     padding: 20px 0;
     font-style: normal;
     font-weight: 500;
+    line-height: 24px;
   }
-  footer .link-grid-column h3::after {
-    display: none;
+  footer .link-grid-column h3 {
+    padding-top: 0;
+    &::after {
+      display: none;
+    }
+  }
+  footer .footer__columns.footer__columns-contact p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+  }
+  footer .footer__columns-contact .default-content-wrapper .tollfree__element {
+    font-size: 16px;
+    letter-spacing: -0.16px;
   }
   .footer__columns-contact {
     display: flex;
@@ -223,9 +238,13 @@ footer.footer__arena .footer__info-left {
   }
   footer .contactUs__Heading {
     display: block;
+    padding-top: 0;
   }
   footer .link-grid-column {
     border-bottom: none;
+  }
+  footer .link-grid-column .links-container li:first-child {
+    padding-top: 0;
   }
   .footer__separator {
     height: 1px;
@@ -261,6 +280,10 @@ footer.footer__arena .footer__info-left {
   footer .contactUs__Heading p {
     font-size: 16px;
   }
+  footer .user__contact__icons {
+    padding-top: 8px;
+    padding-bottom: 22px;
+  }
   footer .footer__columns .footer__columns-contact p {
     font-size: 16px;
     padding-bottom: 10px;
@@ -284,12 +307,10 @@ footer.footer__arena .footer__info-left {
     letter-spacing: 0.96px;
     text-transform: capitalize;
     width: 100%;
-    padding-bottom: 6px;
-  }
-
-  footer .default-content-wrapper p {
+    padding: 0;
     margin: 0;
   }
+
   footer .user__contact h4 {
     display: block;
     color: var(--tertiary-white);
