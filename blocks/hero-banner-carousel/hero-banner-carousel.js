@@ -1,5 +1,6 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
 import carouselUtils from '../../utility/carouselUtils.js';
+import utility from '../../utility/utility.js';
 
 export default async function decorate(block) {
   const [showCtaEl, ctaTextEl, ctaLinkEl, ...bannerItemsEl] = block.children;
@@ -53,7 +54,10 @@ export default async function decorate(block) {
     } if (image) {
       return getImageHtml(image);
     }
-    return '';
+    return `
+      <div class="hero-banner__asset">
+      </div>
+    `;
   };
 
   const bannerItems = bannerItemsEl?.map((itemEl) => {
@@ -94,7 +98,7 @@ export default async function decorate(block) {
               ${(title) ? title.outerHTML : ''}
               ${(subTitle) ? `<p class="hero-banner__subtitle">${subTitle}</p>` : ''}
           </div>
-          <div class="hero-banner__bottom-section">
+          <div class="hero-banner__bottom-section ${(!(desktopVideoUrl || mobileVideoUrl)) ? 'hero-banner__bottom-section--no-action' : ''}">
             ${(desktopVideoUrl || mobileVideoUrl) ? '<div class="hero-banner__mute-btn hero-banner__mute-btn--muted"></div>' : ''}
             ${(subText) ? `<div class="hero-banner__subtext">${subText}</div>` : ''}
           </div>
@@ -104,7 +108,7 @@ export default async function decorate(block) {
     return itemEl.outerHTML;
   });
 
-  block.innerHTML = `
+  block.innerHTML = utility.sanitizeHtml(`
     <div class="hero-banner__container">
       <div class="hero-banner__carousel">
         <div class="hero-banner__slides">
@@ -113,7 +117,7 @@ export default async function decorate(block) {
       </div>
       ${ctaHtml}
     </div>
-  `;
+  `);
 
   carouselUtils.init(block.querySelector('.hero-banner__carousel'), 'hero-banner__slides', 'fade', (currentSlide, targetSlide) => {
     currentSlide.querySelector('video')?.pause();

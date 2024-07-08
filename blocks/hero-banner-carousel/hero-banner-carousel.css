@@ -188,6 +188,10 @@
         flex-basis: content;
     }
 
+    .hero-banner__container .hero-banner__bottom-section--no-action {
+        padding-bottom: 124px;
+    }
+
     .hero-banner__container .hero-banner__bottom-section .hero-banner__subtext {
         font-size: 16px;
         font-weight: 300;
