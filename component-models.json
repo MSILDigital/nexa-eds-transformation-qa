@@ -846,6 +846,7 @@
         "valueType": "string",
         "name": "image",
         "label": "Image",
+        "required": true,
         "multi": false
       },
       {
