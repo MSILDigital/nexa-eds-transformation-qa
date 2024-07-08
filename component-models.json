@@ -644,35 +644,35 @@
             "value": "text-only-teaser"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "location",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
       },
       {
-        "id": "location",
-        "fields": [
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "title",
-            "label": "Title"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "fylText",
-            "label": "Find Your Location Text"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "dylText",
-            "label": "Detect Your Location Text"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "searchText",
-            "label": "Search Text"
-          }
-        ]
+        "component": "text",
+        "valueType": "string",
+        "name": "fylText",
+        "label": "Find Your Location Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "dylText",
+        "label": "Detect Your Location Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "searchText",
+        "label": "Search Text"
       }
     ]
   },
