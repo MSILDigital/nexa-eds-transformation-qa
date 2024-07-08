@@ -53,7 +53,10 @@ export default async function decorate(block) {
     } if (image) {
       return getImageHtml(image);
     }
-    return '';
+    return `
+      <div class="hero-banner__asset">
+      </div>
+    `;
   };
 
   const bannerItems = bannerItemsEl?.map((itemEl) => {
