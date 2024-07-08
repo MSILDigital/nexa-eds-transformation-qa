@@ -17,7 +17,7 @@ export default function decorate(block) {
     const image = imageEl?.querySelector('picture');
     if (image) {
       const img = image.querySelector('img');
-      img.removeAttribute('width');
+      img.setAttribute('width', '100%');
       img.removeAttribute('height');
       const alt = altTextEl?.textContent?.trim() || 'image';
       img.setAttribute('alt', alt);

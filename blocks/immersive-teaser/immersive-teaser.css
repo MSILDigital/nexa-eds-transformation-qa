@@ -200,7 +200,7 @@ main .immersive-teaser-container > div {
 
   .immersive__wrapper .immersive__image {
     width: 85%;
-    height: 100vh;
+    height: auto;
     margin-left: auto;
 
     img {
