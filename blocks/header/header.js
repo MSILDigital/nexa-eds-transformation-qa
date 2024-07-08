@@ -96,7 +96,7 @@ export default async function decorate(block) {
     <div class="car-panel-header">
       <div></div>
       <span class="car-text">Cars</span>
-      <span class="car-filter-close"><img src="../../../icons/close_white.svg" alt="close" /></span>
+      <span class="car-filter-close"><img src="${window.hlx.codeBasePath}/icons/close_white.svg" alt="close" /></span>
     </div>
       </div>
   `;
