@@ -1,4 +1,5 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
+import utility from '../../utility/utility.js';
 
 export default function decorate(block) {
   const [imageEl, imageClickedEl, imageAltTextEl, ...ctasEl] = block.children;
@@ -29,7 +30,7 @@ export default function decorate(block) {
     return element.innerHTML;
   }).join('');
 
-  block.innerHTML = `
+  block.innerHTML = utility.sanitizeHtml(`
     <div class="widget">
         <div class="widget__icon">
             <img src="${imageSrc}" alt="${alt}" class="icon"/>
@@ -41,19 +42,5 @@ export default function decorate(block) {
             </ul>
         </div>
     </div>
-        `;
-  // Add hover logic with JavaScript
-  const widgetElement = block.querySelector('.widget');
-  const widgetLinksElement = block.querySelector('.widget__links');
-
-  widgetElement.addEventListener('mouseenter', () => {
-    widgetLinksElement.style.display = 'block';
-  });
-
-  widgetElement.addEventListener('mouseleave', () => {
-    widgetLinksElement.style.display = 'none';
-  });
-
-  // Initially hide the widget links
-  widgetLinksElement.style.display = 'none';
+  `);
 }

@@ -47,19 +47,19 @@ export default function decorate(block) {
   }
   immersiveTeaser.cta?.classList.add('btn-title');
   const immersiveTeaserHtml = utility.sanitizeHtml(`
-        ${(immersiveTeaser.image) ? immersiveTeaser.image.outerHTML : ''}
+        ${(immersiveTeaser.image) ? `<div class="immersive__image">${immersiveTeaser.image.outerHTML}</div>` : ''}
          <div class="immersive__content">
            ${(immersiveTeaser.pretitle) ? `<p>${immersiveTeaser.pretitle}</p>` : ''}
            ${(immersiveTeaser.title) ? `${immersiveTeaser.title.outerHTML}` : ''}
            ${(immersiveTeaser.description) ? `${immersiveTeaser.description}` : ''}
-           ${(immersiveTeaser.cta) ? `<div class="immersive__action">${immersiveTeaser.cta.outerHTML}</div>` : ''}
+           ${(immersiveTeaser.cta) ? `<div class="immersive__action"><div class="cta__primary">${immersiveTeaser.cta.outerHTML}</div></div>` : ''}
           </div>
     `);
 
-  block.innerHTML = `
-        <div class="immersive__wrapper right-seperator">
-            ${immersiveTeaserHtml}
-            ${(teaserObj?.innerHTML) ? teaserObj.outerHTML : ''}
-        </div>
-    `;
+  block.innerHTML = utility.sanitizeHtml(`
+    <div class="immersive__wrapper right-seperator">
+        ${immersiveTeaserHtml}
+        ${(teaserObj?.innerHTML) ? teaserObj.outerHTML : ''}
+    </div>
+  `);
 }

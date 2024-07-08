@@ -121,12 +121,14 @@ main .teaser-container > div {
     }
 
     .teaser__pretitle {
-      color: var(--primary-main-color);
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 300;
-      line-height: 20px;
-      text-transform: uppercase;
+      p {
+        color: var(--primary-main-color);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 20px;
+        text-transform: uppercase;
+      }
     }
 
     .teaser__actions {
@@ -138,7 +140,6 @@ main .teaser-container > div {
 
       .button {
         display: flex;
-        height: 32px;
         padding: 8px 16px;
         justify-content: center;
         align-items: center;
@@ -146,7 +147,7 @@ main .teaser-container > div {
       }
 
       .primary__btn {
-        width:auto;
+        width: auto;
         background: var(--primary-main-color);
         color: var(--secondary-main-color);
         text-align: center;
@@ -263,7 +264,6 @@ main .teaser-container > div {
 
         .button {
           display: flex;
-          height: 32px;
           padding: 8px 16px;
           justify-content: center;
           align-items: center;
@@ -285,23 +285,18 @@ main .teaser-container > div {
         }
         .secondary__btn {
           font-family: "Fira Sans";
+          padding: 8px 0;
           font-size: 12px;
           font-style: normal;
           align-items: center;
           font-weight: 400;
-          line-height: 13px;
+          line-height: 16px;
           text-decoration: none;
           display: flex;
           gap: 10.24px;
           color: var(--primary-main-color);
           border-radius: inherit;
           background: inherit;
-        }
-
-        .secondary__btn:hover,
-        .secondary__btn:focus {
-          background: inherit;
-          color: inherit;
           border-bottom: 0.64px solid var(--primary-main-color);
         }
 
@@ -335,14 +330,18 @@ main .teaser-container > div {
         clip-path: polygon(
           0 0,
           100% 0,
-          100% calc(100% - 84px),
-          calc(100% - 54px) 100%,
+          100% calc(100% - 124px),
+          calc(100% - 84px) 100%,
           0 100%
         );
         height: 100%;
       }
 
       .teaser__content {
+        .teaser__info {
+          gap: 24px;
+        }
+
         width: 45%;
         padding: 32px;
         flex-direction: column;
@@ -365,6 +364,17 @@ main .teaser-container > div {
           height: 100%;
           width: 100%;
         }
+
+        .teaser__content {
+          flex-direction: row;
+          align-items: flex-end;
+          gap: 24px;
+ 
+          .teaser__info {
+            width: 100%;
+          }
+        }
+ 
         .teaser__title {
           position: relative;
           .teaser__title-text {
@@ -392,6 +402,10 @@ main .teaser-container > div {
             text-transform: uppercase;
           }
         }
+        .teaser__pretitle, .teaser__title {
+          width: 100%;
+          text-align: left;
+        }
         .teaser__image {
           clip-path: none;
         }
@@ -417,7 +431,6 @@ main .teaser-container > div {
           .teaser__content {
             position: absolute;
             inset: 0;
-            justify-content: end;
             direction: ltr;
             width: 100%;
           }
@@ -429,26 +442,52 @@ main .teaser-container > div {
 
       .teaser__card--focused {
         height: 463px;
+
         .teaser__image {
           width: 55%;
           height: auto !important;
         }
+
+        .teaser__actions {
+          gap: 48px;
+          .primary__btn {
+            font-size: 16px;
+            line-height: 24px;
+          }
+
+          .secondary__btn {
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
+
         img {
           width: 100%;
           height: 100%;
         }
+
         .teaser__title .horizontal__arrow {
           display: block;
         }
+
+        .teaser__pretitle {
+          p {
+            font-size: 14px;
+            line-height: 20px;
+          }
+        }
+
         .teaser__title {
           .teaser__title-text {
             font-weight: 600;
             font-size: 32px;
           }
         }
+
         .teaser__description {
           p {
             font-size: 18px;
+            font-weight: 300;
           }
         }
       }
@@ -731,26 +770,23 @@ main .teaser-container > div {
   }
   .dark-teaser
     .teaser__right.teaser__card--unfocused
-    .teaser__content
-    .teaser__title-text::after {
+    .teaser__content::after {
     content: "";
-    position: absolute;
+    display: inline-block;
     height: 48px;
     width: 48px;
-    top: -6px;
-    background-image: url("../../icons/chevron_right_teaser_h.svg");
+    background: url("../../icons/chevron_right_white.svg") no-repeat;
     cursor: pointer;
   }
   .dark-teaser
     .teaser__left.teaser__card--unfocused
-    .teaser__content
-    .teaser__title-text::after {
+    .teaser__content::after {
     content: "";
-    position: absolute;
+    display: inline-block;
     height: 48px;
     width: 48px;
-    top: -6px;
-    background-image: url("../../icons/chevron_left_teaser_h.svg");
+    background: url("../../icons/chevron_right_white.svg") no-repeat;
     cursor: pointer;
+    transform: scale(-1, 1);
   }
 }

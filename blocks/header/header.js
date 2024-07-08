@@ -30,39 +30,40 @@ export default async function decorate(block) {
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
-  Array.from(
-    nav.querySelectorAll('nav > div.section:not(:first-child):not(:last-child):not(:nth-last-child(2))'),
-  ).forEach((el) => {
-    const heading = el.querySelector('.icontitle :is(h1,h2,h3,h4,h5,h6)');
-    const icon = el.querySelector('.icon');
-    const iconClicked = el.querySelector('.iconClicked');
-    const [content] = Array.from(el.children).slice(1);
-    let teaserWrappers;
-    let combinedTeaserHTML = '';
-    let teaser;
-    if (content?.classList.contains('car-filter-wrapper')) {
-      teaserWrappers = el.querySelectorAll('.teaser-wrapper');
-      teaserWrappers.forEach((teaserWrapper) => {
-        combinedTeaserHTML += teaserWrapper.innerHTML;
-      });
+  Array
+    .from(nav.children)
+    .slice(1, nav.children.length - 1)
+    .forEach((el) => {
+      const heading = el.querySelector('.icontitle :is(h1,h2,h3,h4,h5,h6)');
+      const icon = el.querySelector('.icon');
+      const iconClicked = el.querySelector('.iconClicked');
+      const [content] = Array.from(el.children).slice(1);
+      let teaserWrappers;
+      let combinedTeaserHTML = '';
+      let teaser;
+      if (content?.classList.contains('car-filter-wrapper')) {
+        teaserWrappers = el.querySelectorAll('.teaser-wrapper');
+        teaserWrappers.forEach((teaserWrapper) => {
+          combinedTeaserHTML += teaserWrapper.innerHTML;
+        });
 
-      el.querySelector('.card-list-teaser')?.insertAdjacentHTML(
-        'beforeend',
-        utility.sanitizeHtml(
-          `<div class="teaser-list">${combinedTeaserHTML}</div>`,
-        ),
-      );
-    } else {
-      teaser = el.querySelector('.teaser-wrapper');
-    }
-    list.push({
-      heading: heading?.textContent,
-      icon: icon?.innerHTML,
-      iconClicked: iconClicked?.innerHTML,
-      content: content?.firstChild,
-      teaser: teaser?.firstChild ?? '',
+        el.querySelector('.card-list-teaser')?.insertAdjacentHTML(
+          'beforeend',
+          utility.sanitizeHtml(
+            `<div class="teaser-list">${combinedTeaserHTML}</div>`,
+          ),
+        );
+      } else {
+        teaser = el.querySelector('.teaser-wrapper');
+      }
+      list.push({
+        heading: heading?.textContent,
+        icon: icon?.innerHTML,
+        iconClicked: iconClicked?.innerHTML,
+        content: content?.firstChild,
+        teaser: teaser?.firstChild ?? '',
+      });
     });
-  });
   const logo = nav.querySelector('.logo-wrapper');
   const carIcon = nav.children[1].querySelector('.icon')?.innerHTML;
   const carFilter = nav.querySelector('.car-filter');
