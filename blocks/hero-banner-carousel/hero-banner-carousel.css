@@ -51,6 +51,7 @@
     letter-spacing: 0.02em;
     text-align: left;
     margin: 0;
+    font-style: normal;
 }
 
 .hero-banner__container .hero-banner__top-section .hero-banner__subtitle {
@@ -76,7 +77,7 @@
     line-height: 20px;
     text-align: left;
     margin-top: auto;
-    max-width: 50%;
+    max-width: 60%;
 }
 
 .hero-banner__container .hero-banner__bottom-section .hero-banner__subtext p {
@@ -170,7 +171,8 @@
         font-size: 84px;
         font-weight: 700;
         line-height: 72px;
-        letter-spacing: 0.02em;
+        line-height: 96px; 
+        letter-spacing: 0.03em;
         text-align: left;
     }
 
