@@ -75,7 +75,7 @@ main .immersive-teaser-container > div {
   background-color: #18171a;
   text-align: left;
 
-  h2 {
+  .immersive__title {
     color: white;
     margin-bottom: 72px;
     font-size: 32px;
@@ -217,7 +217,9 @@ main .immersive-teaser-container > div {
     padding: 64px;
     width: 55%;
 
-    h2 {
+    .immersive__title {
+      margin: 0;
+      padding-bottom: 32px;
       font-size: 64px;
       font-weight: 600;
       line-height: 68px;
@@ -234,7 +236,7 @@ main .immersive-teaser-container > div {
       font-size: 18px;
       font-weight: 300;
       line-height: 24px;
-      width: 50%;
+      width: 45%;
     }
   }
 
@@ -243,7 +245,8 @@ main .immersive-teaser-container > div {
     padding: 0;
     bottom: 64px;
     right: 64px;
-    width: 45%;
+    width: 45.25%;
+    min-height: 33.5%;
     background-color: transparent;
 
     .teaser__card {

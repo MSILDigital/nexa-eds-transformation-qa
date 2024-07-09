@@ -41,7 +41,8 @@
       "immersive-teaser",
       "widget",
       "hero-banner-carousel",
-      "nexa-world"
+      "nexa-world",
+      "offer-list"
     ]
   },
   {
@@ -90,6 +91,12 @@
     "id": "nexa-world",
     "components": [
       "ctaWithIcon"
+    ]
+  },
+  {
+    "id": "offer-list",
+    "components": [
+      "offer-item"
     ]
   }
 ]

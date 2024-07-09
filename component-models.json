@@ -1243,5 +1243,170 @@
         ]
       }
     ]
+  },
+  {
+    "id": "offer-list",
+    "fields": [
+      {
+        "component": "text-input",
+        "name": "title",
+        "valueType": "string",
+        "label": "Title",
+        "description": "Heading for the offers component",
+        "required": true
+      },
+      {
+        "component": "select",
+        "name": "type",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string",
+        "description": "Description for the offers",
+        "required": true
+
+      },
+      {
+        "component": "text-input",
+        "name": "primaryLinkText",
+        "label": "Primary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "primaryLink",
+        "label": "Primary CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "primaryLinkTarget",
+        "value": "",
+        "label": "Open Primary Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "label": "Icon for Button",
+        "name": "primaryLinkIcon",
+        "valueType": "string",
+        "description": "Icon for the button.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "offer-item",
+    "fields": [
+      {
+        "component": "reference",
+        "label": "Desktop Image(Default Img)",
+        "name": "desktopImage",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "text",
+        "label": "Desktop Image Alt",
+        "name": "desktopImageAlt",
+        "valueType": "string",
+        "required": true,
+        "condition": { "!==": [{"var" : "desktopImage"}, ""] }
+      },
+      {
+        "component": "reference",
+        "label": "Mobile Image",
+        "name": "mobileImage",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "description": "Title for the offer teaser.",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string",
+        "description": "Description for the offer.",
+        "required": true
+      },
+      {
+        "component": "text-input",
+        "name": "primaryLinkText",
+        "label": "Primary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "primaryLink",
+        "label": "Primary CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "primaryLinkTarget",
+        "value": "",
+        "label": "Open Primary Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
+      }
+    ]
   }
 ]
