@@ -411,7 +411,7 @@
                   "filter":"offer-list",
                   "model": "offer-list",
                   "title": "Exciting offers and deals for you!",
-                  "titleType": "h2"
+                  "type": "h2"
                 }
               }
             }
