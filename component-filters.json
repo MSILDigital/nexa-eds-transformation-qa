@@ -42,7 +42,8 @@
       "widget",
       "hero-banner-carousel",
       "nexa-world",
-      "offer-list"
+      "offer-list",
+      "highlights"
     ]
   },
   {
@@ -97,6 +98,12 @@
     "id": "offer-list",
     "components": [
       "offer-item"
+    ]
+  },
+  {
+    "id": "highlights",
+    "components": [
+      "highlight"
     ]
   }
 ]
