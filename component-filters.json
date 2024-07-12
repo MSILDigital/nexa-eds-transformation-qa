@@ -43,7 +43,7 @@
       "hero-banner-carousel",
       "nexa-world",
       "offer-list",
-      "highlights",
+      "highlight-tabs",
       "brand-film-carousel",
       "secondary-navigation"
     ]
@@ -103,9 +103,9 @@
     ]
   },
   {
-    "id": "highlights",
+    "id": "highlight-tabs",
     "components": [
-      "highlight"
+      "highlight-item"
     ]
   },
   {
