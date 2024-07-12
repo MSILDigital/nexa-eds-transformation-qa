@@ -13,7 +13,15 @@ export default async function decorate(block) {
   const {
     publishDomain, apiKey, allFilterText,
   } = await fetchPlaceholders();
-  const authorization = `${publishDomain}/content/nexa/services/token`;
+  let authorization;
+  try {
+    const res = await fetch(`${publishDomain}/content/nexa/services/token`);
+    if(res.ok) {
+      authorization = await res.text();
+    }
+  } catch (e) {
+    authorization = '';
+  }
   const forCode = '48';
   const title = titleEl?.textContent?.trim();
   const subtitle = subtitleEl?.textContent?.trim();
