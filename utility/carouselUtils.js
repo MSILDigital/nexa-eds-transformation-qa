@@ -2,63 +2,24 @@
 * Utility for Carousel
 */
 const carouselUtils = {
-  /**
-   * Callback for carousel slide changes
-   * @callback onChange
-   * @param {Element} [currentSlide] Current slide of the carousel
-   * @param {Element} [targetSlide] Slide which going to be active
-   * @param {number} [direction] Direction of the slides based on interaction
-   * - Previous: -1
-   * - Next: 1
-   * - Dots: 0
-   * @returns {void}
-   */
-  /**
-  * Intialises the carousel
-  * @param {Element} [el] Parent element which will be replaced with carousel elements
-  * @param {string} [className] Class name of the element which contains all the slides
-  * @param {string} [carouselType] Type of the carousel - Supported types: `fade`
-  * @param {onChange} [onChange] Callback for carousel slide changes
-  * @returns {void}
-  */
   init: (
     el,
     className,
     carouselType,
-    onChange,
+    {
+      onChange = () => {},
+      onReset = () => {},
+      onNext = () => {},
+      onPrev = () => {},
+      showArrows = true,
+      showDots = true,
+      dotsInteractive = true,
+      navigationContainerClassName = '',
+    },
   ) => {
     if (!el) {
-      return;
+      return {};
     }
-
-    if (carouselType === 'fade') {
-      el.classList.add('fade-carousel__wrapper');
-    }
-    const slidesWrapper = el.querySelector(`.${className}`);
-    const dots = document.createElement('ul');
-    slidesWrapper.classList.add('carousel__slides');
-    [...slidesWrapper.children].forEach((slide, index) => {
-      slide.classList.add('carousel__slide');
-      slide.dataset.slideIndex = index;
-      const dot = document.createElement('li');
-      dot.classList.add('carousel__dot');
-      dot.dataset.targetIndex = index;
-      if (index === 0) {
-        slide.classList.add('carousel__slide--active');
-        dot.classList.add('carousel__dot--active');
-      }
-      dots.append(dot);
-    });
-    el.innerHTML = `
-      ${slidesWrapper.outerHTML}
-      <div class="carousel__dots">
-        ${dots.outerHTML}
-      </div>
-      <div class="carousel__navigation">
-        <span class="carousel__prev carousel__nav--disabled"></span>
-        <span class="carousel__next"></span>
-      </div>
-    `;
 
     const updateDots = (targetIndex, currentIndex) => {
       const currentDot = el.querySelector('.carousel__dot--active');
@@ -91,50 +52,116 @@ const carouselUtils = {
       }
     };
 
-    const activateSlide = (position) => {
-      const slides = el.querySelectorAll('.carousel__slide');
+    const getSlideInfo = (direction = 0, position = null) => {
       const currentSlide = el.querySelector('.carousel__slide--active');
       const currentIndex = parseInt(currentSlide.dataset.slideIndex, 10);
-      let targetIndex = 0;
-      let targetSlide;
-      if (position === 1 && currentIndex + 1 < slides.length) {
-        targetIndex = currentIndex + 1;
-        targetSlide = slides[targetIndex];
-      } else if (position === -1 && currentIndex - 1 >= 0) {
-        targetIndex = currentIndex - 1;
-        targetSlide = slides[targetIndex];
-      }
+      const targetIndex = position ?? (currentIndex + (direction ?? 0));
+      const targetSlide = el.querySelector(`.carousel__slide[data-slide-index="${targetIndex}"]`);
+      return {
+        currentSlide,
+        currentIndex,
+        targetSlide,
+        targetIndex,
+      };
+    };
 
+    const navigateSlide = (slideInfo, direction = 0, isReset = false) => {
+      const {
+        currentSlide, targetSlide, currentIndex, targetIndex,
+      } = slideInfo;
       if (targetSlide) {
         currentSlide.classList.remove('carousel__slide--active');
         targetSlide.classList.add('carousel__slide--active');
-        if (typeof onChange === 'function') {
-          onChange(currentSlide, targetSlide, position);
+        if (isReset && typeof onReset === 'function') {
+          onReset(currentSlide, targetSlide);
+        } else if (typeof onChange === 'function') {
+          onChange(currentSlide, targetSlide, direction);
         }
-        updateNavigation(targetIndex, slides.length);
+        updateNavigation(targetIndex, el.querySelectorAll('.carousel__slide').length);
         updateDots(targetIndex, currentIndex);
+        return true;
       }
+      return false;
     };
 
-    el.querySelector('.carousel__prev')?.addEventListener('click', () => {
-      activateSlide(-1);
+    if (carouselType === 'fade' || !carouselType) {
+      el.classList.add('fade-carousel__wrapper');
+    }
+    const slidesWrapper = el.querySelector(`.${className}`);
+    const dots = document.createElement('ul');
+    slidesWrapper.classList.add('carousel__slides');
+    [...slidesWrapper.children].forEach((slide, index) => {
+      slide.classList.add('carousel__slide');
+      slide.dataset.slideIndex = index;
+      const dot = document.createElement('li');
+      dot.classList.add('carousel__dot');
+      dot.dataset.targetIndex = index;
+      if (index === 0) {
+        slide.classList.add('carousel__slide--active');
+        dot.classList.add('carousel__dot--active');
+      }
+      dots.append(dot);
     });
-    el.querySelector('.carousel__next')?.addEventListener('click', () => {
-      activateSlide(1);
-    });
-    el.querySelectorAll('.carousel__dot')?.forEach((dot) => {
-      dot.addEventListener('click', (e) => {
-        const targetIndex = parseInt(e.target.dataset.targetIndex, 10);
-        const currentSlide = el.querySelector('.carousel__slide--active');
-        const targetSlide = el.querySelector(`.carousel__slide[data-slide-index="${targetIndex}"]`);
-        currentSlide?.classList?.remove('carousel__slide--active');
-        targetSlide?.classList?.add('carousel__slide--active');
-        onChange(currentSlide, targetSlide, 0);
-        const slides = el.querySelectorAll('.carousel__slide');
-        updateNavigation(targetIndex, slides.length);
-        updateDots(targetIndex, parseInt(currentSlide.dataset.slideIndex, 10));
+
+    el.querySelector(`.${className}`).replaceWith(slidesWrapper);
+    const navigationContainerEl = (navigationContainerClassName) ? el.querySelector(`.${navigationContainerClassName}`) : null;
+    if (showDots) {
+      const dotsContainer = document.createElement('div');
+      dotsContainer.className = 'carousel__dots';
+      dotsContainer.append(dots);
+      if (navigationContainerEl) {
+        navigationContainerEl.insertAdjacentElement('beforeend', dotsContainer);
+      } else {
+        el.insertAdjacentElement('beforeend', dotsContainer);
+      }
+      if (dotsInteractive) {
+        el.querySelectorAll('.carousel__dot')?.forEach((dot) => {
+          dot.addEventListener('click', (e) => {
+            const targetIndex = parseInt(e.target.dataset.targetIndex, 10);
+            const slideInfo = getSlideInfo(0, targetIndex);
+            navigateSlide(slideInfo);
+          });
+        });
+      }
+    }
+
+    if (showArrows) {
+      const arrowsContainer = document.createElement('div');
+      arrowsContainer.className = 'carousel__navigation';
+      arrowsContainer.innerHTML = `
+          <span class="carousel__prev carousel__nav--disabled"></span>
+          <span class="carousel__next"></span>
+      `;
+      if (navigationContainerEl) {
+        navigationContainerEl.insertAdjacentElement('beforeend', arrowsContainer);
+      } else {
+        el.insertAdjacentElement('beforeend', arrowsContainer);
+      }
+      el.querySelector('.carousel__prev')?.addEventListener('click', () => {
+        const slideInfo = getSlideInfo(-1);
+        const status = onPrev(slideInfo.currentSlide, slideInfo.targetSlide) ?? true;
+        if (status) {
+          navigateSlide(slideInfo, -1);
+        }
       });
-    });
+      el.querySelector('.carousel__next')?.addEventListener('click', () => {
+        const slideInfo = getSlideInfo(1);
+        const status = onNext(slideInfo.currentSlide, slideInfo.targetSlide) ?? true;
+        if (status) {
+          navigateSlide(slideInfo, 1);
+        }
+      });
+    }
+
+    const prev = () => navigateSlide(getSlideInfo(-1), -1);
+    const next = () => navigateSlide(getSlideInfo(1), 1);
+    const reset = () => navigateSlide(getSlideInfo(0, 0), 0, true);
+
+    return {
+      prev,
+      next,
+      reset,
+    };
   },
 };
 

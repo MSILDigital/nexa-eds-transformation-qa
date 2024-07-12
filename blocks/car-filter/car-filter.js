@@ -10,8 +10,11 @@ export default async function decorate(block) {
     filterSelectEl,
   ] = block.children;
 
-  const { publishDomain } = await fetchPlaceholders();
-
+  const {
+    publishDomain, apiKey, allFilterText,
+  } = await fetchPlaceholders();
+  const authorization = `${publishDomain}/content/nexa/services/token`;
+  const forCode = '48';
   const title = titleEl?.textContent?.trim();
   const subtitle = subtitleEl?.textContent?.trim();
   const priceText = priceTextEl?.textContent?.trim();
@@ -55,7 +58,7 @@ export default async function decorate(block) {
 
     newContainer.append(carCardsWithTeaser);
 
-    let selectedFilter = 'All';
+    let selectedFilter = allFilterText;
     const filters = {};
     const filterTypes = filterList.split(',');
 
@@ -88,7 +91,8 @@ export default async function decorate(block) {
     if (componentVariation === 'arena-variant') {
       unifiedFilterOptions = [...new Set(filterTypes.flatMap((type) => filters[type]))];
     } else {
-      unifiedFilterOptions = ['All', ...new Set(filterTypes.flatMap((type) => filters[type]))];
+      unifiedFilterOptions = [allFilterText,
+        ...new Set(filterTypes.flatMap((type) => filters[type]))];
     }
 
     function updateFilterStyles() {
@@ -109,10 +113,82 @@ export default async function decorate(block) {
       return formatter.format(price);
     }
 
-    function fetchPrice(variantCode, priceElement, priceTextElement, defaultPrice) {
-      const formattedPrice = defaultPrice ? priceFormatting(defaultPrice) : 'Not available';
-      priceElement.textContent = formattedPrice;
-      priceTextElement.textContent = priceText;
+    function getLocalStorage(key) {
+      return localStorage.getItem(key);
+    }
+
+    function fetchPrice(modelCode, priceElement, priceTextElement, defaultPrice) {
+      const storedPrices = getLocalStorage('modelPrice')
+        ? JSON.parse(getLocalStorage('modelPrice')) : {};
+      if (storedPrices[modelCode] && storedPrices[modelCode].price[forCode]) {
+        const storedPrice = storedPrices[modelCode].price[forCode];
+        priceElement.textContent = `${priceText} ${storedPrice}`;
+      } else {
+        let channel = 'EXC';
+        if (componentVariation === 'arena-variant') {
+          channel = 'NRM';
+        }
+
+        const apiUrl = 'https://api.preprod.developersatmarutisuzuki.in/pricing/v2/common/pricing/ex-showroom-detail';
+
+        const params = {
+
+          forCode,
+          channel,
+        };
+
+        const headers = {
+          'x-api-key': apiKey,
+          Authorization: authorization,
+        };
+
+        const url = new URL(apiUrl);
+        Object.keys(params)
+          .forEach((key) => url.searchParams.append(key, params[key]));
+
+        fetch(url, {
+          method: 'GET',
+          headers,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.error === false && data.data) {
+              const storedModelPrices = {};
+              const timestamp = new Date().getTime() + (1 * 24 * 60 * 60 * 1000); // 1 day from now
+
+              data.data.models.forEach((item) => {
+                const { modelCd } = item;
+                const formattedPrice = priceFormatting(item.lowestExShowroomPrice);
+
+                storedModelPrices[modelCd] = {
+                  price: {
+                    [forCode]: formattedPrice,
+                  },
+                  timestamp,
+                };
+              });
+
+              // Convert to JSON and store in localStorage
+              localStorage.setItem('modelPrice', JSON.stringify(storedModelPrices));
+              priceElement.textContent = `${priceText} ${storedModelPrices[modelCode].price[forCode]}`;
+            } else {
+              const formattedPrice = defaultPrice ? priceFormatting(defaultPrice) : 'Not available';
+              priceElement.textContent = formattedPrice;
+              priceTextElement.textContent = priceText;
+            }
+          })
+          .catch((error) => {
+            const formattedPrice = defaultPrice ? priceFormatting(defaultPrice) : 'Not available';
+            priceElement.textContent = formattedPrice;
+            priceTextElement.textContent = priceText;
+            throw new Error('Network response was not ok', error);
+          });
+      }
     }
 
     function renderCards(carsToRender) {
@@ -174,7 +250,7 @@ export default async function decorate(block) {
 
     function filterCards() {
       const filteredCars = cars.filter((car) => {
-        if (selectedFilter === 'All') {
+        if (selectedFilter === allFilterText) {
           return true;
         }
         return filterTypes.some((type) => (
