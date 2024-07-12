@@ -146,16 +146,13 @@
   margin-top: 16px;
 
   .switch-list {
-    height: 28px;
     list-style-type: none;
     display: flex;
-    gap: 16px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: 2px;
-    scrollbar-color: var(--secondary-color) transparent;
+    scrollbar-width: none;
 
     @media (min-width: 999px) {
       gap: 24px;
@@ -179,10 +176,22 @@
   line-height: 16px;
   white-space: nowrap;
   position: relative;
+  padding-left:8px;
+  padding-right:8px;
+  padding-bottom:8px;
 
   @media (min-width: 999px) {
     font-size: 16px;
     line-height: 20px;
+    width:210px;
+    padding-left:16px;
+    padding-right:16px;
+    padding-bottom:14px;
+    display:flex;
+    justify-content: center;
+    align-items: end;
+    overflow-wrap: break-word;
+    white-space:pre-wrap;
   }
 
   &::after {
@@ -208,7 +217,7 @@
 .highlightItem-content {
   position: relative;
   margin-top: 24px;
-  width: calc(100% - 20px);
+  width:calc(100% - 20px);
   padding: 16px;
   background: linear-gradient(238deg,
       var(--content-background-gradient-start) -11.12%,
@@ -228,7 +237,7 @@
     position: absolute;
     left: 5%;
     bottom: 48px;
-    width: 30%;
+    width:397px;
     margin-left: 0;
     margin-top: 0;
     padding: 32px;
@@ -240,7 +249,7 @@
 .more-content {
   line-height: 16px;
   overflow: hidden;
-  max-height: 50px;
+  max-height: 48px;
   transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
 
   @media (min-width: 999px) {

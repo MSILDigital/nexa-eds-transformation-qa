@@ -1,5 +1,6 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import utility from '../../utility/utility.js';
 
 export default function decorate(block) {
   // Function to extract Nexa World content from the block
@@ -112,11 +113,11 @@ export default function decorate(block) {
     </div>`;
 
   // Replace the block's HTML with the constructed Nexa World HTML and teaser if present
-  block.innerHTML = `
+  block.innerHTML = utility.sanitizeHtml(`
     <div class="nexa-world__container">
       ${nexaWorldHtml}
       ${nexaWorldTeaser}
-    </div>`;
+    </div>`);
 
   // Function to handle hover effects
   function updateHoverEffects() {

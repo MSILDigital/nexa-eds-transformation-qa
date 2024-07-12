@@ -11,9 +11,9 @@ export default async function decorate(block) {
   if (ctaVisibility === 'true' && ctaLink) {
     const href = ctaLink?.href;
     ctaHtml = `
-    <div class="hero-banner__cta-container">
+    <div class="hero-banner-carousel__cta-container">
       ${(ctaText) ? `<p>${ctaText}</p>` : ''}
-      <a href="${href}" class="hero-banner__primary-btn"></a>
+      <a href="${href}" class="hero-banner-carousel__primary-btn"></a>
     </div>
     `;
   }
@@ -37,13 +37,13 @@ export default async function decorate(block) {
   };
 
   const getVideoHtml = (videoUrl) => `
-      <div class="hero-banner__asset hero-banner__video-container">
-        <video src="${videoUrl}" muted="muted" width="100%" autoplay loop></video>
+      <div class="hero-banner-carousel__asset hero-banner-carousel__video-container">
+        <video src="${videoUrl}" muted="muted" width="100%" autoplay loop playsinline></video>
       </div>
     `;
 
   const getImageHtml = (image) => `
-      <div class="hero-banner__asset hero-banner__image-container">
+      <div class="hero-banner-carousel__asset hero-banner-carousel__image-container">
         ${image.outerHTML}
       </div>
     `;
@@ -54,10 +54,7 @@ export default async function decorate(block) {
     } if (image) {
       return getImageHtml(image);
     }
-    return `
-      <div class="hero-banner__asset">
-      </div>
-    `;
+    return '';
   };
 
   const bannerItems = bannerItemsEl?.map((itemEl) => {
@@ -81,7 +78,7 @@ export default async function decorate(block) {
     const mobileVideoUrl = (isAllowMobileVideo === 'true') ? (getVideoUrl(mobileVideoEl) || desktopVideoUrl) : desktopVideoUrl;
     const mobileImage = (isAllowMobileImage === 'true') ? (getImage(mobileImageEl, altText) || desktopImage) : desktopImage;
     const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
-    title?.classList?.add('hero-banner__title');
+    title?.classList?.add('hero-banner-carousel__title');
     const subTitle = subTitleEl?.textContent?.trim();
     const subText = Array.from(subTextEl?.querySelectorAll('p'))?.map((el) => el.outerHTML)?.join('');
     let assetHtml = '';
@@ -91,16 +88,16 @@ export default async function decorate(block) {
       assetHtml = getAssetHtml(mobileVideoUrl, mobileImage);
     }
     itemEl.innerHTML = `
-      <div class="hero-banner__content">
+      <div class="hero-banner-carousel__content">
         ${assetHtml}
-        <div class="hero-banner__info">
-          <div class="hero-banner__top-section">
+        <div class="hero-banner-carousel__info">
+          <div class="hero-banner-carousel__top-section">
               ${(title) ? title.outerHTML : ''}
-              ${(subTitle) ? `<p class="hero-banner__subtitle">${subTitle}</p>` : ''}
+              ${(subTitle) ? `<p class="hero-banner-carousel__subtitle">${subTitle}</p>` : ''}
           </div>
-          <div class="hero-banner__bottom-section ${(!(desktopVideoUrl || mobileVideoUrl)) ? 'hero-banner__bottom-section--no-action' : ''}">
-            ${(desktopVideoUrl || mobileVideoUrl) ? '<div class="hero-banner__mute-btn hero-banner__mute-btn--muted"></div>' : ''}
-            ${(subText) ? `<div class="hero-banner__subtext">${subText}</div>` : ''}
+          <div class="hero-banner-carousel__bottom-section">
+            ${(desktopVideoUrl || mobileVideoUrl) ? '<div class="hero-banner-carousel__mute-btn hero-banner-carousel__mute-btn--muted"></div>' : ''}
+            ${(subText) ? `<div class="hero-banner-carousel__subtext">${subText}</div>` : ''}
           </div>
         </div>
       </div>
@@ -109,9 +106,9 @@ export default async function decorate(block) {
   });
 
   block.innerHTML = utility.sanitizeHtml(`
-    <div class="hero-banner__container">
-      <div class="hero-banner__carousel">
-        <div class="hero-banner__slides">
+    <div class="hero-banner-carousel__container">
+      <div class="hero-banner-carousel__carousel">
+        <div class="hero-banner-carousel__slides">
           ${bannerItems.join('')}
         </div>
       </div>
@@ -119,20 +116,27 @@ export default async function decorate(block) {
     </div>
   `);
 
-  carouselUtils.init(block.querySelector('.hero-banner__carousel'), 'hero-banner__slides', 'fade', (currentSlide, targetSlide) => {
-    currentSlide.querySelector('video')?.pause();
-    targetSlide.querySelector('video')?.play();
-  });
+  carouselUtils.init(
+    block.querySelector('.hero-banner-carousel__carousel'),
+    'hero-banner-carousel__slides',
+    'fade',
+    {
+      onChange: (currentSlide, targetSlide) => {
+        currentSlide.querySelector('video')?.pause();
+        targetSlide.querySelector('video')?.play();
+      },
+    },
+  );
 
-  block.querySelectorAll('.hero-banner__mute-btn').forEach((el) => {
-    const video = el.closest('.hero-banner__content')?.querySelector('video');
+  block.querySelectorAll('.hero-banner-carousel__mute-btn').forEach((el) => {
+    const video = el.closest('.hero-banner-carousel__content')?.querySelector('video');
     el.addEventListener('click', (e) => {
       const targetStatus = !video.muted;
       video.muted = targetStatus;
       if (targetStatus) {
-        e.target?.classList?.add('hero-banner__mute-btn--muted');
+        e.target?.classList?.add('hero-banner-carousel__mute-btn--muted');
       } else {
-        e.target?.classList?.remove('hero-banner__mute-btn--muted');
+        e.target?.classList?.remove('hero-banner-carousel__mute-btn--muted');
       }
     });
   });
