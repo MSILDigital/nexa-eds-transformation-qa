@@ -1598,5 +1598,34 @@
         "label": "CTA Link"
       }
     ]
+  },
+  {
+    "id": "nexa-eshowroom-experience",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "component-id",
+        "label": "Component ID"
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "preTitle",
+        "label": "Price Text"
+      },
+      {
+        "component": "text-input",
+        "name": "secondaryText",
+        "label": "Secondary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "secondaryLink",
+        "valueType": "string",
+        "label": "Secondary CTA Link"
+      }
+    ]
   }
 ]
