@@ -165,8 +165,10 @@ export default async function decorate(block) {
                     }
                 },
                 onNext: (currentSlide, targetSlide) => {
-                    currentSlide.querySelector(".e-showroom__video")?.play();
-                    return false;
+                    if (targetSlide) {
+                        currentSlide.querySelector(".e-showroom__video")?.play();
+                        return false;
+                    }
                 },
                 onPrev: (currentSlide, targetSlide) => {
                     targetSlide
