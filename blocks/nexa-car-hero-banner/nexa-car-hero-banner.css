@@ -1,0 +1,366 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+
+.hero {
+  padding: 64px 24px;
+  mix-blend-mode: hard-light;
+  background: linear-gradient(
+    228deg,
+    rgba(56, 79, 110, 0.6) 0%,
+    rgba(90.81, 90.81, 90.81, 0.6) 100%
+  );
+}
+
+.hero-banner__carousel {
+  position: relative;
+  background-color: #18171A;
+  height: 712px;
+}
+
+.hero__video-container {
+  background-color: #18171A;
+  height: 712px;
+
+  video {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.hero-banner__slides {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+
+  &.active {
+    position: relative;
+    visibility: visible;
+  }
+  
+}
+
+.hero__information-overlay {
+  padding: 64px 24px 24px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero__top-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-bottom: 2rem;
+
+  .vehicle-name {
+    color: white;
+    font-size: 32px;
+    font-family: Kepler Std;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: 0.64px;
+    word-wrap: break-word;
+    margin: 0;
+  }
+
+  .vehicle-tagline {
+    color: #f2f2f2;
+    font-size: 24px;
+    font-family: Kepler Std;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 32px;
+    word-wrap: break-word;
+    margin: 0;
+  }
+
+  .price-details {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .ex-showroom-label {
+      color: #f2f2f2;
+      font-size: 12px;
+      font-family: Fira Sans;
+      font-weight: 300;
+      text-transform: uppercase;
+      line-height: 20px;
+      word-wrap: break-word;
+      margin: 0;
+    }
+
+    .ex-showroom-price {
+      color: white;
+      font-size: 16px;
+      font-family: Fira Sans;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 1.28px;
+      word-wrap: break-word;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    div[role="separator"] {
+      display: none;
+      width: 2px;
+      height: 28px;
+      background-color: #ffffff80;
+    }
+  }
+
+  .hero__ctas {
+    display: none;
+  }
+}
+
+.hero__bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+
+  .hero__legends-container,
+  .hero__disclaimer-container {
+    width: 100%;
+  }
+}
+
+.hero__ctas {
+  display: flex;
+  gap: 2rem;
+
+
+  .cta__secondary {
+    display: flex;
+
+    a {
+      padding: 0 16px;
+      height: 40px;
+      display: flex;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background-color: transparent;
+      border: 1px solid white;
+      border-left: none;
+      border-right: none;
+    }
+  }
+
+  .cta__secondary::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    margin-right: -2px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("/icons/cta-secondary-before-element.svg");
+  }
+
+  .cta__secondary::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("/icons/cta-secondary-after-element.svg");
+  }
+}
+
+.hero__legends-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  align-items: center;
+
+  .hero__legends {
+    display: flex;
+    width: 100%;
+    padding-inline: 2rem;
+    justify-content: space-between;
+
+    .legend-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      .legend-title {
+        color: white;
+        font-size: 16px;
+        font-family: Fira Sans;
+        font-weight: 700;
+        line-height: 24px;
+        letter-spacing: 1.28px;
+        word-wrap: break-word;
+        margin: 0;
+      }
+
+      .legend-desc {
+        color: #f2f2f2;
+        font-size: 12px;
+        font-family: Fira Sans;
+        font-weight: 300;
+        text-transform: uppercase;
+        line-height: 20px;
+        word-wrap: break-word;
+        margin: 0;
+      }
+    }
+
+    div[role="separator"] {
+      width: 2px;
+      background-color: #b2b2b2;
+    }
+  }
+}
+
+.hero__disclaimer-container {
+  p {
+    text-align: center;
+    color: #767879;
+    font-size: 10px;
+    font-family: Fira Sans;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+}
+
+@media (min-width: 999px) {
+  .hero {
+    padding: 80px 64px;
+  }
+
+  .hero__information-overlay {
+    padding: 64px;
+  }
+  
+  .hero-banner__carousel{
+    height: 768px;
+  }
+
+  .hero__video-container {
+    height: 768px;
+  }
+
+  .hero__top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    .vehicle-name {
+      font-size: 64px;
+      line-height: 72px;
+      letter-spacing: 1.28px;
+    }
+
+    .vehicle-tagline {
+      font-size: 32px;
+      line-height: 48px;
+    }
+
+    .price-details {
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+
+      .ex-showroom-label {
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: none;
+      }
+
+      .ex-showroom-price {
+        font-size: 24px;
+        line-height: 28px;
+        margin: 0;
+      }
+
+      div[role="separator"] {
+        display: block;
+      }
+    }
+
+    .hero__ctas {
+      display: flex;
+    }
+  }
+
+  .hero__bottom-container {
+    flex-direction: row;
+  }
+
+  .hero__ctas {
+
+    .cta__secondary {
+      a {
+        height: 50px;
+        padding: 0 24px;
+      }
+    }
+
+    .cta__secondary::before {
+      height: 50px;
+      margin-right: 0px;
+    }
+
+    .cta__secondary::after {
+      height: 50px;
+    }
+  }
+
+  .hero__legends-container {
+    display: block;
+    margin-bottom: 0;
+
+    .hero__legends {
+      display: flex;
+      gap: 3rem;
+      justify-content: start;
+      width: 100%;
+
+      .legend-item {
+        .legend-title {
+          font-size: 24px;
+          font-weight: 500;
+          line-height: 32px;
+          letter-spacing: normal;
+        }
+
+        .legend-desc {
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .hero__ctas {
+      display: none;
+    }
+  }
+
+  .hero__disclaimer-container {
+    p {
+      text-align: end;
+    }
+  }
+}
