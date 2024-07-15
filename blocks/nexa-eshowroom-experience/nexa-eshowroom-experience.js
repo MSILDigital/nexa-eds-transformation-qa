@@ -2,6 +2,7 @@ import {
     fetchPlaceholders
 } from "../../scripts/aem.js";
 import carouselUtils from "../../utility/carouselUtils.js";
+import utility from '../../utility/utility.js';
 
 export default async function decorate(block) {
 
@@ -32,8 +33,13 @@ export default async function decorate(block) {
         apiKey
     } = await fetchPlaceholders();
     const url = `${publishDomain}/content/nexa/services/token`
-    const auth = await fetch(url);
-    const authorization = await auth.text();
+    let authorization = null;
+    try {
+        const auth = await fetch(url);
+        authorization = await auth.text();
+    } catch (e) {
+        authorization = '';
+    }
 
     const [componentIds, priceTextE1, secondaryBtnTextE1, secondaryBtnCtaE1] = block.children;
 
@@ -56,9 +62,17 @@ export default async function decorate(block) {
         },
     };
 
-    const response = await fetch(graphQlEndpoint, requestOptions);
-    const data = await response.json();
-    await carModelInfo(data);
+    try {
+        const response = await fetch(graphQlEndpoint, requestOptions);
+        if (!response.ok) {
+            throw new Error(`GraphQL response was not ok: ${response.statusText}`);
+        }
+        const data = await response.json();
+        await carModelInfo(data);
+    } catch (e) {
+        throw new Error('GraphQL response was not ok');
+    }
+
 
     async function carModelInfo(result) {
         const cars = result.data.carModelList.items;
@@ -105,7 +119,7 @@ export default async function decorate(block) {
                         <div>
                             <h2 class="text-heading-primary">${carDescription}</h2>
                             <div class="e-showroom__price-text">${priceText}
-                                <span class="e-showroom__price">Rs ${formattedCarPrice}</span>
+                                <span class="e-showroom__price">${formattedCarPrice}</span>
                             </div>
                         </div>
                         <div>
@@ -131,14 +145,15 @@ export default async function decorate(block) {
 
         const carItems = await Promise.all(carItemsPromises);
 
-        block.innerHTML = `
+        block.innerHTML = utility.sanitizeHtml(`
             <div class="e-showroom__container">
                 <div class="e-showroom-carousel">
                     <div class="e-showroom__slides">
                         ${carItems.join("")}
                     </div>
                 </div>
-            </div>`;
+            </div>
+            `);
 
         const controller = carouselUtils.init(
             block.querySelector(".e-showroom-carousel"),
@@ -187,13 +202,15 @@ export default async function decorate(block) {
 
     async function formatCurrency(value) {
         let numericValue = String(value).replace(/[^\d.]/g, '');
-        numericValue = numericValue.split('.')[0];
-        let lastThree = numericValue.slice(-3);
-        let otherNumbers = numericValue.slice(0, -3);
-        if (otherNumbers !== '') {
-            lastThree = ' ' + lastThree;
-        }
-        let formattedValue = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ' ') + lastThree;
+        const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+        let formattedValue = formatter.format(numericValue);
+
+        // Replace commas with spaces
+        formattedValue = formattedValue.replace(/,/g, ' ');
         return formattedValue;
     }
 
@@ -254,8 +271,8 @@ export default async function decorate(block) {
                     return exShowRoomPrice;
                 }
             } catch (error) {
-                console.error('Error fetching price:', error);
                 return exShowRoomPrice;
+                throw new Error('Network response was not ok', error);
             }
         }
     }
