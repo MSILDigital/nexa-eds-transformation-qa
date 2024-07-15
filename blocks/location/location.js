@@ -1,4 +1,5 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
+import utility from '../../utility/utility.js';
 
 export default async function decorate(block) {
   const [titleEl, fylTextEl, dylTextEl] = block.children;
@@ -6,7 +7,7 @@ export default async function decorate(block) {
   const fylText = fylTextEl?.textContent?.trim();
   const dylText = dylTextEl?.textContent?.trim();
 
-  block.innerHTML = `
+  block.innerHTML = utility.sanitizeHtml(`
           <button class="location-btn">
               Delhi
           </button>
@@ -21,7 +22,7 @@ export default async function decorate(block) {
                   </p>
               </div>
           </div>
-      `;
+      `);
   function processData(data) {
     const citiesObject = data?.reduce((acc, item) => {
       acc[item.cityDesc] = {
