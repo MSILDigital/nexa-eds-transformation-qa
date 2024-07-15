@@ -43,6 +43,10 @@
       "hero-banner-carousel",
       "nexa-world",
       "offer-list",
+      "highlight-tabs",
+      "brand-film-carousel",
+      "secondary-navigation",
+      "nexa-eshowroom-experience",
       "nexa-car-hero-banner"
     ]
   },
@@ -98,6 +102,24 @@
     "id": "offer-list",
     "components": [
       "offer-item"
+    ]
+  },
+  {
+    "id": "highlight-tabs",
+    "components": [
+      "highlight-item"
+    ]
+  },
+  {
+    "id": "brand-film-carousel",
+    "components": [
+      "brand-film-carousel-item"
+    ]
+  },
+  {
+    "id": "secondary-navigation",
+    "components": [
+      "cta"
     ]
   }
 ]

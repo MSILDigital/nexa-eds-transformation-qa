@@ -1,0 +1,102 @@
+.secondary-navbar-container{
+    width: 100%;
+    padding: 0 20px;
+    background: var(--Tertiary-Light-grey, #F2F2F2);
+    transition: top 0.3s; 
+    z-index: 1000; 
+    padding-top: 48px;
+    margin-bottom: 10px;
+}
+
+.secondary-navbar-container .secondary-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 1px solid #C9D3D7;
+    gap: 8px;
+
+}
+
+.secondary-navbar-container .logo-container p {
+    white-space: nowrap;
+    color: var(--Primary-Main, #18171A);
+    font-family: "Fira Sans";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 1.28px;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.secondary-navbar-container .buttons-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    gap: 24px;
+    white-space: nowrap;
+    padding-right: 20px;
+    overflow-x: auto;
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+}
+
+.secondary-navbar-container .buttons-container::-webkit-scrollbar {
+    display: none; 
+}
+
+.secondary-navbar-container .buttons-container .nav-button {
+    font-family: "Fira Sans";
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--Tertiary-Deep-Grey, #767879);
+    position: relative;
+    padding: 12px 0;
+}
+
+.secondary-navbar-container .buttons-container .nav-button.active {
+    color: black;
+    border-bottom: 2px solid black;
+}
+
+@media (min-width: 999px) {
+    
+    .secondary-navbar-container {
+        padding: 0 64px;
+    }
+
+    .secondary-navbar-container .secondary-navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .secondary-navbar-container .logo-container p{
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 32px;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+
+    .secondary-navbar-container .buttons-container {
+        gap: 40px;
+        justify-content: flex-end;
+        overflow-x: hidden; 
+        padding: 0;
+    }
+
+    .secondary-navbar-container .buttons-container .nav-button {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 24px 0;
+    }
+}

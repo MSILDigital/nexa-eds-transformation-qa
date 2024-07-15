@@ -435,6 +435,117 @@
           }
         },
         {
+          "title": "Highlight Tabs",
+          "id": "highlight-tabs",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Highlight Tabs",
+                  "filter": "highlight-tabs",
+                  "title": "Highlight Tabs"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Highlight Item",
+          "id": "highlight-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Highlight Item",
+                  "model": "highlight-item",
+                  "title": "Highlight Item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Brand Film Carousel",
+          "id": "brand-film-carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Brand Film Carousel",
+                  "model": "brand-film-carousel",
+                  "filter": "brand-film-carousel",
+                  "titleType": "h2"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Brand Film Carousel Item",
+          "id": "brand-film-carousel-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Brand Film Carousel Item",
+                  "model": "brand-film-carousel-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Secondary Navigation",
+          "id": "secondary-navigation",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Secondary Navigation",
+                  "filter": "secondary-navigation",
+                  "model": "logo"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "CTA",
+          "id": "cta",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "CTA",
+                  "model": "cta"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Nexa Eshowroom Experience",
+          "id": "nexa-eshowroom-experience",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Nexa Eshowroom Experience",
+                  "model": "nexa-eshowroom-experience",
+                  "filter": "nexa-eshowroom-experience"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Nexa Car Hero Banner",
           "id": "nexa-car-hero-banner",
           "plugins": {
