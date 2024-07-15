@@ -30,11 +30,11 @@ export default async function decorate(block) {
     const auth = await fetch(url);
     authorization = await auth.text();
   } catch (e) {
-    authorization = ''
+    authorization = '';
   }
   let citiesObject;
   function processData(data) {
-    const citiesObject = data?.reduce((acc, item) => {
+    citiesObject = data?.reduce((acc, item) => {
       acc[item.cityDesc] = {
         cityDesc: item.cityDesc,
         cityCode: item.cityCode,
@@ -46,7 +46,7 @@ export default async function decorate(block) {
     }, {});
     return citiesObject;
   }
-// Function to calculate distance between two points using Haversine formula
+  // Function to calculate distance between two points using Haversine formula
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -107,7 +107,7 @@ export default async function decorate(block) {
 
   const urlWithParams = 'https://api.preprod.developersatmarutisuzuki.in/dms/v1/api/common/msil/dms/dealer-only-cities?channel=EXC';
   let result = null;
-  try{
+  try {
     const response = await fetch(urlWithParams, { method: 'GET', headers: defaultHeaders });
     result = await response.json();
     const filteredData = result?.data?.filter((obj) => obj.cityDesc !== null);
@@ -116,21 +116,20 @@ export default async function decorate(block) {
     const geoLocationDiv = block.querySelector('.geo-location');
     const detectLocationCTA = block.querySelector('.detect-location__cta');
     locationButton.addEventListener('click', () => {
-    if (
-      geoLocationDiv.style.display === 'none'
+      if (
+        geoLocationDiv.style.display === 'none'
       || geoLocationDiv.style.display === ''
-    ) {
-      geoLocationDiv.style.display = 'block';
-    } else {
-      geoLocationDiv.style.display = 'none';
-    }
-  });
+      ) {
+        geoLocationDiv.style.display = 'block';
+      } else {
+        geoLocationDiv.style.display = 'none';
+      }
+    });
     detectLocationCTA.addEventListener('click', () => {
-    geoLocationDiv.style.display = 'none';
-    requestLocationPermission();
-  });
-  }
-  catch(e){
+      geoLocationDiv.style.display = 'none';
+      requestLocationPermission();
+    });
+  } catch (e) {
     throw new Error('Network response was not ok', e);
   }
 }
