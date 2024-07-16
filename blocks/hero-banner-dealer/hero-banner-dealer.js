@@ -65,11 +65,10 @@ export default function decorate(block) {
   `);
 
   function getCTAHeight() {
-    if (window.matchMedia("(min-width: 999px)").matches) {
+    if (window.matchMedia('(min-width: 999px)').matches) {
       return 64; // Height for desktop
-    } else {
-      return 35; // Height for mobile
     }
+    return 35; // Height for mobile
   }
 
   function setupScrollHighlight() {
