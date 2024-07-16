@@ -16,7 +16,7 @@ export default async function decorate(block) {
   let authorization;
   try {
     const res = await fetch(`${publishDomain}/content/nexa/services/token`);
-    if(res.ok) {
+    if (res.ok) {
       authorization = await res.text();
     }
   } catch (e) {
@@ -129,7 +129,7 @@ export default async function decorate(block) {
       const storedPrices = getLocalStorage('modelPrice')
         ? JSON.parse(getLocalStorage('modelPrice')) : {};
       if (storedPrices[modelCode] && storedPrices[modelCode].price[forCode]) {
-        const storedPrice = priceFormatting(storedPrices[modelCode].price[forCode]).replaceAll(',',' ');
+        const storedPrice = priceFormatting(storedPrices[modelCode].price[forCode]).replaceAll(',', ' ');
         priceElement.textContent = `${priceText} ${storedPrice}`;
       } else {
         let channel = 'EXC';

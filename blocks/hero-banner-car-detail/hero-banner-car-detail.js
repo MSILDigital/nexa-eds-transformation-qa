@@ -61,7 +61,7 @@ export default async function decorate(block) {
 
     const defaultHeaders = {
       'x-api-key': apiKey,
-      'Authorization': authorization,
+      Authorization: authorization,
     };
     const url = new URL(apiUrl);
     let priceData;
@@ -211,6 +211,7 @@ export default async function decorate(block) {
   };
 
   const getVariantHtml = async (variant) => {
+    // eslint-disable-next-line
     const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl) : getAssetHtml(variant.variantMobileVideo._publishUrl);
     return `
         ${assetHtml}
@@ -265,6 +266,7 @@ export default async function decorate(block) {
   div.className = 'hero-banner__carousel';
   async function finalBlock() {
     for (let i = 0; i < cars.length; i += 1) {
+      // eslint-disable-next-line
       const html = await getVariantHtml(cars[i]);
       const item = document.createElement('div');
       item.classList.add('hero-banner__slides');

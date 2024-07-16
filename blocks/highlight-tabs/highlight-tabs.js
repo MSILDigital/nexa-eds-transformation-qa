@@ -69,6 +69,7 @@ export default function decorate(block) {
       highlightItem.style.position = 'absolute';
 
       // Force a reflow to ensure correct measurements
+      // eslint-disable-next-line
       void moreContent.offsetHeight;
 
       const computedStyle = getComputedStyle(moreContent);
