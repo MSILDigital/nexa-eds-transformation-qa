@@ -1484,7 +1484,14 @@
         "component": "richtext",
         "name": "description",
         "value": "",
-        "label": "Description",
+        "label": "Collapsed Description",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description-ex",
+        "value": "",
+        "label": "Expanded Description",
         "valueType": "string"
       },
       {

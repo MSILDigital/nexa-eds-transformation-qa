@@ -246,20 +246,14 @@
   }
 }
 
-.more-content {
+.more-content, .more-content-expanded {
   line-height: 16px;
-  overflow: hidden;
-  max-height: 48px;
+  height: auto;
   transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
 
   @media (min-width: 999px) {
     line-height: 20px;
-    max-height: 60px;
   }
-}
-
-.more-content.expanded {
-  max-height: 400px;
 }
 
 .read-more {

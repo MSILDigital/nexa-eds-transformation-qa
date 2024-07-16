@@ -10,6 +10,7 @@ export default function decorate(block) {
       titleEl,
       subtitleEl,
       descriptionEl,
+      descriptionExEl,
       expandDescriptionEl,
       collapseDescriptionEL,
     ] = highlightItem.children;
@@ -27,6 +28,7 @@ export default function decorate(block) {
     const title = titleEl?.textContent?.trim() || '';
     const subtitle = subtitleEl?.textContent?.trim() || '';
     const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.textContent.trim()).join('');
+    const descriptionEx = Array.from(descriptionExEl.querySelectorAll('p')).map((p) => p.textContent.trim()).join('');
     const expandDescription = expandDescriptionEl?.textContent?.trim() || '';
     const collapseDescription = collapseDescriptionEL?.textContent?.trim() || '';
     highlightItemButtons[index] = {
@@ -47,6 +49,9 @@ export default function decorate(block) {
           <p class="more-content">
             ${description}
           </p>
+          <p class="more-content-expanded" style="display:none">
+            ${description} ${descriptionEx}
+          </p>
           <a href="#" class="read-more">${expandDescription}</a>
         </div>
     `);
@@ -57,50 +62,36 @@ export default function decorate(block) {
 
   function initializeHighlightItem(highlightItem, index) {
     const moreContent = highlightItem.querySelector('.more-content');
+    const moreContentExpanded = highlightItem.querySelector('.more-content-expanded');
     const readMoreButton = highlightItem.querySelector('.read-more');
 
-    if (moreContent && readMoreButton) {
-      // Store the original display style
-      const originalDisplay = highlightItem.style.display;
+    if (moreContent && moreContentExpanded && readMoreButton) {
+      // Initially hide the expanded content
+      moreContentExpanded.style.display = 'none';
 
-      // Temporarily make the element visible for measurement
-      highlightItem.style.display = 'block';
-      highlightItem.style.visibility = 'hidden';
-      highlightItem.style.position = 'absolute';
-
-      // Force a reflow to ensure correct measurements
-      // eslint-disable-next-line
-      void moreContent.offsetHeight;
-
-      const computedStyle = getComputedStyle(moreContent);
-      const contentHeight = moreContent.scrollHeight;
-      const lineHeight = parseFloat(computedStyle.lineHeight);
-
-      // Determine whether to show the read more link based on content height
-      if (contentHeight > lineHeight * 3) {
-        readMoreButton.style.display = 'block';
-      } else {
-        readMoreButton.style.display = 'none';
-      }
-
-      // Restore the original display style
-      highlightItem.style.display = originalDisplay;
-      highlightItem.style.visibility = '';
-      highlightItem.style.position = '';
-
+      // Add click event listener
       readMoreButton.addEventListener('click', (event) => {
         event.preventDefault();
-        moreContent.classList.toggle('expanded');
+
+        // Toggle visibility of content
+        if (moreContent.style.display !== 'none') {
+          moreContent.style.display = 'none';
+          moreContentExpanded.style.display = 'block';
+        } else {
+          moreContent.style.display = 'block';
+          moreContentExpanded.style.display = 'none';
+        }
+
+        // Toggle button text
         const { expandBtn, collapseBtn } = highlightItemButtons[index];
-        readMoreButton.textContent = moreContent.classList.contains('expanded') ? collapseBtn : expandBtn;
+        readMoreButton.textContent = (moreContent.style.display === 'none') ? collapseBtn : expandBtn;
       });
     }
   }
 
   function initializeHighlightItems(highlightItems) {
     highlightItems.forEach((highlightItem, index) => {
-      // Delay initialization to ensure content is rendered
-      setTimeout(() => initializeHighlightItem(highlightItem, index), 0);
+      initializeHighlightItem(highlightItem, index);
     });
   }
 
@@ -122,10 +113,10 @@ export default function decorate(block) {
     <div class="highlightItems-container">${highlightItemsHTML}</div>
     ${switchListHTML}`;
 
-  const restructureDescriptionHtml = (itemsContainerEl) => {
-    const itemsContainer = itemsContainerEl.querySelector('.highlightItems-container');
-    const switchListSection = itemsContainerEl.querySelector('.switch-list-section');
-    const highlightItems = itemsContainer.querySelectorAll('.highlightItem');
+  const restructureDescriptionHtml = (blockItem) => {
+    const highlightItemsContainerItem = blockItem.querySelector('.highlightItems-container');
+    const switchListSection = blockItem.querySelector('.switch-list-section');
+    const highlightItems = highlightItemsContainerItem.querySelectorAll('.highlightItem');
 
     // Move highlightItem-content elements to be siblings of the switch list
     highlightItems.forEach((item, index) => {
@@ -146,7 +137,7 @@ export default function decorate(block) {
     restructureDescriptionHtml(block);
   }
   initializeHighlightItems(block.querySelectorAll('.highlightItem-content'));
-  TabUtils.setupTabs(block, highlightItemListElements);
+  TabUtils.setupTabs(block, 'highlightItem');
 
   return block;
 }
