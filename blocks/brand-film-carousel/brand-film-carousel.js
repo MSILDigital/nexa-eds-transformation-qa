@@ -35,7 +35,7 @@ export default async function decorate(block) {
             <button class="brand-film__fullscreen-btn">Full Screen</button>
             <button class="brand-film__pip-btn">Pip</button>
           </div>
-          <button class="brand-film__close-btn">Close</button>
+          <div class="brand-film__close-btn"></div>
           <div class="brand-film__slides">
             ${videos.join('')}
           </div>
