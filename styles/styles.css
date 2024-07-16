@@ -17,6 +17,7 @@
   --tertiary-light-grey: #f2f2f2;
   --tertiary-medium-grey: #b2b2b2;
   --tertiary-deep-Grey: #767879;
+  --tertiary-medium-dark-grey: #7B7777;
   --tertiary-black: #000;
 
   /* AEM colors */
@@ -196,6 +197,12 @@ html {
 }
 
 @media (min-width: 999px) {
+  .cta {
+    a {
+      font-size: 18px;
+    }
+  }
+
   .cta__primary {
     a {
       height: 50px;
