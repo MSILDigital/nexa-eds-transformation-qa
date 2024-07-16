@@ -113,10 +113,10 @@ export default function decorate(block) {
     <div class="highlightItems-container">${highlightItemsHTML}</div>
     ${switchListHTML}`;
 
-  const restructureDescriptionHtml = (block) => {
-    const highlightItemsContainer = block.querySelector('.highlightItems-container');
-    const switchListSection = block.querySelector('.switch-list-section');
-    const highlightItems = highlightItemsContainer.querySelectorAll('.highlightItem');
+  const restructureDescriptionHtml = (blockItem) => {
+    const highlightItemsContainerItem = blockItem.querySelector('.highlightItems-container');
+    const switchListSection = blockItem.querySelector('.switch-list-section');
+    const highlightItems = highlightItemsContainerItem.querySelectorAll('.highlightItem');
 
     // Move highlightItem-content elements to be siblings of the switch list
     highlightItems.forEach((item, index) => {
