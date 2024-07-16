@@ -48,7 +48,7 @@
       "secondary-navigation",
       "nexa-eshowroom-experience",
       "nexa-car-hero-banner",
-      "dealer-locator"
+      "hero-banner-dealer"
     ]
   },
   {
@@ -124,7 +124,7 @@
     ]
   },
   {
-    "id": "dealer-locator",
+    "id": "hero-banner-dealer",
     "components": [
       "cta"
     ]
