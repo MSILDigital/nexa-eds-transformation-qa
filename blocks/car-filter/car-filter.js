@@ -129,7 +129,7 @@ export default async function decorate(block) {
       const storedPrices = getLocalStorage('modelPrice')
         ? JSON.parse(getLocalStorage('modelPrice')) : {};
       if (storedPrices[modelCode] && storedPrices[modelCode].price[forCode]) {
-        const storedPrice = storedPrices[modelCode].price[forCode];
+        const storedPrice = priceFormatting(storedPrices[modelCode].price[forCode]).replaceAll(',',' ');
         priceElement.textContent = `${priceText} ${storedPrice}`;
       } else {
         let channel = 'EXC';
