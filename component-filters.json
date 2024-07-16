@@ -47,7 +47,8 @@
       "brand-film-carousel",
       "secondary-navigation",
       "nexa-eshowroom-experience",
-      "nexa-car-hero-banner"
+      "nexa-car-hero-banner",
+      "dealer-locator"
     ]
   },
   {
@@ -118,6 +119,12 @@
   },
   {
     "id": "secondary-navigation",
+    "components": [
+      "cta"
+    ]
+  },
+  {
+    "id": "dealer-locator",
     "components": [
       "cta"
     ]
