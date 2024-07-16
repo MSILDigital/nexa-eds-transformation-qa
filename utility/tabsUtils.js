@@ -20,16 +20,16 @@ const TabsUtils = {
             </div>
           `);
   },
-  setupTabs: (container) => {
+  setupTabs: (container, className= 'highlightItem') => {
     const switchList = container.querySelector('.switch-list');
     switchList.addEventListener('click', (event) => {
       const switchItem = event.target.closest('.switch-list-item');
       if (!switchItem) return;
 
       const index = Array.from(switchList.children).indexOf(switchItem);
-      const highlightItems = container.querySelectorAll('.highlightItem');
-      const highlightContentItems = container.querySelectorAll('.highlightItem-content');
-      const switchItems = container.querySelectorAll('.switch-list-item');
+      const highlightItems = container.querySelectorAll(`.${className}`) || [];
+      const highlightContentItems = container.querySelectorAll(`.${className}-content`) || [];
+      const switchItems = container.querySelectorAll('.switch-list-item') || [];
 
       highlightItems.forEach((highlightItem) => {
         highlightItem.style.display = 'none';
@@ -45,7 +45,7 @@ const TabsUtils = {
     });
 
     // Initial setup
-    const defaultHighlightItem = container.querySelector('.highlightItem.switch-index-0');
+    const defaultHighlightItem = container.querySelector(`.${className}.switch-index-0`);
     if (defaultHighlightItem) {
       defaultHighlightItem.style.display = 'block';
     }
