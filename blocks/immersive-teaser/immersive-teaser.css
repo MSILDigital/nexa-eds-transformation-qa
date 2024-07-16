@@ -150,7 +150,7 @@ main .immersive-teaser-container > div {
       .teaser__title {
         width: 75%;
 
-        h3 {
+        .teaser__title-text {
           font-size: 14px;
           font-weight: 500;
           line-height: 18px;
@@ -181,12 +181,12 @@ main .immersive-teaser-container > div {
 
 @media (min-width: 999px) {
   main .immersive-teaser-container {
-    padding-bottom: 30px;
+    padding-bottom: 24px;
     clip-path: polygon(
       0 0,
       100% 0,
-      100% calc(100% - 30px),
-      82% calc(100% - 30px),
+      100% calc(100% - 24px),
+      82% calc(100% - 24px),
       calc(82% - 25px) 100%,
       0 100%
     );
@@ -256,8 +256,8 @@ main .immersive-teaser-container > div {
       clip-path: polygon(
         0 0,
         100% 0,
-        100% calc(100% - 30px),
-        62% calc(100% - 30px),
+        100% calc(100% - 24px),
+        62% calc(100% - 24px),
         calc(62% - 25px) 100%,
         0 100%
       );
@@ -274,13 +274,10 @@ main .immersive-teaser-container > div {
         }
 
         .teaser__title {
-          width: 75%;
-
-          h3 {
+          .teaser__title-text {
             font-size: 24px;
             font-weight: 500;
             line-height: 32px;
-            word-wrap: break-word;
           }
         }
 
