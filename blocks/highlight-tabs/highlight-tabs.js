@@ -38,7 +38,7 @@ export default function decorate(block) {
     const newHTML = utility.sanitizeHtml(`
         <div class="text-section">
           <div class="top-left">
-            <h1>${title}</h1>
+            <p>${title}</p>
           </div>
           <div class="top-right">
             <p>${subtitle}</p>
