@@ -47,6 +47,7 @@
       font-weight: 600;
       line-height: 28px; /* 116.667% */
       letter-spacing: 0.48px;
+      padding: 10px 0 5px 0;
     }
 
     .subtitle {
@@ -280,6 +281,15 @@
 
     .filter-text {
       padding: 24px 0;
+
+      .title {
+        padding: 0 0 5px 0;
+      }
+
+      .subtitle {
+        font-size: 32px;
+        line-height: 40px;
+      }
     }
 
     .card-list-teaser {
@@ -369,9 +379,6 @@
 
           .teaser__card {
             background: none;
-            .teaser-content {
-              padding: ;
-            }
           }
 
           .teaser__image {
