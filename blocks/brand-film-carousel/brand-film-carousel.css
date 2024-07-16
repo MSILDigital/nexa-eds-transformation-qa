@@ -106,6 +106,15 @@
   visibility: hidden;
 }
 
+.brand-film__container .brand-film__wrapper .brand-film__close-btn {
+  content: '';
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  background: url('../../icons/close_white.svg') no-repeat;
+  cursor: pointer;
+}
+
 .brand-film__container .brand-film__wrapper .brand-film__actions {
   visibility: visible;
 }
@@ -175,11 +184,16 @@
   border-radius: 8px;
 }
 
-.brand-film__container .brand-film__wrapper--fullscreen .brand-film__close-btn,
-.brand-film__container .brand-film__wrapper--pip .brand-film__close-btn {
-  top: 20px;
+.brand-film__container .brand-film__wrapper--fullscreen .brand-film__close-btn {
+  top: 52px;
   left: unset;
-  right: 20px;
+  right: 53px;
+}
+
+.brand-film__container .brand-film__wrapper--pip .brand-film__close-btn {
+  top: 15px;
+  left: unset;
+  right: 12px;
 }
 
 .brand-film__container .brand-film__slides {

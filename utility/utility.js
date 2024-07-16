@@ -8,6 +8,17 @@ const utility = {
       imgElement.setAttribute('loading', 'eager');
     }
   },
+  /**
+     * Format Price to Lakhs.
+     */
+  formatToLakhs(num) {
+    if (num >= 100000) {
+      const lakhs = (num / 100000).toFixed(2);
+      return `${lakhs}`;
+    }
+    return num.toString();
+  },
+
   isInternalLink(href) {
     return !/^https?:\/\//i.test(href);
   },

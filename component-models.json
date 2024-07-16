@@ -1627,5 +1627,148 @@
         "label": "Secondary CTA Link"
       }
     ]
+  },
+  {
+    "id": "nexa-car-hero-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "exShowroomPriceLabel",
+        "label": "Ex-Showroom Price Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "lakhLabel",
+        "label": "Ex-Showroom Lakh Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tagline",
+        "label": "Tagline"
+      },
+      {
+        "component": "multiselect",
+        "name": "filterSelect",
+        "label": "Select Required Specifications",
+        "valueType": "string",
+        "options": [
+          { "name": "Engine", "value": "engine" },
+          { "name": "Power", "value": "power" },
+          { "name": "Mileage", "value": "mileage" }
+        ]
+      },
+      {
+        "component": "aem-content-fragment",
+        "name": "carModelPath",
+        "label": "Car Model Path",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "primaryText",
+        "label": "Primary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "primaryLink",
+        "label": "Primary CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "primaryTarget",
+        "value": "",
+        "label": "Open Primary Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
+      },
+      {
+        "component": "text-input",
+        "name": "secondaryText",
+        "label": "Secondary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "secondaryLink",
+        "label": "Secondary CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "secondaryTarget",
+        "value": "",
+        "label": "Open Secondary Link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
+      },
+      {
+        "component": "text-input",
+        "name": "termsConditionsText",
+        "label": "Terms & Conditions Text",
+        "valueType": "string"
+      }
+    ]
   }
 ]
