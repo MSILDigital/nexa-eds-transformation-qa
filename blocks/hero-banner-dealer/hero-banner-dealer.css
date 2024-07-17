@@ -1,21 +1,21 @@
-.dealer-locator__container {
+.hero-banner-dealer__container {
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 35px), 74% calc(100% - 31px), calc(74% - 25px) 100%, 0 100%);
   background: black;
 }
 
-.dealer-locator__image-container {
+.hero-banner-dealer__image-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   height: 500px;
 }
 
-.dealer-locator__image-container picture {
+.hero-banner-dealer__image-container picture {
   width: 100%;
   height: 100%;
 }
-.dealer-locator__image-container img {
+.hero-banner-dealer__image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -24,7 +24,7 @@
   opacity: 0.7;
 }
 /* Content styling */
-.dealer-locator__content {
+.hero-banner-dealer__content {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,14 +32,14 @@
 }
 
 /* List of CTAs styling */
- .dealer-locator__action ul {
+ .hero-banner-dealer__action ul {
   list-style: none;
   padding: 0;
   margin: 0;
   position: relative;
 } 
 
-.dealer-locator__action ul::before{
+.hero-banner-dealer__action ul::before{
   position: absolute;
   content: "";
   width: 2px;
@@ -49,11 +49,11 @@
   background-color: #767879;
 }
 
-.dealer-locator__action ul li {
+.hero-banner-dealer__action ul li {
   margin-right: 10px;
 }
 
-.dealer-locator__overlay {
+.hero-banner-dealer__overlay {
   position: absolute;
   left: 0;
   bottom: unset;
@@ -62,7 +62,7 @@
   background: linear-gradient(360deg, #000, rgba(24, 23, 26, 0.00));
 }
 
-.dealer-locator__action .scroll-bar {
+.hero-banner-dealer__action .scroll-bar {
   position: absolute;
   top: 0;
   width: 2px;
@@ -70,7 +70,7 @@
   transition: height 0.3s ease; /* Add smooth transition for height changes */
 }
 
-.dealer-locator__action {
+.hero-banner-dealer__action {
   position: absolute;
   bottom: 100px;
   left: 0;
@@ -80,7 +80,7 @@
   padding-right: 20px;
 }
 
-.dealer-locator__content .pre-title {
+.hero-banner-dealer__content .pre-title {
   position: absolute;
   left: 0;
   padding: 20px;
@@ -97,7 +97,7 @@
   text-align: left;
 }
 
-.dealer-locator__description {
+.hero-banner-dealer__description {
   position: absolute;
   bottom: 30px;
   right: unset;
@@ -111,7 +111,7 @@
   color: #fff;
 }
 
-.dealer-locator__action .cta-text {
+.hero-banner-dealer__action .cta-text {
   font-family: "Kepler Std";
   font-style: normal;
   font-weight: 600;
@@ -124,7 +124,7 @@
   transition: font-size 0.3s, color 0.3s; /* Smooth transition */
 }
 
-.dealer-locator__action .cta-text.highlight {
+.hero-banner-dealer__action .cta-text.highlight {
   color: var(--Tertiary-White, #FFF);
   font-size: 24px;
   font-weight: 600;
@@ -140,13 +140,13 @@
   }
 
 @media (min-width:999px) {
-  .dealer-locator__container {
+  .hero-banner-dealer__container {
     position: relative;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 35px), 74% calc(100% - 31px), calc(74% - 25px) 100%, 0 100%);
     background: black;
   }
 
-  .dealer-locator__action ul::before {
+  .hero-banner-dealer__action ul::before {
     position: absolute;
     content: "";
     width: 2px;
@@ -157,7 +157,7 @@
   }
   
  
-.dealer-locator__action .cta-text  {
+.hero-banner-dealer__action .cta-text  {
   font-family: "Kepler Std";
   font-style: normal;
   font-weight: 600;
@@ -169,7 +169,7 @@
   letter-spacing: 1px;
 }
 
-.dealer-locator__action .cta-text.highlight  {
+.hero-banner-dealer__action .cta-text.highlight  {
   color: var(--Tertiary-White, #FFF);
   font-size: 64px;
   line-height: 72px; 
@@ -183,22 +183,22 @@
   }
 
   
-    .dealer-locator__image-container img {
+    .hero-banner-dealer__image-container img {
       height: 100%;
     }
    
-  .dealer-locator__overlay {
+  .hero-banner-dealer__overlay {
     bottom: 0;
     height: 353px;
   }
 
-  .dealer-locator__action {
+  .hero-banner-dealer__action {
     bottom: 85px;
     left: 64px;
     padding-left: 0;
     padding-right: 0;
   }
-  .dealer-locator__content {
+  .hero-banner-dealer__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,7 +206,7 @@
   }
  
 
-  .dealer-locator__container {
+  .hero-banner-dealer__container {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 35px), 30% calc(100% - 31px), calc(29% - 25px) 100%, 0 100%);
     background:black;
     position: relative;
@@ -217,7 +217,7 @@
     background-color: gray;
   }
 
-  .dealer-locator__content .pre-title {
+  .hero-banner-dealer__content .pre-title {
     position: absolute;
     padding: 20px;
    font-size: 18px;
@@ -231,7 +231,7 @@
     text-align: left;
     left:42px;
   } 
-  .dealer-locator__description {
+  .hero-banner-dealer__description {
     font-size: 18px;
     line-height: 24px;
     max-width: 27%;
