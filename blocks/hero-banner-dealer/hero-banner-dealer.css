@@ -216,8 +216,7 @@
     position: absolute;
     background-color: gray;
   }
-
-  .hero-banner-dealer__content .pre-title {
+.hero-banner-dealer__content .pre-title {
     position: absolute;
     padding: 20px;
    font-size: 18px;

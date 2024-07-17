@@ -37,8 +37,7 @@ export default function decorate(block) {
       image, pretitle, description, ctas,
     };
   }
-
-  const heroBannerDealer = getHeroBannerDealer();
+const heroBannerDealer = getHeroBannerDealer();
 
   block.innerHTML = utility.sanitizeHtml(`
     <div class="hero-banner-dealer__container right-seperator">
