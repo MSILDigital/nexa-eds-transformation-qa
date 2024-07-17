@@ -1,6 +1,5 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import utility from '../../utility/utility.js';
-
 export default function decorate(block) {
   function getHeroBannerDealer() {
     const [
