@@ -211,7 +211,7 @@ export default async function decorate(block) {
   };
 
   const getVariantHtml = async (variant) => {
-    // eslint-disable-next-line
+    /* eslint-disable-next-line no-underscore-dangle */
     const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl) : getAssetHtml(variant.variantMobileVideo._publishUrl);
     return `
         ${assetHtml}
@@ -259,24 +259,32 @@ export default async function decorate(block) {
       'Content-Type': 'application/json',
     },
   };
-  const response = await fetch(graphQlEndpoint, requestOptions);
-  const { data } = await response.json();
-  const cars = data?.variantList?.items;
+
+  let data;
+  try {
+    const response = await fetch(graphQlEndpoint, requestOptions);
+    data = await response.json();
+  } catch (error) {
+    data = {};
+  }
+  const cars = data?.data?.variantList?.items;
   const div = document.createElement('div');
   div.className = 'hero-banner__carousel';
   async function finalBlock() {
-    for (let i = 0; i < cars.length; i += 1) {
-      // eslint-disable-next-line
-      const html = await getVariantHtml(cars[i]);
-      const item = document.createElement('div');
-      item.classList.add('hero-banner__slides');
-      if (i === 0) {
-        item.classList.add('active');
-      }
-      item.innerHTML = html;
-      div.insertAdjacentElement('beforeend', item);
+    if (cars) {
+      const htmlPromises = cars.map((car) => getVariantHtml(car));
+      const htmlResults = await Promise.all(htmlPromises);
+      htmlResults.forEach((html, i) => {
+        const item = document.createElement('div');
+        item.classList.add('hero-banner__slides');
+        if (i === 0) {
+          item.classList.add('active');
+        }
+        item.innerHTML = html;
+        div.insertAdjacentElement('beforeend', item);
+      });
+      initCarousel(div);
     }
-    initCarousel(div);
   }
   block.innerHTML = '';
   block.append(div);
