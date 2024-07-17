@@ -20,7 +20,7 @@ export default function decorate(block) {
       img.classList.add('hero-banner-dealer__image-container');
     }
 
-    const pretitle = pretitleEl?.textContent?.trim() || '';
+   const pretitle = pretitleEl?.textContent?.trim() || '';
     const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.outerHTML).join('');
     const ctas = Array.from(ctaEls).map((ctaEl) => {
       const [ctaTextEl, ctaLinkEl] = ctaEl.children;
