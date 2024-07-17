@@ -90,40 +90,38 @@ export default async function decorate(block) {
 
     const url = new URL(apiUrl);
     Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
-
-    const response = await fetch(url, {
-      method: 'GET',
-      headers,
-    });
-    const data = await response.json();
-
+    let data;
     try {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      if (data.error === false && data.data) {
-        const storedModelPrices = {};
-        const timestamp = new Date().getTime() + (1 * 24 * 60 * 60 * 1000); // 1 day from now
-        data.data.models.forEach((item) => {
-          const {
-            modelCd,
-          } = item;
-          const { lowestExShowroomPrice } = item;
-
-          storedModelPrices[modelCd] = {
-            price: {
-              [forCode]: lowestExShowroomPrice,
-            },
-            timestamp,
-          };
-        });
-        localStorage.setItem('modelPrice', JSON.stringify(storedModelPrices));
-        return storedModelPrices[modelCode].price[forCode];
-      }
-      return exShowRoomPrice;
-    } catch (error) {
-      throw new Error('Network response was not ok', error);
+      const response = await fetch(url, {
+        method: 'GET',
+        headers,
+      });
+      data = await response.json();
+    } catch {
+      data = {};
     }
+    if (data?.error === false && data?.data) {
+      const storedModelPrices = {};
+      const timestamp = new Date().getTime() + (1 * 24 * 60 * 60 * 1000); // 1 day from now
+      data.data.models.forEach((item) => {
+        const {
+          modelCd,
+        } = item;
+        const {
+          lowestExShowroomPrice,
+        } = item;
+
+        storedModelPrices[modelCd] = {
+          price: {
+            [forCode]: lowestExShowroomPrice,
+          },
+          timestamp,
+        };
+      });
+      localStorage.setItem('modelPrice', JSON.stringify(storedModelPrices));
+      return storedModelPrices[modelCode].price[forCode];
+    }
+    return exShowRoomPrice;
   }
 
   async function carModelInfo(result) {
@@ -135,21 +133,29 @@ export default async function decorate(block) {
 
     const carItemsPromises = cars.map(async (itemEl, index) => {
       const car = cars[index];
-      const { modelId } = car;
-      const { carDescription } = car;
+      const {
+        modelId,
+      } = car;
+      const {
+        carDescription,
+      } = car;
       const exShowRoomPrice = car.exShowroomPrice;
-      const { eshowroomDescription } = car;
-      const { eshowroomPrimaryCtaText } = car;
+      const {
+        eshowroomDescription,
+      } = car;
+      const {
+        eshowroomPrimaryCtaText,
+      } = car;
       // eslint-disable-next-line
-      const carDetailsPagePath = car.carDetailsPagePath ? car.carDetailsPagePath._path : '#';
+            const carDetailsPagePath = car.carDetailsPagePath ? car.carDetailsPagePath._path : '#';
       // eslint-disable-next-line
-      const eshowroomDesktopFwdVideo = car.eshowroomDesktopFwdVideo ? car.eshowroomDesktopFwdVideo._publishUrl : '';
+            const eshowroomDesktopFwdVideo = car.eshowroomDesktopFwdVideo ? car.eshowroomDesktopFwdVideo._publishUrl : '';
       // eslint-disable-next-line
-      const eshowroomDesktopReverseVideo = car.eshowroomDesktopReverseVideo ? car.eshowroomDesktopReverseVideo._publishUrl : '';
+            const eshowroomDesktopReverseVideo = car.eshowroomDesktopReverseVideo ? car.eshowroomDesktopReverseVideo._publishUrl : '';
       // eslint-disable-next-line
-      const eshowroomMobileFwdVideo = car.eshowroomMobileFwdVideo ? car.eshowroomMobileFwdVideo._publishUrl : '';
+            const eshowroomMobileFwdVideo = car.eshowroomMobileFwdVideo ? car.eshowroomMobileFwdVideo._publishUrl : '';
       // eslint-disable-next-line
-      const eshowroomMobileReverseVideo = car.eshowroomMobileReverseVideo ? car.eshowroomMobileReverseVideo._publishUrl : '';
+            const eshowroomMobileReverseVideo = car.eshowroomMobileReverseVideo ? car.eshowroomMobileReverseVideo._publishUrl : '';
 
       let assetFwdHtml = '';
       let assetReverseHtml = '';
