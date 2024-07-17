@@ -23,7 +23,6 @@ const TabsUtils = {
   setupTabs: (container, className = 'highlightItem') => {
     const switchList = container.querySelector('.switch-list');
     switchList.addEventListener('click', (event) => {
-      
       const switchItem = event.target.closest('.switch-list-item');
       if (!switchItem) return;
 
