@@ -16,7 +16,7 @@ export default async function decorate(block) {
     secondaryLinkEl,
     secondaryTargetEl,
     termsAndConditionsTextEl,
-    thumbnailEl,
+    thumbnailEl
   ] = block.children;
   const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
   title.removeAttribute('id');
@@ -36,7 +36,22 @@ export default async function decorate(block) {
   const secondaryLink = secondaryLinkEl?.querySelector('.button-container a')?.href;
   const secondaryTarget = secondaryTargetEl?.textContent?.trim() || '_self';
   const thumbnail = thumbnailEl?.querySelector('img')?.src;
-
+  const div = document.createElement('div');
+  div.className = 'hero-banner__carousel';
+  const video = document.createElement('video');
+  video.setAttribute("poster", thumbnail);
+  video.setAttribute('muted',"muted");
+  video.setAttribute('width',"100%");
+  video.setAttribute('autoplay','');
+  video.setAttribute('src','');
+  const item = document.createElement('div');
+  item.classList.add('hero-banner__slides');
+  item.classList.add('active');
+  const videoDiv = document.createElement('div');
+  videoDiv.className='hero__video-container'
+  videoDiv.appendChild(video);
+  item.appendChild(videoDiv);
+  div.appendChild(item);
   const { publishDomain, apiKey } = await fetchPlaceholders();
 
   const tokenUrl = `${publishDomain}/content/nexa/services/token`;
@@ -184,15 +199,22 @@ export default async function decorate(block) {
 
   const filterTypes = filterList.split(',');
 
-  const getVideoHtml = (videoUrl) => `
-  <div class="hero__video-container">
-    <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
-  </div>
-`;
+  const getVideoHtml = (videoUrl,flag) => {
+    if(flag){
+      video.setAttribute('src',videoUrl);
+      video.setAttribute("poster", thumbnail);
+      return videoDiv.outerHTML;
+    }
+  else{
+    return `<div class="hero__video-container">
+      <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
+    </div>`
+  }
+}
 
-  const getAssetHtml = (videoUrl) => {
+  const getAssetHtml = (videoUrl,flag) => {
     if (videoUrl) {
-      return getVideoHtml(videoUrl);
+      return getVideoHtml(videoUrl,flag);
     }
     return '';
   };
@@ -212,9 +234,9 @@ export default async function decorate(block) {
     return typeHtml;
   };
 
-  const getVariantHtml = async (variant) => {
+  const getVariantHtml = async (variant,flag) => {
     /* eslint-disable-next-line no-underscore-dangle */
-    const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl) : getAssetHtml(variant.variantMobileVideo._publishUrl);
+    const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl,flag) : getAssetHtml(variant.variantMobileVideo._publishUrl,flag);
     return `
         ${assetHtml}
         <div class="hero__information-overlay" style="opacity: 0; transition: opacity 0.5s;">
@@ -261,7 +283,6 @@ export default async function decorate(block) {
       'Content-Type': 'application/json',
     },
   };
-
   let data;
   try {
     const response = await fetch(graphQlEndpoint, requestOptions);
@@ -270,24 +291,22 @@ export default async function decorate(block) {
     data = {};
   }
   const cars = data?.data?.variantList?.items;
-  const div = document.createElement('div');
-  div.className = 'hero-banner__carousel';
-  const video = document.createElement('video');
-  video.setAttribute('poster', thumbnail);
-  div.appendChild(video);
   async function finalBlock() {
     if (cars) {
-      const htmlPromises = cars.map((car) => getVariantHtml(car));
+      const htmlPromises = cars.map((car,index) => getVariantHtml(car,index===0));
       const htmlResults = await Promise.all(htmlPromises);
-      div.removeChild(video);
+      let itemDiv;
       htmlResults.forEach((html, i) => {
-        const item = document.createElement('div');
-        item.classList.add('hero-banner__slides');
-        if (i === 0) {
-          item.classList.add('active');
+        if (i !== 0) {
+          itemDiv = document.createElement('div');
+          itemDiv.classList.add('hero-banner__slides');
+          itemDiv.innerHTML = html;
+          div.insertAdjacentElement('beforeend', itemDiv);
         }
-        item.innerHTML = html;
-        div.insertAdjacentElement('beforeend', item);
+        else{
+          item.innerHTML = html;
+          div.insertAdjacentElement('beforeend', item);
+        }
       });
       initCarousel(div);
     }
