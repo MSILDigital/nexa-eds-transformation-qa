@@ -1,170 +1,198 @@
 .nexa-world__container {
-    background-color: black;
-    color: white;
-    font-family: "Fira Sans";
-    padding-top: 48px;
-    padding-left: 20px;
-    p{
-      margin:unset;
-      font-size:unset;
-    }
-    h2{
-      margin:unset;
-      font-size:unset;
-    }
-    ul{
-      margin:unset;
-    }
-    @media (min-width: 1280px) {
-      padding: 84px 64px;
+  background-color: black;
+  color: white;
+  font-family: var(--font-primary-nexa);
+  padding-top: 48px;
+  padding-left: 20px;
+  height: auto;
+
+  p {
+    margin: unset;
+    font-size: unset;
+  }
+
+  h2 {
+    margin: unset;
+    font-size: unset;
+  }
+
+  ul {
+    margin: unset;
+  }
+
+  @media (width >= 1280px) {
+    padding: 84px 64px;
+  }
+}
+
+.nexa-world__content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    width: 70%;
+
+    @media (width >= 999px) {
+      width: 376px;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 24px;
     }
   }
-  .nexa-world__content {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    .description {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      width:70%;
-      @media (min-width: 999px) {
-        width: 376px;
-        font-size:18px;
-        font-weight: 300;
-        line-height:24px;
-      }
-    }
-  }
-  .nexa-world__title {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    .pre-title {
-      font-family: "Kepler Std";
-      font-style: italic;
-      font-size: 24px;
-      font-weight: 400;
-      line-height: 28px;
-      margin-bottom: 8px;
-      @media(min-width:999px) {
-        font-size:48px;
-        line-height: 56px;
-      }
-    }
-    .title {
-      font-family: "Kepler Std";
-      font-size: 32px;
-      font-weight: 600;
-      line-height: 40px;
-      letter-spacing: 0.64px;
-      @media(min-width:999px){
-         font-size:84px;
-         font-weight:700;
-         line-height:96px;
-         letter-spacing: 1.68px;
-      }
+}
+
+.nexa-world__title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .pre-title {
+    font-family: var(--font-secondary-nexa);
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    margin-bottom: 8px;
+
+    @media (width >=999px) {
+      font-size: 48px;
+      line-height: 56px;
     }
   }
 
-  .nexa-world__teaser {
-    margin-top:72px;
-    padding-bottom:45%;
-    @media(min-width:999px){
-    padding-top:30%;
-    margin-top:0px;
-    padding-bottom:85.5px;
-  }
-  }
-  .nexa-world__links {
-    ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      @media(min-width:999px){
-        flex-direction:row;
-        gap:24px;
-      }
-      a {
-        text-decoration: none;
-        color: unset;
-      }
-      li {
-        color: #b2b2b2;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        img{
-          display:none;
-        }
-      }
-      li:hover {
-        font-weight: 500;
-        cursor: pointer;
-        color: #ffffff;
-      }
+  .title {
+    font-family: var(--font-secondary-nexa);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: 0.64px;
+
+    @media (width >=999px) {
+      font-size: 84px;
+      font-weight: 700;
+      line-height: 96px;
+      letter-spacing: 1.68px;
     }
   }
-  .nexa-world__action {
-    display: inline-flex;
-    width:fit-content;
-    height: 40px;
-    background-color: #ffffff;
-    padding: 8px 12px;
-    clip-path: polygon(2% 0, 100% 0, 100% 88%, 98% 100%, 0 100%, 0 12%);
-    .btn-title {
+}
+
+.nexa-world__teaser {
+  margin-top: 72px;
+  padding-bottom: 45%;
+
+  @media (width >=999px) {
+    padding-top: 30%;
+    margin-top: 0;
+    padding-bottom: 85.5px;
+  }
+}
+
+.nexa-world__links {
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media (width >=999px) {
+      flex-direction: row;
+      gap: 24px;
+    }
+
+    a {
       text-decoration: none;
-      color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      p {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 24px;
-        margin-right:12px;
-      }
-    } 
-    .btn-title::after{
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-image:url("../../icons/location__icon.svg");
-      background-size: contain;
-      background-repeat: no-repeat;
+      color: unset;
     }
-    @media (min-width: 999px) {
-      margin-top: 32px;
-      .btn-title {
-        .cta-text {
-          font-size: 18px;
-        }
+
+    li {
+      color: #b2b2b2;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+
+      img {
+        display: none;
       }
     }
-  }
-  .nexa-world__container, .nexa-world__teaser {
-    background-size: cover;
-    background-position: center;
-    display: block;
-    height:auto;
-  }
-  .nexa-world__container{
-    height:auto;
-  }
-  @media (max-width: 999px) {
-    .nexa-world__container {
-      background-image: none;
-      height:auto;
-    }
-    .nexa-world__teaser{
-      height:auto;
+
+    li:hover {
+      font-weight: 500;
+      cursor: pointer;
+      color: #fff;
     }
   }
-  @media (min-width: 1000px) {
-    .nexa-world__teaser {
-      background-image: none;
+}
+
+.nexa-world__action {
+  display: inline-flex;
+  width: fit-content;
+  height: 40px;
+  background-color: #fff;
+  padding: 8px 12px;
+  clip-path: polygon(2% 0, 100% 0, 100% 88%, 98% 100%, 0 100%, 0 12%);
+
+  .btn-title {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      margin-right: 12px;
     }
   }
+
+  .btn-title::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../icons/location__icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  @media (width >= 999px) {
+    margin-top: 32px;
+
+    .btn-title {
+      .cta-text {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.nexa-world__container,
+.nexa-world__teaser {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  height: auto;
+}
+
+@media (width <= 999px) {
+  .nexa-world__container {
+    background-image: none;
+    height: auto;
+  }
+
+  .nexa-world__teaser {
+    height: auto;
+  }
+}
+
+@media (width >= 1000px) {
+  .nexa-world__teaser {
+    background-image: none;
+  }
+}

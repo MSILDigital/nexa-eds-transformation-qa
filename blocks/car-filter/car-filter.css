@@ -1,6 +1,7 @@
 .car-filter {
   padding: 16px 20px;
   width: 100%;
+
   .filter-cars {
     display: flex;
     flex-direction: column;
@@ -21,7 +22,7 @@
       border: 1px solid #b2b2b2;
       min-width: 68px;
       text-align: center;
-      font-family: "Fira Sans";
+      font-family: var(--font-primary-nexa);
       font-size: 12px;
       font-style: normal;
       font-weight: 400;
@@ -41,18 +42,18 @@
 
     .title {
       color: #18171a;
-      font-family: "Kepler Std";
+      font-family: var(--font-secondary-nexa);
       font-size: 24px;
       font-style: normal;
       font-weight: 600;
       line-height: 28px; /* 116.667% */
       letter-spacing: 0.48px;
-      padding: 10px 0 5px 0;
+      padding: 10px 0 5px;
     }
 
     .subtitle {
       color: #18171a;
-      font-family: "Kepler Std";
+      font-family: var(--font-secondary-nexa);
       font-size: 20px;
       font-style: italic;
       font-weight: 300;
@@ -64,6 +65,114 @@
   .card-list-teaser {
     display: flex;
     flex-direction: column;
+
+    .teaser-list {
+      margin-top: 10px;
+      display: flex;
+      overflow: auto;
+      gap: 20px;
+
+      .teaser {
+        border-radius: 4px 4px 4px 0;
+        background: linear-gradient(
+          179deg,
+          rgb(157 207 218 / 25%) -62.26%,
+          rgb(22 29 31 / 25%) 82.34%
+        );
+        backdrop-filter: blur(10px);
+
+        @media (width <= 999px) {
+          flex: 0 0 75%;
+        }
+      }
+
+      .teaser__card {
+        display: flex;
+        height: 100%;
+      }
+
+      .teaser__image {
+        display: flex;
+        height: 100%;
+        width: 39%;
+
+        picture {
+          max-width: 100%;
+          display: flex;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+          object-fit: cover;
+          clip-path: polygon(0 0, 100% 0, 100% 80%, 85% 100%, 0 100%);
+        }
+      }
+
+      .teaser__content {
+        padding: 24px 12px;
+
+        @media (width >= 999px) {
+          padding: 16px 24px;
+        }
+      }
+
+      .teaser__pretitle p,
+      .teaser__title h3,
+      .teaser__actions a {
+        font-family: var(--font-primary-nexa);
+      }
+
+      .teaser__description p {
+        margin: 0 0 12px;
+        color: var(--Primary-Main, #18171a);
+        font-family: var(--font-primary-nexa);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px; /* 133.333% */
+      }
+
+      .teaser__title h4 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        margin-bottom: 8px;
+      }
+
+      .teaser__actions a {
+        position: relative;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20px;
+        background: none;
+        color: #18171a;
+        padding: 0 24px 4px 0;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        border-bottom: 1px solid #18171a;
+        width: auto;
+        height: auto;
+        margin-bottom: 0;
+        margin-top: 30px;
+
+        @media (width >= 999px) {
+          padding: 0 28px 4px 0;
+        }
+      }
+
+      .teaser__actions a::after {
+        content: url("../../icons/arrow.svg");
+        position: absolute;
+        right: 0;
+        bottom: -3px;
+
+        @media (width >= 999px) {
+          bottom: 0;
+        }
+      }
+    }
 
     .card-list {
       display: flex;
@@ -81,11 +190,11 @@
         padding: 20px 10px;
         background: linear-gradient(
           179deg,
-          rgba(157, 207, 218, 0.08) -62.26%,
-          rgba(22, 29, 31, 0.08) 82.34%
+          rgb(157 207 218 / 8%) -62.26%,
+          rgb(22 29 31 / 8%) 82.34%
         );
-        filter: drop-shadow(0px 3.269px 3.269px rgba(0, 0, 0, 0.04));
-        backdrop-filter: blur(9.806451797485352px);
+        filter: drop-shadow(0 3.269px 3.269px rgb(0 0 0 / 4%));
+        backdrop-filter: blur(9.8065px);
         clip-path: polygon(0 0, 100% 0, 100% 80%, 85% 100%, 0 100%);
 
         .card-content {
@@ -95,7 +204,7 @@
         .card-title,
         .card-description {
           color: #18171a;
-          font-family: "Fira Sans";
+          font-family: var(--font-primary-nexa);
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
@@ -113,7 +222,7 @@
         .card-price,
         .card-price-text {
           color: #6a6a6a;
-          font-family: "Fira Sans";
+          font-family: var(--font-primary-nexa);
           font-size: 10px;
           font-style: normal;
           font-weight: 500;
@@ -141,118 +250,10 @@
         }
       }
     }
-
-    .teaser-list {
-      margin-top: 10px;
-      display: flex;
-      overflow: auto;
-      gap: 20px;
-
-      .teaser {
-        border-radius: 4px 4px 4px 0px;
-        background: linear-gradient(
-          179deg,
-          rgba(157, 207, 218, 0.25) -62.26%,
-          rgba(22, 29, 31, 0.25) 82.34%
-        );
-
-        backdrop-filter: blur(10px);
-        @media (max-width: 999px) {
-          flex: 0 0 75%;
-        }
-      }
-
-      .teaser__card {
-        display: flex;
-        height: 100%;
-      }
-
-      .teaser__image {
-        display: flex;
-        height: 100%;
-        width: 39%;
-      }
-
-      .teaser__image picture {
-        max-width: 100%;
-        display: flex;
-      }
-
-      .teaser__image img {
-        clip-path: none;
-        max-width: 100%;
-        height: auto;
-        object-fit: cover;
-        clip-path: polygon(0 0, 100% 0, 100% 80%, 85% 100%, 0 100%);
-      }
-
-      .teaser__content {
-        padding: 24px 12px;
-        @media (min-width: 999px) {
-          padding: 16px 24px;
-        }
-      }
-
-      .teaser__pretitle p,
-      .teaser__title h3,
-      .teaser__actions a {
-        font-family: "Fira Sans";
-      }
-
-      .teaser__description p {
-        margin: 0 0 12px 0;
-        color: var(--Primary-Main, #18171a);
-        font-family: "Fira Sans";
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 16px; /* 133.333% */
-      }
-
-      .teaser__title h4 {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-        margin-bottom: 8px;
-      }
-
-      .teaser__actions a {
-        position: relative;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 20px;
-        background: none;
-        color: #18171a;
-        padding: 0 24px 4px 0;
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
-        border-bottom: 1px solid #18171a;
-        margin-top: 0;
-        width: auto;
-        height: auto;
-        margin-bottom: 0;
-        margin-top: 30px;
-        @media (min-width: 999px) {
-          padding: 0 28px 4px 0;
-        }
-      }
-
-      .teaser__actions a::after {
-        content: url("../../icons/arrow.svg");
-
-        position: absolute;
-        right: 0;
-        bottom: -3px;
-        @media (min-width: 999px) {
-          bottom: 0;
-        }
-      }
-    }
   }
 }
 
-@media (min-width: 999px) {
+@media (width >= 999px) {
   .car-filter {
     padding: 24px 64px;
 
@@ -283,7 +284,7 @@
       padding: 24px 0;
 
       .title {
-        padding: 0 0 5px 0;
+        padding: 0 0 5px;
       }
 
       .subtitle {
@@ -310,11 +311,15 @@
           background: transparent;
           cursor: pointer;
 
+          .card-image img {
+            aspect-ratio: 140/80;
+          }
+
           &:hover {
             background: linear-gradient(
               179deg,
-              rgba(157, 207, 218, 0.08) -62.26%,
-              rgba(22, 29, 31, 0.08) 82.34%
+              rgb(157 207 218 / 8%) -62.26%,
+              rgb(22 29 31 / 8%) 82.34%
             );
 
             .card-image img {
@@ -322,16 +327,11 @@
             }
           }
 
-          .card-image img {
-            aspect-ratio: 140/80;
-          }
-
           .card-title {
             font-size: 16px;
           }
 
           .card-description {
-            display: block;
             font-weight: 400;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -346,6 +346,7 @@
             font-weight: 500;
             line-height: 20px;
           }
+
           .card-price-text {
             font-weight: 400;
           }
@@ -386,9 +387,9 @@
           }
 
           .teaser__title h4 {
-            margin: 0 0 8px 0;
+            margin: 0 0 8px;
             color: var(--Primary-Main, #18171a);
-            font-family: "Fira Sans";
+            font-family: var(--font-primary-nexa);
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
@@ -402,12 +403,12 @@
 
           .teaser__description p {
             color: var(--Primary-Main, #18171a);
-            font-family: "Fira Sans";
+            font-family: var(--font-primary-nexa);
             font-size: 14px;
             font-style: normal;
             font-weight: 300;
             line-height: 20px; /* 142.857% */
-            margin: 0 0 28px 0;
+            margin: 0 0 28px;
           }
 
           &::after {
@@ -423,10 +424,19 @@
         .teaser:not(:first-child) {
           background: none;
           height: 230px;
-          clip-path: polygon(0px 25px, 16% 25px, 60% 25px, 66% 0px, 100% 0px, 100% 100%, 0px 100%);
+          clip-path: polygon(
+            0 25px,
+            16% 25px,
+            60% 25px,
+            66% 0,
+            100% 0,
+            100% 100%,
+            0 100%
+          );
 
           .teaser__image {
             width: 100%;
+
             img {
               clip-path: none;
             }
@@ -441,16 +451,15 @@
             border-radius: 4px;
             background: linear-gradient(
               206deg,
-              rgba(56, 79, 110, 0.6) -4.69%,
-              rgba(91, 91, 91, 0.6) 110.79%
+              rgb(56 79 110 / 60%) -4.69%,
+              rgb(91 91 91 / 60%) 110.79%
             );
-
             backdrop-filter: blur(7px);
 
             .teaser__title h4 {
-              margin: 0 0 10px 0;
+              margin: 0 0 10px;
               color: #fff;
-              font-family: "Fira Sans";
+              font-family: var(--font-primary-nexa);
               font-size: 18px;
               font-style: normal;
               font-weight: 600;
@@ -459,10 +468,11 @@
 
             .teaser__actions {
               line-height: 0;
+
               a {
                 margin-top: 0;
                 color: var(--Tertiary-White, #fff);
-                font-family: "Fira Sans";
+                font-family: var(--font-primary-nexa);
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;
@@ -470,6 +480,7 @@
                 border-color: white;
                 width: auto;
                 height: auto;
+
                 &::after {
                   content: url("");
                   right: 0;
@@ -513,7 +524,7 @@
         border: 1px solid #575a5e;
         min-width: 36px;
         text-align: center;
-        font-family: "Anek Latin";
+        font-family: "Anek Latin", sans-serif;
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
@@ -535,7 +546,7 @@
       .title {
         color: #171c8f;
         font-feature-settings: "clig" off, "liga" off;
-        font-family: "Anek Latin";
+        font-family: "Anek Latin", sans-serif;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -545,7 +556,7 @@
       .subtitle {
         color: #171c8f;
         font-feature-settings: "clig" off, "liga" off;
-        font-family: "Anek Latin";
+        font-family: "Anek Latin", sans-serif;
         font-size: 24px;
         font-style: normal;
         font-weight: 800;
@@ -569,7 +580,7 @@
           box-sizing: border-box;
           padding: 0 0 0 16px;
           background: #f4f4f4;
-          box-shadow: 0px 0px 10.8px 0px rgba(169, 169, 169, 0.11);
+          box-shadow: 0 0 10.8px 0 rgb(169 169 169 / 11%);
           filter: none;
           backdrop-filter: blur(0);
           clip-path: none;
@@ -603,7 +614,7 @@
           .card-price,
           .card-price-text {
             color: #878787;
-            font-family: "Anek Latin";
+            font-family: "Anek Latin", sans-serif;
             font-size: 14px;
             font-style: normal;
             font-weight: 300;
@@ -638,14 +649,15 @@
         margin-top: 10px;
 
         .teaser {
-          border-radius: 4px 4px 4px 0px;
+          border-radius: 4px 4px 4px 0;
           background: linear-gradient(
             228deg,
-            rgba(23, 29, 155, 0.1) 31.52%,
-            rgba(255, 98, 0, 0.1) 111.9%
+            rgb(23 29 155 / 10%) 31.52%,
+            rgb(255 98 0 / 10%) 111.9%
           );
           backdrop-filter: blur(0);
-          @media (max-width: 999px) {
+
+          @media (width <= 999px) {
             flex: 0 0 100%;
           }
 
@@ -661,11 +673,11 @@
         .teaser__pretitle p,
         .teaser__title h3,
         .teaser__actions a {
-          font-family: "Anek Latin";
+          font-family: "Anek Latin", sans-serif;
         }
 
         .teaser__description {
-          margin: 0 0 8px 0;
+          margin: 0 0 8px;
 
           p {
             color: #575a5e;
@@ -691,7 +703,7 @@
           padding: 12px 32px;
           color: #fff;
           font-feature-settings: "clig" off, "liga" off;
-          font-family: Roboto;
+          font-family: Roboto, sans-serif;
           font-size: 18px;
           font-style: normal;
           font-weight: 400;
@@ -709,7 +721,7 @@
 }
 
 .navbar-arena {
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     .car-filter {
       padding: 24px 64px;
 
@@ -778,6 +790,42 @@
             clip-path: none;
             padding: 16px 8px;
 
+            .card-logo-image {
+              display: flex;
+
+              img {
+                max-height: 10px;
+              }
+            }
+
+            .card-image {
+              margin-bottom: 0;
+
+              img {
+                filter: none;
+                mix-blend-mode: normal;
+              }
+            }
+
+            .card-price,
+            .card-price-text {
+              color: #878787;
+              font-family: "Anek Latin", sans-serif;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 300;
+              line-height: 17px;
+              margin: 0;
+              text-transform: capitalize;
+              display: inline-block;
+            }
+
+            .card-price {
+              font-weight: 500;
+              color: black;
+              margin-left: 2px;
+            }
+
             &:hover {
               background-color: #171d9b;
 
@@ -796,45 +844,9 @@
               justify-content: space-between;
             }
 
-            .card-logo-image {
-              display: flex;
-
-              img {
-                max-height: 10px;
-              }
-            }
-
-            .card-image {
-              margin-bottom: 0;
-
-              img {
-                filter: none;
-                mix-blend-mode: normal;
-              }
-            }
-
             .card-description,
             .card-title {
               display: none;
-            }
-
-            .card-price,
-            .card-price-text {
-              color: #878787;
-              font-family: "Anek Latin";
-              font-size: 14px;
-              font-style: normal;
-              font-weight: 300;
-              line-height: 17px;
-              margin: 0;
-              text-transform: capitalize;
-              display: inline-block;
-            }
-
-            .card-price {
-              font-weight: 500;
-              color: black;
-              margin-left: 2px;
             }
           }
         }
@@ -847,6 +859,7 @@
 
           .teaser:first-child {
             clip-path: none;
+
             .teaser__card {
               display: flex;
               flex-direction: column;
@@ -876,14 +889,14 @@
             .teaser__pretitle p,
             .teaser__title h3,
             .teaser__actions a {
-              font-family: "Anek Latin";
+              font-family: "Anek Latin", sans-serif;
             }
 
             .teaser__title h4 {
-              margin: 0 0 4px 0;
+              margin: 0 0 4px;
               color: #1d1d1d;
               font-feature-settings: "clig" off, "liga" off;
-              font-family: "Anek Latin";
+              font-family: "Anek Latin", sans-serif;
               font-size: 18px;
               font-style: normal;
               font-weight: 500;
@@ -893,7 +906,7 @@
             .teaser__actions a {
               color: #575a5e;
               font-feature-settings: "clig" off, "liga" off;
-              font-family: Roboto;
+              font-family: Roboto, sans-serif;
               font-size: 16px;
               font-style: normal;
               font-weight: 400;
@@ -916,16 +929,16 @@
               padding: 16px;
               background: linear-gradient(
                 228deg,
-                rgba(23, 29, 155, 0.1) 31.52%,
-                rgba(255, 98, 0, 0.1) 111.9%
+                rgb(23 29 155 / 10%) 31.52%,
+                rgb(255 98 0 / 10%) 111.9%
               );
             }
 
             .teaser__title h3 {
-              margin: 0 0 8px 0;
+              margin: 0 0 8px;
               color: #1d1d1d;
               font-feature-settings: "clig" off, "liga" off;
-              font-family: "Anek Latin";
+              font-family: "Anek Latin", sans-serif;
               font-size: 24px;
               font-style: normal;
               font-weight: 600;
@@ -935,7 +948,7 @@
             .teaser__description p {
               color: #575a5e;
               font-feature-settings: "clig" off, "liga" off;
-              font-family: "Anek Latin";
+              font-family: "Anek Latin", sans-serif;
               font-size: 14px;
               font-style: normal;
               font-weight: 300;
@@ -946,7 +959,7 @@
               padding: 12px 32px;
               color: #fff;
               font-feature-settings: "clig" off, "liga" off;
-              font-family: Roboto;
+              font-family: Roboto, sans-serif;
               font-size: 18px;
               font-style: normal;
               font-weight: 400;
