@@ -1,5 +1,6 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import utility from '../../utility/utility.js';
+
 export default function decorate(block) {
   function getHeroBannerDealer() {
     const [
@@ -20,7 +21,7 @@ export default function decorate(block) {
       img.classList.add('hero-banner-dealer__image-container');
     }
 
-   const pretitle = pretitleEl?.textContent?.trim() || '';
+    const pretitle = pretitleEl?.textContent?.trim() || '';
     const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.outerHTML).join('');
     const ctas = Array.from(ctaEls).map((ctaEl) => {
       const [ctaTextEl, ctaLinkEl] = ctaEl.children;
@@ -36,8 +37,8 @@ export default function decorate(block) {
       image, pretitle, description, ctas,
     };
   }
-const heroBannerDealer = getHeroBannerDealer();
-block.innerHTML = utility.sanitizeHtml(`
+  const heroBannerDealer = getHeroBannerDealer();
+  block.innerHTML = utility.sanitizeHtml(`
     <div class="hero-banner-dealer__container right-seperator">
       <div class="hero-banner-dealer__container">
         <div class="hero-banner-dealer__section">
