@@ -16,6 +16,7 @@ export default async function decorate(block) {
     secondaryLinkEl,
     secondaryTargetEl,
     termsAndConditionsTextEl,
+    thumbnailEl,
   ] = block.children;
   const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
   title.removeAttribute('id');
@@ -34,6 +35,7 @@ export default async function decorate(block) {
   const secondaryCtaText = secondaryTextEl?.textContent?.trim() || '';
   const secondaryLink = secondaryLinkEl?.querySelector('.button-container a')?.href;
   const secondaryTarget = secondaryTargetEl?.textContent?.trim() || '_self';
+  const thumbnail = thumbnailEl?.querySelector('img')?.src;
 
   const { publishDomain, apiKey } = await fetchPlaceholders();
 
@@ -270,10 +272,14 @@ export default async function decorate(block) {
   const cars = data?.data?.variantList?.items;
   const div = document.createElement('div');
   div.className = 'hero-banner__carousel';
+  const video = document.createElement('video');
+  video.setAttribute('poster', thumbnail);
+  div.appendChild(video);
   async function finalBlock() {
     if (cars) {
       const htmlPromises = cars.map((car) => getVariantHtml(car));
       const htmlResults = await Promise.all(htmlPromises);
+      div.removeChild(video);
       htmlResults.forEach((html, i) => {
         const item = document.createElement('div');
         item.classList.add('hero-banner__slides');
