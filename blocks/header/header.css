@@ -124,6 +124,24 @@ header nav a:any-link {
   bottom: 3px;
 }
 
+.navbar-nexa .nav-hamburger-icon {
+  content: url('../../icons/handburger-icon.svg');
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #18171a;
+  border-radius: 0;
+  top: 16px;
+}
+.navbar-nexa .nav-hamburger-icon::before,
+.navbar-nexa .nav-hamburger-icon::before
+{
+  display: none;
+
+}
+
 @media (width > 998px) {
   header nav .nav-hamburger {
     display: none;
