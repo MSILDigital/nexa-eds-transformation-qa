@@ -1,4 +1,4 @@
-@import "../teaser/teaser.css";
+@import url("../teaser/teaser.css");
 
 main .immersive-teaser-container {
   padding: 0;
@@ -46,12 +46,50 @@ main .immersive-teaser-container > div {
       position: absolute;
       top: 0;
       left: 0;
-      background: linear-gradient(89deg, #18171a 0%, rgba(24, 23, 26, 0) 96%);
+      background: linear-gradient(89deg, #18171a 0%, rgb(24 23 26 / 0%) 96%);
     }
   }
 
   .immersive__content {
     order: 1;
+    padding: 64px 24px 24px;
+    background-color: #18171a;
+    text-align: left;
+
+    .immersive__title {
+      color: white;
+      margin-bottom: 72px;
+      font-size: 32px;
+      font-family: var(--font-secondary-nexa);
+      font-weight: 600;
+      line-height: 40px;
+      letter-spacing: 0.64px;
+      word-wrap: break-word;
+      text-align: left;
+    }
+
+    p strong {
+      margin-top: 12px;
+      color: white;
+      font-size: 16px;
+      font-family: var(--font-primary-nexa);
+      font-weight: 500;
+      line-height: 20px;
+      word-wrap: break-word;
+      text-align: left;
+    }
+
+    p {
+      margin-top: 12px;
+      color: white;
+      font-size: 12px;
+      font-family: var(--font-primary-nexa);
+      font-weight: 400;
+      line-height: 16px;
+      word-wrap: break-word;
+      text-align: left;
+      width: 70%;
+    }
   }
 
   .teaser-wrapper {
@@ -68,47 +106,6 @@ main .immersive-teaser-container > div {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-.immersive__wrapper .immersive__content {
-  padding: 64px 24px 24px;
-  background-color: #18171a;
-  text-align: left;
-
-  .immersive__title {
-    color: white;
-    margin-bottom: 72px;
-    font-size: 32px;
-    font-family: Kepler Std;
-    font-weight: 600;
-    line-height: 40px;
-    letter-spacing: 0.64px;
-    word-wrap: break-word;
-    text-align: left;
-  }
-
-  p strong {
-    margin-top: 12px;
-    color: white;
-    font-size: 16px;
-    font-family: Fira Sans;
-    font-weight: 500;
-    line-height: 20px;
-    word-wrap: break-word;
-    text-align: left;
-  }
-
-  p {
-    margin-top: 12px;
-    color: white;
-    font-size: 12px;
-    font-family: Fira Sans;
-    font-weight: 400;
-    line-height: 16px;
-    word-wrap: break-word;
-    text-align: left;
-    width: 70%;
-  }
 }
 
 .immersive__wrapper .immersive__content .immersive__action {
@@ -179,7 +176,7 @@ main .immersive-teaser-container > div {
   margin-top: -12px;
 }
 
-@media (min-width: 999px) {
+@media (width >= 999px) {
   main .immersive-teaser-container {
     padding-bottom: 24px;
     clip-path: polygon(

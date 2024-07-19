@@ -2,10 +2,10 @@
   /* Define CSS Variables (Custom Properties) */
   --primary-color: #fff;
   --secondary-color: #b2b2b2;
-  --background-gradient-start: rgba(0, 0, 0, 0.6);
-  --background-gradient-end: rgba(0, 0, 0, 0.6);
-  --content-background-gradient-start: rgba(56, 79, 110, 0.6);
-  --content-background-gradient-end: rgba(91, 91, 91, 0.6);
+  --background-gradient-start: rgb(0 0 0 / 60%);
+  --background-gradient-end: rgb(0 0 0 / 60%);
+  --content-background-gradient-start: rgb(56 79 110 / 60%);
+  --content-background-gradient-end: rgb(91 91 91 / 60%);
 }
 
 .highlight-tabs {
@@ -28,15 +28,15 @@
   background-color: #18171a;
   padding-bottom: 40px;
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     clip-path: polygon(0 3%, 30% 3%, 32% 0, 100% 0, 100% 100%, 0 100%);
     padding-bottom: 65px;
   }
 }
 
 .highlightItem {
-  display: flex;
   flex-direction: column;
+  display: none;
 
   .highlightItem-img {
     object-fit: cover;
@@ -45,7 +45,7 @@
     aspect-ratio: 360/297;
   }
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     position: relative;
 
     .highlightItem-img {
@@ -59,14 +59,13 @@
       right: 0;
       height: 250px;
       z-index: 1;
-    }
-
-    &::before {
       top: 0;
-      background: linear-gradient(180deg,
-          rgba(24, 23, 26, 1) 50%,
-          rgba(24, 23, 26, 0.80) 80%,
-          rgba(24, 23, 26, 0) 100%);
+      background: linear-gradient(
+        180deg,
+        rgb(24 23 26 / 100%) 50%,
+        rgb(24 23 26 / 80%) 80%,
+        rgb(24 23 26 / 0%) 100%
+      );
     }
 
     &::after {
@@ -76,14 +75,13 @@
       right: 0;
       height: 50px;
       z-index: 1;
-    }
-
-    &::after {
       bottom: 0;
-      background: linear-gradient(180deg,
-          rgba(24, 23, 26, 0) 30%,
-          rgba(24, 23, 26, 0.75) 60%,
-          rgba(24, 23, 26, 1) 100%);
+      background: linear-gradient(
+        180deg,
+        rgb(24 23 26 / 0%) 30%,
+        rgb(24 23 26 / 75%) 60%,
+        rgb(24 23 26 / 100%) 100%
+      );
     }
   }
 }
@@ -93,10 +91,10 @@
   flex-direction: column;
   gap: 32px;
   justify-content: left;
-  padding: 56.25px 20px 48px 20px;
+  padding: 56.25px 20px 48px;
 
   .top-left {
-    font-family: "Kepler Std";
+    font-family: var(--font-secondary-nexa);
     color: #fff;
     font-size: 32px;
     font-weight: 600;
@@ -106,7 +104,7 @@
   }
 
   .top-right {
-    font-family: "Fira Sans";
+    font-family: var(--font-primary-nexa);
     color: #f2f2f2;
     font-size: 14px;
     font-weight: 400;
@@ -115,7 +113,7 @@
     z-index: 1;
   }
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     display: inherit;
 
     .top-left {
@@ -142,26 +140,25 @@
 }
 
 .switch-list-section {
-  padding: 12px 20px 0px 20px;
+  padding: 12px 20px 0;
   margin-top: 16px;
 
   .switch-list {
     list-style-type: none;
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: auto hidden;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
 
-    @media (min-width: 999px) {
+    @media (width >= 999px) {
       gap: 24px;
       justify-content: center;
       margin-top: 36px;
     }
   }
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     position: relative;
   }
 }
@@ -170,35 +167,35 @@
   cursor: pointer;
   color: var(--secondary-color);
   text-decoration: none;
-  font-family: "Fira Sans";
+  font-family: var(--font-primary-nexa);
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
   white-space: nowrap;
   position: relative;
-  padding-left:8px;
-  padding-right:8px;
-  padding-bottom:8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     font-size: 16px;
     line-height: 20px;
-    width:210px;
-    padding-left:16px;
-    padding-right:16px;
-    padding-bottom:14px;
-    display:flex;
+    width: 210px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 14px;
+    display: flex;
     justify-content: center;
     align-items: end;
     overflow-wrap: break-word;
-    white-space:pre-wrap;
+    white-space: pre-wrap;
   }
 
   &::after {
     content: "";
     display: block;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
     width: 100%;
     border-bottom: 1px solid var(--secondary-color);
@@ -217,15 +214,16 @@
 .highlightItem-content {
   position: relative;
   margin-top: 24px;
-  width:calc(100% - 20px);
+  width: calc(100% - 20px);
   padding: 16px;
-  background: linear-gradient(238deg,
-      var(--content-background-gradient-start) -11.12%,
-      var(--content-background-gradient-end) 111.5%);
-  clip-path: polygon(0 0, 100% 0, 100% 94%, 66% 94%, 61% 100%, 0 100%);
+  background: linear-gradient(
+    238deg,
+    var(--content-background-gradient-start) -11.12%,
+    var(--content-background-gradient-end) 111.5%
+  );
   backdrop-filter: blur(10px);
   color: #f2f2f2;
-  font-family: "Fira Sans";
+  font-family: var(--font-primary-nexa);
   font-size: 12px;
   font-weight: 400;
   clip-path: polygon(0 0, 100% 0, 100% 90%, 65% 90%, 60% 100%, 0 100%);
@@ -233,11 +231,11 @@
   transform-origin: top;
   z-index: 10;
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     position: absolute;
     left: 5%;
     bottom: 48px;
-    width:397px;
+    width: 397px;
     margin-left: 0;
     margin-top: 0;
     padding: 32px;
@@ -246,12 +244,13 @@
   }
 }
 
-.more-content, .more-content-expanded {
+.more-content,
+.more-content-expanded {
   line-height: 16px;
   height: auto;
   transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     line-height: 20px;
   }
 }
@@ -265,11 +264,7 @@
   margin-top: 8px;
   position: relative;
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     font-weight: 400;
   }
-}
-
-.highlightItem {
-  display: none;
 }
