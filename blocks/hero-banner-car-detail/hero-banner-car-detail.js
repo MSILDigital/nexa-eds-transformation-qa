@@ -16,6 +16,7 @@ export default async function decorate(block) {
     secondaryLinkEl,
     secondaryTargetEl,
     termsAndConditionsTextEl,
+    thumbnailEl,
   ] = block.children;
   const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
   title.removeAttribute('id');
@@ -34,7 +35,23 @@ export default async function decorate(block) {
   const secondaryCtaText = secondaryTextEl?.textContent?.trim() || '';
   const secondaryLink = secondaryLinkEl?.querySelector('.button-container a')?.href;
   const secondaryTarget = secondaryTargetEl?.textContent?.trim() || '_self';
-
+  const thumbnail = thumbnailEl?.querySelector('img')?.src;
+  const div = document.createElement('div');
+  div.className = 'hero-banner__carousel';
+  const video = document.createElement('video');
+  video.setAttribute('poster', thumbnail);
+  video.setAttribute('muted', 'muted');
+  video.setAttribute('width', '100%');
+  video.setAttribute('autoplay', '');
+  video.setAttribute('src', '');
+  const item = document.createElement('div');
+  item.classList.add('hero-banner__slides');
+  item.classList.add('active');
+  const videoDiv = document.createElement('div');
+  videoDiv.className = 'hero__video-container';
+  videoDiv.appendChild(video);
+  item.appendChild(videoDiv);
+  div.appendChild(item);
   const { publishDomain, apiKey } = await fetchPlaceholders();
 
   const tokenUrl = `${publishDomain}/content/nexa/services/token`;
@@ -111,13 +128,13 @@ export default async function decorate(block) {
     function showSlide(index) {
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
-        const video = slide.querySelector('video');
-        if (video) {
+        const videoEl = slide.querySelector('video');
+        if (videoEl) {
           if (i === index) {
-            video.play();
+            videoEl.play();
           } else {
-            video.pause();
-            video.currentTime = 0;
+            videoEl.pause();
+            videoEl.currentTime = 0;
           }
         }
       });
@@ -129,40 +146,40 @@ export default async function decorate(block) {
     }
 
     function handleOverlayBehavior(slide) {
-      const video = slide.querySelector('video');
+      const videoEl = slide.querySelector('video');
       const overlay = slide.querySelector('.hero__information-overlay');
 
-      if (video && overlay) {
+      if (videoEl && overlay) {
         let overlayShown = false;
 
-        video.addEventListener('timeupdate', () => {
-          const progress = (video.currentTime / video.duration) * 100;
+        videoEl.addEventListener('timeupdate', () => {
+          const progress = (videoEl.currentTime / videoEl.duration) * 100;
 
           if (progress >= 50 && !overlayShown) {
             overlayShown = true;
-            video.pause();
+            videoEl.pause();
             overlay.style.opacity = '1';
 
             setTimeout(() => {
               overlay.style.opacity = '0';
               setTimeout(() => {
-                video.play();
+                videoEl.play();
               }, 1000); // Wait for overlay fade-out before resuming video
             }, 3000);
           }
         });
 
-        video.addEventListener('ended', () => {
+        videoEl.addEventListener('ended', () => {
           overlayShown = false; // Reset for next play
         });
       }
     }
 
-    function setupVideo(video, slide) {
-      video.addEventListener('loadedmetadata', () => {
+    function setupVideo(videoEl, slide) {
+      videoEl.addEventListener('loadedmetadata', () => {
       });
 
-      video.addEventListener('ended', () => {
+      videoEl.addEventListener('ended', () => {
         nextSlide();
       });
 
@@ -170,9 +187,9 @@ export default async function decorate(block) {
     }
 
     slides.forEach((slide) => {
-      const video = slide.querySelector('video');
-      if (video) {
-        setupVideo(video, slide);
+      const videoEl = slide.querySelector('video');
+      if (videoEl) {
+        setupVideo(videoEl, slide);
       }
     });
 
@@ -182,15 +199,21 @@ export default async function decorate(block) {
 
   const filterTypes = filterList.split(',');
 
-  const getVideoHtml = (videoUrl) => `
-  <div class="hero__video-container">
-    <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
-  </div>
-`;
+  const getVideoHtml = (videoUrl, flag) => {
+    if (flag) {
+      video.setAttribute('src', videoUrl);
+      video.setAttribute('poster', thumbnail);
+      return videoDiv.outerHTML;
+    }
 
-  const getAssetHtml = (videoUrl) => {
+    return `<div class="hero__video-container">
+      <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
+    </div>`;
+  };
+
+  const getAssetHtml = (videoUrl, flag) => {
     if (videoUrl) {
-      return getVideoHtml(videoUrl);
+      return getVideoHtml(videoUrl, flag);
     }
     return '';
   };
@@ -210,9 +233,9 @@ export default async function decorate(block) {
     return typeHtml;
   };
 
-  const getVariantHtml = async (variant) => {
-    // eslint-disable-next-line
-    const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl) : getAssetHtml(variant.variantMobileVideo._publishUrl);
+  const getVariantHtml = async (variant, flag) => {
+    /* eslint-disable-next-line no-underscore-dangle */
+    const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl, flag) : getAssetHtml(variant.variantMobileVideo._publishUrl, flag);
     return `
         ${assetHtml}
         <div class="hero__information-overlay" style="opacity: 0; transition: opacity 0.5s;">
@@ -259,24 +282,32 @@ export default async function decorate(block) {
       'Content-Type': 'application/json',
     },
   };
-  const response = await fetch(graphQlEndpoint, requestOptions);
-  const { data } = await response.json();
-  const cars = data?.variantList?.items;
-  const div = document.createElement('div');
-  div.className = 'hero-banner__carousel';
+  let data;
+  try {
+    const response = await fetch(graphQlEndpoint, requestOptions);
+    data = await response.json();
+  } catch (error) {
+    data = {};
+  }
+  const cars = data?.data?.variantList?.items;
   async function finalBlock() {
-    for (let i = 0; i < cars.length; i += 1) {
-      // eslint-disable-next-line
-      const html = await getVariantHtml(cars[i]);
-      const item = document.createElement('div');
-      item.classList.add('hero-banner__slides');
-      if (i === 0) {
-        item.classList.add('active');
-      }
-      item.innerHTML = html;
-      div.insertAdjacentElement('beforeend', item);
+    if (cars) {
+      const htmlPromises = cars.map((car, index) => getVariantHtml(car, index === 0));
+      const htmlResults = await Promise.all(htmlPromises);
+      let itemDiv;
+      htmlResults.forEach((html, i) => {
+        if (i !== 0) {
+          itemDiv = document.createElement('div');
+          itemDiv.classList.add('hero-banner__slides');
+          itemDiv.innerHTML = html;
+          div.insertAdjacentElement('beforeend', itemDiv);
+        } else {
+          item.innerHTML = html;
+          div.insertAdjacentElement('beforeend', item);
+        }
+      });
+      initCarousel(div);
     }
-    initCarousel(div);
   }
   block.innerHTML = '';
   block.append(div);
