@@ -304,7 +304,7 @@ export default async function decorate(block) {
           div.insertAdjacentElement('beforeend', item);
         }
       });
-      initCarousel(div);
+      initCarousel();
     }
   }
   block.innerHTML = '';
