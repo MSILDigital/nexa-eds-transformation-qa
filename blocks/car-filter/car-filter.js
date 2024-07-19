@@ -22,7 +22,7 @@ export default async function decorate(block) {
   } catch (e) {
     authorization = '';
   }
-  const forCode = '48';
+  let forCode = '48';
   const title = titleEl?.textContent?.trim();
   const subtitle = subtitleEl?.textContent?.trim();
   const priceText = priceTextEl?.textContent?.trim();
@@ -118,7 +118,7 @@ export default async function decorate(block) {
         currency: 'INR',
         maximumFractionDigits: 0,
       });
-      return formatter.format(price);
+      return formatter.format(price)?.replaceAll(',', ' ');
     }
 
     function getLocalStorage(key) {
@@ -129,7 +129,7 @@ export default async function decorate(block) {
       const storedPrices = getLocalStorage('modelPrice')
         ? JSON.parse(getLocalStorage('modelPrice')) : {};
       if (storedPrices[modelCode] && storedPrices[modelCode].price[forCode]) {
-        const storedPrice = priceFormatting(storedPrices[modelCode].price[forCode]).replaceAll(',', ' ');
+        const storedPrice = priceFormatting(storedPrices[modelCode].price[forCode]);
         priceElement.textContent = `${priceText} ${storedPrice}`;
       } else {
         let channel = 'EXC';
@@ -169,21 +169,35 @@ export default async function decorate(block) {
               const storedModelPrices = {};
               const timestamp = new Date().getTime() + (1 * 24 * 60 * 60 * 1000); // 1 day from now
 
-              data.data.models.forEach((item) => {
+              data?.data?.models.forEach((item) => {
                 const { modelCd } = item;
-                const formattedPrice = priceFormatting(item.lowestExShowroomPrice);
 
                 storedModelPrices[modelCd] = {
                   price: {
-                    [forCode]: formattedPrice,
+                    [forCode]: item.lowestExShowroomPrice,
                   },
                   timestamp,
                 };
               });
-
+              Object.entries(storedModelPrices).forEach(([key, value]) => {
+                if (storedPrices[key]) {
+                  // If existing data is present, merge prices and update timestamp
+                  storedPrices[key] = {
+                    ...storedPrices[key],
+                    price: {
+                      ...storedPrices[key].price,
+                      ...value.price
+                    },
+                    timestamp: value.timestamp
+                  };
+                } else {
+                  // If key doesn't exist in existing data, add it
+                  storedPrices[key] = value;
+                }
+              });
               // Convert to JSON and store in localStorage
-              localStorage.setItem('modelPrice', JSON.stringify(storedModelPrices));
-              priceElement.textContent = `${priceText} ${storedModelPrices[modelCode].price[forCode]}`;
+              localStorage.setItem('modelPrice', JSON.stringify(storedPrices));
+              priceElement.textContent = `${priceText} ${priceFormatting(storedPrices[modelCode].price[forCode])}`;
             } else {
               const formattedPrice = defaultPrice ? priceFormatting(defaultPrice) : 'Not available';
               priceElement.textContent = formattedPrice;
@@ -203,8 +217,9 @@ export default async function decorate(block) {
       carCardsContainer.innerHTML = '';
 
       carsToRender.forEach((car) => {
-        const card = document.createElement('div');
+        const card = document.createElement('a');
         card.classList.add('card');
+        card.href = car.carDetailsPagePath?._path || '#';
 
         if (componentVariation === 'arena-variant') {
           const cardLogoImage = document.createElement('div');
@@ -304,6 +319,7 @@ export default async function decorate(block) {
 
   function appendNewHTMLContainer() {
     if (newHTMLContainer) {
+      block.innerHTML = '';
       block.appendChild(newHTMLContainer);
     }
   }
@@ -315,13 +331,22 @@ export default async function decorate(block) {
     },
   };
 
-  fetch(graphQlEndpoint, requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      newHTMLContainer = carModelInfo(result);
-      appendNewHTMLContainer();
-    })
-    .catch();
+  function fetchCars () { 
+    fetch(graphQlEndpoint, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        newHTMLContainer = carModelInfo(result);
+        appendNewHTMLContainer();
+      })
+      .catch();
+  }
+
+  fetchCars();
+    
+  document.addEventListener('updateLocation', (event) => {
+    forCode = '34' || event.target.textContent.trim();
+    fetchCars();
+  });
 
   block.innerHTML = '';
   block.appendChild(newHTMLContainer);

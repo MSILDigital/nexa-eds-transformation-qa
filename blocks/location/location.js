@@ -1,4 +1,5 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
+import { dispatchLocationChangeEvent } from '../../scripts/customEvents.js';
 import utility from '../../utility/utility.js';
 
 export default async function decorate(block) {
@@ -115,7 +116,7 @@ export default async function decorate(block) {
     const locationButton = block.querySelector('.location-btn');
     const geoLocationDiv = block.querySelector('.geo-location');
     const detectLocationCTA = block.querySelector('.detect-location__cta');
-    locationButton.addEventListener('click', () => {
+    locationButton.addEventListener('click', (event) => {
       if (
         geoLocationDiv.style.display === 'none'
       || geoLocationDiv.style.display === ''
@@ -124,6 +125,10 @@ export default async function decorate(block) {
       } else {
         geoLocationDiv.style.display = 'none';
       }
+
+      //TODO: Pass forCode from this component once dropdown for cities is implemented
+      const text = event.target.textContent;
+      dispatchLocationChangeEvent(text);
     });
     detectLocationCTA.addEventListener('click', () => {
       geoLocationDiv.style.display = 'none';
