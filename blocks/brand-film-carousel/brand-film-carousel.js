@@ -73,12 +73,19 @@ export default async function decorate(block) {
     },
   );
 
+  let isPlayed = false;
   block.querySelectorAll('.brand-film__video-container')?.forEach((el) => {
     const video = el.querySelector('video');
     if (video) {
       el.addEventListener('click', () => {
         if (video.paused) {
           video.play();
+          if (!isPlayed) {
+            block.querySelectorAll('.brand-film__video-container video')?.forEach((vd) => {
+              vd.removeAttribute('preload');
+            });
+            isPlayed = true;
+          }
         } else {
           video?.pause();
         }
