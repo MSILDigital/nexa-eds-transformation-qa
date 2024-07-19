@@ -1,18 +1,22 @@
-@import "../teaser/teaser.css";
+@import url("../teaser/teaser.css");
 
 .finance-card-list {
   &.dark-teaser-list {
     background: var(--primary-main-color);
+
     .text-color {
       color: var(--secondary-main-color);
     }
   }
+
   &.light-teaser-list {
     background: var(--secondary-main-color);
+
     .text-color {
       color: var(--primary-main-color);
     }
   }
+
   padding-top: 48px;
   padding-bottom: 48px;
 }
@@ -21,36 +25,37 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
 }
 
 .teaser-container .teaser-wrapper .teaser__title .teaser__title-text {
-  font-family: "Anek Latin";
+  font-family: "Anek Latin", sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 800;
   line-height: 44px;
 }
-@media (min-width: 999px) {
+
+@media (width >= 999px) {
   .teaser__cards {
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 16px;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: auto hidden;
   }
+
   .teaser-container .teaser-wrapper .teaser__title .teaser__title-text {
     font-size: 40px;
     font-style: normal;
     font-weight: 800;
     line-height: 44px; /* 110% */
   }
+
   .finance-card-list {
     &.dark-teaser-list {
       .text-color {
         color: var(--Tertiary-White, #fff);
-        font-family: "Kepler Std";
+        font-family: var(--font-secondary-nexa);
         font-size: 64px;
         font-style: normal;
         font-weight: 600;
@@ -59,10 +64,6 @@
       }
     }
   }
-}
-
-.teaser__cards {
-  /* overflow: hidden; */
 }
 
 .teaser__cards::-webkit-scrollbar {
