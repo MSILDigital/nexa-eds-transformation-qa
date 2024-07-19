@@ -54,14 +54,7 @@ export default async function decorate(block) {
   div.appendChild(item);
   const { publishDomain, apiKey } = await fetchPlaceholders();
 
-  const tokenUrl = `${publishDomain}/content/nexa/services/token`;
-  let authorization;
-  try {
-    const auth = await fetch(tokenUrl);
-    authorization = await auth.text();
-  } catch (e) {
-    authorization = '';
-  }
+  let authorization = '';
   const storedVariantPrices = {};
   function getLocalStorage(key) {
     return localStorage.getItem(key);
@@ -273,24 +266,29 @@ export default async function decorate(block) {
         </div>
         `;
   };
-
-  const graphQlEndpoint = `${publishDomain}/graphql/execute.json/msil-platform/VariantList;modelId=${carModelPath}`;
-
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  let data;
-  try {
-    const response = await fetch(graphQlEndpoint, requestOptions);
-    data = await response.json();
-  } catch (error) {
-    data = {};
-  }
-  const cars = data?.data?.variantList?.items;
   async function finalBlock() {
+    const tokenUrl = `${publishDomain}/content/nexa/services/token`;
+    try {
+      const auth = await fetch(tokenUrl);
+      authorization = await auth.text();
+    } catch (e) {
+      authorization = '';
+    }
+    const graphQlEndpoint = `${publishDomain}/graphql/execute.json/msil-platform/VariantList;modelId=${carModelPath}`;
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let data;
+    try {
+      const response = await fetch(graphQlEndpoint, requestOptions);
+      data = await response.json();
+    } catch (error) {
+      data = {};
+    }
+    const cars = data?.data?.variantList?.items;
     if (cars) {
       const htmlPromises = cars.map((car, index) => getVariantHtml(car, index === 0));
       const htmlResults = await Promise.all(htmlPromises);
