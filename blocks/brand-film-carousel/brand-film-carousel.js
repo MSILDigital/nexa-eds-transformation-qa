@@ -19,7 +19,7 @@ export default async function decorate(block) {
     const path = videoPathEl?.querySelector('a')?.textContent?.trim();
     videoEl.classList?.add('brand-film__video-container', 'brand-film__video--paused');
     videoEl.innerHTML = `
-      <video class="brand-film__video" src="${publishDomain + path}" poster=${thumbnail} width="100%" playsinline>
+      <video class="brand-film__video" src="${publishDomain + path}" poster=${thumbnail} width="100%" playsinline preload="none">
       </video>
       <span class="brand-film__play-btn"></span>
     `;
