@@ -322,7 +322,7 @@ export default async function decorate(block) {
       });
       initCarousel();
       document.addEventListener('updateLocation', (event) => {
-        forCode = '34' || event.target.textContent.trim();
+        forCode = event?.detail?.message;
         div.querySelectorAll('.ex-showroom-price').forEach((e) => {
           const index = parseInt(e.dataset.targetIndex, 10);
           e.textContent = fetchPrice(cars[index].variantId, cars[index].exShowroomPrice);

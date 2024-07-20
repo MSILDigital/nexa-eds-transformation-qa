@@ -306,7 +306,7 @@ export default async function decorate(block) {
   init();
 
   document.addEventListener('updateLocation', (event) => {
-    forCode = '34' || event.target.dataset.forcode();
+    forCode = event?.detail?.message;
     init();
   });
 }

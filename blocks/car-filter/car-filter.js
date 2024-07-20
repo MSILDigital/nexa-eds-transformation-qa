@@ -344,7 +344,7 @@ export default async function decorate(block) {
   fetchCars();
     
   document.addEventListener('updateLocation', (event) => {
-    forCode = '34' || event.target.textContent.trim();
+    forCode = event?.detail?.message;
     fetchCars();
   });
 

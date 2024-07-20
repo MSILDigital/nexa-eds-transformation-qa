@@ -224,9 +224,6 @@ export default async function decorate(block) {
         geoLocationDiv.style.display = 'none';
       }
 
-      //TODO: Pass forCode from this component once dropdown for cities is implemented
-      const text = event.target.textContent;
-      dispatchLocationChangeEvent(text);
     });
     detectLocationCTA.addEventListener('click', () => {
       geoLocationDiv.style.display = 'none';
@@ -251,6 +248,8 @@ export default async function decorate(block) {
         updateLocationButton(selectedCity, selectedForCode);
         searchInput.value = '';
         populateAllCities();
+        const forCode = e.target.dataset?.forcode;
+        dispatchLocationChangeEvent(forCode);
       }
     });
 
@@ -260,6 +259,8 @@ export default async function decorate(block) {
         const selectedCity = e.target.textContent;
         const selectedForCode = e.target.getAttribute('data-forcode');
         updateLocationButton(selectedCity, selectedForCode);
+        const forCode = e.target.dataset?.forcode;
+        dispatchLocationChangeEvent(forCode);
       }
     });
   } catch (e) {
