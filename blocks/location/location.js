@@ -223,7 +223,6 @@ export default async function decorate(block) {
       } else {
         geoLocationDiv.style.display = 'none';
       }
-
     });
     detectLocationCTA.addEventListener('click', () => {
       geoLocationDiv.style.display = 'none';

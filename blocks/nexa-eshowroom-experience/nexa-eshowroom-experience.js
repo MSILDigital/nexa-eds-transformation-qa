@@ -125,9 +125,9 @@ export default async function decorate(block) {
             ...storedPrices[key],
             price: {
               ...storedPrices[key].price,
-              ...value.price
+              ...value.price,
             },
-            timestamp: value.timestamp
+            timestamp: value.timestamp,
           };
         } else {
           // If key doesn't exist in existing data, add it
@@ -293,16 +293,16 @@ export default async function decorate(block) {
 
   async function init() {
     try {
-    const response = await fetch(graphQlEndpoint, requestOptions);
-    if (!response.ok) {
-      throw new Error(`GraphQL response was not ok: ${response.statusText}`);
+      const response = await fetch(graphQlEndpoint, requestOptions);
+      if (!response.ok) {
+        throw new Error(`GraphQL response was not ok: ${response.statusText}`);
+      }
+      const data = await response.json();
+      await carModelInfo(data);
+    } catch (e) {
+      throw new Error('GraphQL response was not ok');
     }
-    const data = await response.json();
-    await carModelInfo(data);
-  } catch (e) {
-    throw new Error('GraphQL response was not ok');
   }
-}
   init();
 
   document.addEventListener('updateLocation', (event) => {

@@ -186,9 +186,9 @@ export default async function decorate(block) {
                     ...storedPrices[key],
                     price: {
                       ...storedPrices[key].price,
-                      ...value.price
+                      ...value.price,
                     },
-                    timestamp: value.timestamp
+                    timestamp: value.timestamp,
                   };
                 } else {
                   // If key doesn't exist in existing data, add it
@@ -219,6 +219,7 @@ export default async function decorate(block) {
       carsToRender.forEach((car) => {
         const card = document.createElement('a');
         card.classList.add('card');
+        // eslint-disable-next-line no-underscore-dangle
         card.href = car.carDetailsPagePath?._path || '#';
 
         if (componentVariation === 'arena-variant') {
@@ -331,7 +332,7 @@ export default async function decorate(block) {
     },
   };
 
-  function fetchCars () { 
+  function fetchCars() {
     fetch(graphQlEndpoint, requestOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -342,7 +343,7 @@ export default async function decorate(block) {
   }
 
   fetchCars();
-    
+
   document.addEventListener('updateLocation', (event) => {
     forCode = event?.detail?.message;
     fetchCars();
