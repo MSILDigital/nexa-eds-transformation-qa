@@ -1,5 +1,106 @@
 @import url("../teaser/teaser.css");
 
+.teaser__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  overflow: auto hidden;
+}
+
+.teaser-container .teaser-wrapper .teaser__title .teaser__title-text {
+  font-family: "Anek Latin", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 44px;
+}
+
+.teaser-list-container {
+  background: var(--primary-main-color);
+
+  .dealer-cards-list {
+    padding: 36px 24px;
+
+    .teaser__cards-container {
+      height: initial;
+    }
+
+    .teaser__cards {
+      width: 100%;
+      gap: 24px;
+      grid-template-columns: none;
+      position: relative;
+
+      .teaser__image {
+        clip-path: none;
+        height: 182px;
+        filter: none;
+      }
+
+      .teaser__content {
+        padding: 24px;
+        gap: 24px;
+        background: var(--secondary-main-color);
+
+        .teaser__title {
+          .teaser__title-text {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 28px;
+            font-family: "Kepler Std", sans-serif;
+          }
+        }
+
+        .teaser__actions {
+          width: 100%;
+
+          .primary__btn {
+            width: 100%;
+          }
+
+          .secondary__btn {
+            display: none;
+            border-bottom: 0.64px solid var(--primary-main-color);
+          }
+        }
+      }
+
+      .teaser__card--secondary {
+        .teaser__content {
+          background: linear-gradient(222deg, #cee5e9 0%, #dac8c6 100%);
+        }
+
+        .teaser__info {
+          gap: 24px;
+        }
+
+        .teaser__actions {
+          width: initial;
+
+          .primary__btn {
+            padding: 0;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            color: inherit;
+            gap: 12px;
+
+            &::before {
+              content: "";
+              width: 44px;
+              height: 44px;
+              background-image: url("/icons/arrow.svg");
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .finance-card-list {
   &.dark-teaser-list {
     background: var(--primary-main-color);
@@ -21,21 +122,6 @@
   padding-bottom: 48px;
 }
 
-.teaser__cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  overflow: auto hidden;
-}
-
-.teaser-container .teaser-wrapper .teaser__title .teaser__title-text {
-  font-family: "Anek Latin", sans-serif;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 44px;
-}
-
 @media (width >= 999px) {
   .teaser__cards {
     display: grid;
@@ -51,11 +137,102 @@
     line-height: 44px; /* 110% */
   }
 
+  .teaser-list-container {
+    .dealer-cards-list {
+      padding: 64px;
+
+      .teaser__cards {
+        grid-template-columns: 2.7fr 1.3fr;
+
+        .teaser__card {
+          height: 320px;
+          width: 100%;
+        }
+
+        .teaser__image {
+          height: 100%;
+          width: 50%;
+        }
+
+        .teaser__content {
+          width: 50%;
+          gap: 0;
+          justify-content: space-between;
+
+          .teaser__info {
+            gap: 16px;
+          }
+
+          .teaser__pretitle {
+            p {
+              font-size: 14px;
+              font-weight: 400;
+              line-height: 20px;
+            }
+          }
+
+          .teaser__title {
+            .teaser__title-text {
+              font-size: 32px;
+              font-weight: 600;
+              line-height: 36px;
+              letter-spacing: 0.64px;
+            }
+          }
+
+          .teaser__actions {
+            display: flex;
+            width: initial;
+            gap: 24px;
+
+            .primary__btn {
+              padding: 8px 16px;
+              font-size: 16px;
+              line-height: 24px;
+            }
+
+            .secondary__btn {
+              display: flex;
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 20px;
+              padding: 8px 0;
+            }
+          }
+        }
+
+        .teaser__card--secondary {
+          .teaser__content {
+            width: 100%;
+          }
+
+          .teaser__actions {
+            .primary__btn {
+              gap: 16px;
+
+              &::before {
+                width: 52px;
+                height: 52px;
+                transition: scale 0.1s ease-out;
+              }
+
+              &:hover {
+                &::before {
+                  scale: 1.3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .finance-card-list {
     &.dark-teaser-list {
       .text-color {
         color: var(--Tertiary-White, #fff);
-        font-family: var(--font-secondary-nexa);
+        font-family: "Kepler Std", sans-serif;
         font-size: 64px;
         font-style: normal;
         font-weight: 600;

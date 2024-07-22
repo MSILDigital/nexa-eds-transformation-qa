@@ -846,6 +846,10 @@
           {
             "name": "Arena Card List",
             "value": "arena-card-list"
+          },
+          {
+            "name": "Dealer Card List",
+            "value": "dealer-cards-list"
           }
         ]
       }
