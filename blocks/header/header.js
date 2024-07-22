@@ -81,7 +81,7 @@ export default async function decorate(block) {
   const desktopHeader = `
     <div class="navbar navbar-nexa">
       <div class="nav-hamburger nav-hamburger-nexa">
-      <button type="button" aria-controls="nav" aria-label="Open navigation">
+      <button type="button" aria-controls="menu" aria-label="Open navigation">
         <span class="nav-hamburger-icon"></span>
       </button>
     </div>
