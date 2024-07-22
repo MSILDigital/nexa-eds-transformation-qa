@@ -47,7 +47,7 @@
             font-size: 24px;
             font-weight: 600;
             line-height: 28px;
-            font-family: "Kepler Std", sans-serif;
+            font-family: var(--font-secondary-nexa);
           }
         }
 
@@ -232,7 +232,7 @@
     &.dark-teaser-list {
       .text-color {
         color: var(--Tertiary-White, #fff);
-        font-family: "Kepler Std", sans-serif;
+        font-family: var(--font-secondary-nexa);
         font-size: 64px;
         font-style: normal;
         font-weight: 600;
