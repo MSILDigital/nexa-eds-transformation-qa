@@ -47,7 +47,7 @@ export default async function decorate(block) {
   const secondaryBtnText = secondaryBtnTextE1?.textContent.trim();
   const secondaryBtnCta = secondaryBtnCtaE1?.querySelector('a')?.textContent?.trim();
 
-  const forCode = '48';
+  let forCode = '48';
 
   const parentDiv = document.querySelector('.nexa-eshowroom-experience-container');
   parentDiv.setAttribute('id', componentId);
@@ -118,8 +118,25 @@ export default async function decorate(block) {
           timestamp,
         };
       });
-      localStorage.setItem('modelPrice', JSON.stringify(storedModelPrices));
-      return storedModelPrices[modelCode].price[forCode];
+      Object.entries(storedModelPrices).forEach(([key, value]) => {
+        if (storedPrices[key]) {
+          // If existing data is present, merge prices and update timestamp
+          storedPrices[key] = {
+            ...storedPrices[key],
+            price: {
+              ...storedPrices[key].price,
+              ...value.price,
+            },
+            timestamp: value.timestamp,
+          };
+        } else {
+          // If key doesn't exist in existing data, add it
+          storedPrices[key] = value;
+        }
+      });
+      // Convert to JSON and store in localStorage
+      localStorage.setItem('modelPrice', JSON.stringify(storedPrices));
+      return storedPrices[modelCode].price[forCode];
     }
     return exShowRoomPrice;
   }
@@ -274,14 +291,22 @@ export default async function decorate(block) {
     },
   };
 
-  try {
-    const response = await fetch(graphQlEndpoint, requestOptions);
-    if (!response.ok) {
-      throw new Error(`GraphQL response was not ok: ${response.statusText}`);
+  async function init() {
+    try {
+      const response = await fetch(graphQlEndpoint, requestOptions);
+      if (!response.ok) {
+        throw new Error(`GraphQL response was not ok: ${response.statusText}`);
+      }
+      const data = await response.json();
+      await carModelInfo(data);
+    } catch (e) {
+      throw new Error('GraphQL response was not ok');
     }
-    const data = await response.json();
-    await carModelInfo(data);
-  } catch (e) {
-    throw new Error('GraphQL response was not ok');
   }
+  init();
+
+  document.addEventListener('updateLocation', (event) => {
+    forCode = event?.detail?.message;
+    init();
+  });
 }

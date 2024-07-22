@@ -1,4 +1,5 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
+import { dispatchLocationChangeEvent } from '../../scripts/customEvents.js';
 import utility from '../../utility/utility.js';
 
 export default async function decorate(block) {
@@ -246,6 +247,8 @@ export default async function decorate(block) {
         updateLocationButton(selectedCity, selectedForCode);
         searchInput.value = '';
         populateAllCities();
+        const forCode = e.target.dataset?.forcode;
+        dispatchLocationChangeEvent(forCode);
       }
     });
 
@@ -255,6 +258,8 @@ export default async function decorate(block) {
         const selectedCity = e.target.textContent;
         const selectedForCode = e.target.getAttribute('data-forcode');
         updateLocationButton(selectedCity, selectedForCode);
+        const forCode = e.target.dataset?.forcode;
+        dispatchLocationChangeEvent(forCode);
       }
     });
   } catch (e) {

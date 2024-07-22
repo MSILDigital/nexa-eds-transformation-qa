@@ -35,7 +35,7 @@ export default async function decorate(block) {
   const secondaryCtaText = secondaryTextEl?.textContent?.trim() || '';
   const secondaryLink = secondaryLinkEl?.querySelector('.button-container a')?.href;
   const secondaryTarget = secondaryTargetEl?.textContent?.trim() || '_self';
-  const thumbnail = thumbnailEl?.querySelector('img')?.src;
+  const thumbnail = thumbnailEl?.querySelector('img')?.src || '';
   const div = document.createElement('div');
   div.className = 'hero-banner__carousel';
   const video = document.createElement('video');
@@ -56,11 +56,11 @@ export default async function decorate(block) {
 
   let authorization = '';
   const storedVariantPrices = {};
+  let forCode = '08';
   function getLocalStorage(key) {
     return localStorage.getItem(key);
   }
   async function fetchPrice(variantCode, defaultPrice) {
-    const forCode = '48';
     const storedPrices = getLocalStorage('variantPrice') ? JSON.parse(getLocalStorage('variantPrice')) : {};
     if (storedPrices[variantCode] && storedPrices[variantCode].price[forCode]) {
       const storedPrice = storedPrices[variantCode].price[forCode];
@@ -105,10 +105,25 @@ export default async function decorate(block) {
           };
         }
       });
-
+      Object.entries(storedVariantPrices).forEach(([key, value]) => {
+        if (storedPrices[key]) {
+          // If existing data is present, merge prices and update timestamp
+          storedPrices[key] = {
+            ...storedPrices[key],
+            price: {
+              ...storedPrices[key].price,
+              ...value.price,
+            },
+            timestamp: value.timestamp,
+          };
+        } else {
+          // If key doesn't exist in existing data, add it
+          storedPrices[key] = value;
+        }
+      });
       // Convert to JSON and store in localStorage
-      localStorage.setItem('variantPrice', JSON.stringify(storedVariantPrices));
-      return storedVariantPrices[variantCode].price[forCode];
+      localStorage.setItem('variantPrice', JSON.stringify(storedPrices));
+      return storedPrices[variantCode].price[forCode];
     }
     const formattedPrice = defaultPrice ? utility.formatToLakhs(defaultPrice) : 'Not available';
     return formattedPrice;
@@ -226,7 +241,8 @@ export default async function decorate(block) {
     return typeHtml;
   };
 
-  const getVariantHtml = async (variant, flag) => {
+  const getVariantHtml = async (variant, index) => {
+    const flag = index === 0;
     /* eslint-disable-next-line no-underscore-dangle */
     const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl, flag) : getAssetHtml(variant.variantMobileVideo._publishUrl, flag);
     return `
@@ -241,7 +257,7 @@ export default async function decorate(block) {
               <div class="price-details">
                   <p class="ex-showroom-label">${exShowroomLabel}</p>
                   <div role="separator"></div>
-                  <p class="ex-showroom-price">${await fetchPrice(variant.variantId, variant.exShowroomPrice)} ${lakhLabel}</p>
+                  <p class="ex-showroom-price" data-target-index="${index}">${await fetchPrice(variant.variantId, variant.exShowroomPrice)} ${lakhLabel}</p>
               </div>
               <div class="hero__ctas">
                   <div class="cta cta__primary">
@@ -290,7 +306,7 @@ export default async function decorate(block) {
     }
     const cars = data?.data?.variantList?.items;
     if (cars) {
-      const htmlPromises = cars.map((car, index) => getVariantHtml(car, index === 0));
+      const htmlPromises = cars.map((car, index) => getVariantHtml(car, index));
       const htmlResults = await Promise.all(htmlPromises);
       let itemDiv;
       htmlResults.forEach((html, i) => {
@@ -305,6 +321,13 @@ export default async function decorate(block) {
         }
       });
       initCarousel();
+      document.addEventListener('updateLocation', (event) => {
+        forCode = event?.detail?.message;
+        div.querySelectorAll('.ex-showroom-price').forEach((e) => {
+          const index = parseInt(e.dataset.targetIndex, 10);
+          e.textContent = fetchPrice(cars[index].variantId, cars[index].exShowroomPrice);
+        });
+      });
     }
   }
   block.innerHTML = '';
