@@ -48,7 +48,8 @@
       "secondary-navigation",
       "nexa-eshowroom-experience",
       "hero-banner-car-detail",
-      "hero-banner-dealer"
+      "hero-banner-dealer",
+      "safety-tabs"
     ]
   },
   {
@@ -127,6 +128,12 @@
     "id": "hero-banner-dealer",
     "components": [
       "cta"
+    ]
+  },
+  {
+    "id": "safety-tabs",
+    "components": [
+      "safety-item"
     ]
   }
 ]
