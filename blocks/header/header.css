@@ -331,7 +331,6 @@ header nav .nav-tools {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  border-bottom: 3px solid transparent;
 }
 
 .navbar-nexa .links .link-title {
@@ -359,13 +358,11 @@ header nav .nav-tools {
   display: flex;
   align-items: center;
   color: #575a5e;
-  margin-right: 24px;
 }
 
 .navbar-nexa .right .location {
   color: #f2f2f2;
   font-size: 16px;
-  margin-right: 24px;
 }
 
 .navbar-nexa .links .link-title:hover {
@@ -378,7 +375,7 @@ header nav .nav-tools {
 .navbar .right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap:24px;
 }
 
 .navbar .right > img {
@@ -433,6 +430,14 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.menu-list > li {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
 }
 
 .menu-list > li:hover {

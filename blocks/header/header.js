@@ -139,36 +139,44 @@ export default async function decorate(block) {
   const menuList = document.querySelector('.menu-list');
 
   menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
-
+  
   list.forEach((el, i) => {
-    const linkTitle = document.createElement('div');
-    const desktopPanel = document.createElement('div');
-    const heading = document.createElement('span');
-    linkTitle.classList.add('link-title');
+    const linkTitle = document.createElement("div");
+    const desktopPanel = document.createElement("div");
+    const heading = document.createElement("span");
+    linkTitle.classList.add("link-title");
     heading.textContent = el.heading;
     linkTitle.append(heading);
     desktopPanel.classList.add(
-      'desktop-panel',
-      'panel',
-      el.heading?.split(' ')[0].toLowerCase(),
+      "desktop-panel",
+      "panel",
+      el.heading?.split(" ")[0].toLowerCase()
     );
-    if (el.content) desktopPanel.append(el.content);
-    if (el.teaser) desktopPanel.append(el.teaser);
-    linkEl.append(linkTitle, desktopPanel);
+
+    if (el.content || el.teaser) {
+      if (el.content) desktopPanel.append(el.content);
+      if (el.teaser) desktopPanel.append(el.teaser);
+      linkEl.append(linkTitle, desktopPanel);
+    } else {
+      linkEl.append(linkTitle);
+    }
+
     if (i === 0) return;
-    menuList.innerHTML += `<li id="menu-item-${i}" class="${
-      el.content?.innerHTML ? 'accordion nav-link' : ''
-    } ${el.heading?.toLowerCase()}" ><span class="icon">${
-      el.icon
-    }</span> <span class="menu-title">${el.heading}</span></li>
-    ${
-  el.content?.innerHTML || el.teaser?.innerHTML
-    ? `<div class="panel">${el.content?.innerHTML || ''}${
-      el.teaser?.innerHTML || ''
-    }</div>`
-    : ''
-}
-    `;
+
+    if (el.content?.innerHTML || el.teaser?.innerHTML) {
+      menuList.innerHTML += `<li id="menu-item-${i}" class="accordion nav-link ${el.heading?.toLowerCase()}">
+      <span class="icon">${el.icon}</span>
+      <span class="menu-title">${el.heading}</span>
+    </li>
+    <div class="panel">${el.content?.innerHTML || ""}${
+        el.teaser?.innerHTML || ""
+      }</div>`;
+    } else {
+      menuList.innerHTML += `<li id="menu-item-${i}" class="nav-link ${el.heading?.toLowerCase()}">
+      <span class="icon">${el.icon}</span>
+      <span class="menu-title">${el.heading}</span>
+    </li>`;
+    }
   });
 
   if (!window.matchMedia('(min-width: 999px)').matches) {

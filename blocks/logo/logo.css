@@ -1,9 +1,15 @@
-.logo {
+.logo__picture {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  @media (width >=768px) {
+  @media (min-width:999px) {
     justify-content: start;
   }
+  
+  picture{
+    display:flex;
+    align-items:center;
+  }
+
 }
