@@ -17,7 +17,7 @@
   --tertiary-light-grey: #f2f2f2;
   --tertiary-medium-grey: #b2b2b2;
   --tertiary-deep-Grey: #767879;
-  --tertiary-medium-dark-grey: #7B7777;
+  --tertiary-medium-dark-grey: #7b7777;
   --tertiary-black: #000;
 
   /* AEM colors */
@@ -33,11 +33,11 @@
   --gradient-1: linear-gradient(60.18deg, #c9d3d7 3.71%, #ebebeb 104.51%);
 
   /* fonts */
-  --body-font-family: "Fira Sans";
+  --body-font-family: var(--font-primary-nexa);
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: "Fira Sans";
-
-  /* body sizes */
+  --fixed-font-family: var(--font-primary-nexa);
+  --font-primary-nexa: "Fira Sans", sans-serif;
+  --font-secondary-nexa: "Kepler Std", sans-serif, /* body sizes */;
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
   --body-font-size-xs: 16px;
@@ -107,18 +107,23 @@ h6 {
 h1 {
   font-size: var(--heading-font-size-xxl);
 }
+
 h2 {
   font-size: var(--heading-font-size-xl);
 }
+
 h3 {
   font-size: var(--heading-font-size-l);
 }
+
 h4 {
   font-size: var(--heading-font-size-m);
 }
+
 h5 {
   font-size: var(--heading-font-size-s);
 }
+
 h6 {
   font-size: var(--heading-font-size-xs);
 }
@@ -204,7 +209,7 @@ html {
   }
 }
 
-@media (min-width: 999px) {
+@media (width >= 999px) {
   .cta {
     a {
       font-size: 18px;

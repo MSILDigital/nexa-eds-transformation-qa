@@ -16,6 +16,7 @@ export default async function decorate(block) {
     secondaryLinkEl,
     secondaryTargetEl,
     termsAndConditionsTextEl,
+    thumbnailEl,
   ] = block.children;
   const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
   title.removeAttribute('id');
@@ -34,23 +35,32 @@ export default async function decorate(block) {
   const secondaryCtaText = secondaryTextEl?.textContent?.trim() || '';
   const secondaryLink = secondaryLinkEl?.querySelector('.button-container a')?.href;
   const secondaryTarget = secondaryTargetEl?.textContent?.trim() || '_self';
-
+  const thumbnail = thumbnailEl?.querySelector('img')?.src || '';
+  const div = document.createElement('div');
+  div.className = 'hero-banner__carousel';
+  const video = document.createElement('video');
+  video.setAttribute('poster', thumbnail);
+  video.setAttribute('muted', 'muted');
+  video.setAttribute('width', '100%');
+  video.setAttribute('autoplay', '');
+  video.setAttribute('src', '');
+  const item = document.createElement('div');
+  item.classList.add('hero-banner__slides');
+  item.classList.add('active');
+  const videoDiv = document.createElement('div');
+  videoDiv.className = 'hero__video-container';
+  videoDiv.appendChild(video);
+  item.appendChild(videoDiv);
+  div.appendChild(item);
   const { publishDomain, apiKey } = await fetchPlaceholders();
 
-  const tokenUrl = `${publishDomain}/content/nexa/services/token`;
-  let authorization;
-  try {
-    const auth = await fetch(tokenUrl);
-    authorization = await auth.text();
-  } catch (e) {
-    authorization = '';
-  }
+  let authorization = '';
   const storedVariantPrices = {};
+  let forCode = '08';
   function getLocalStorage(key) {
     return localStorage.getItem(key);
   }
   async function fetchPrice(variantCode, defaultPrice) {
-    const forCode = '48';
     const storedPrices = getLocalStorage('variantPrice') ? JSON.parse(getLocalStorage('variantPrice')) : {};
     if (storedPrices[variantCode] && storedPrices[variantCode].price[forCode]) {
       const storedPrice = storedPrices[variantCode].price[forCode];
@@ -95,10 +105,25 @@ export default async function decorate(block) {
           };
         }
       });
-
+      Object.entries(storedVariantPrices).forEach(([key, value]) => {
+        if (storedPrices[key]) {
+          // If existing data is present, merge prices and update timestamp
+          storedPrices[key] = {
+            ...storedPrices[key],
+            price: {
+              ...storedPrices[key].price,
+              ...value.price,
+            },
+            timestamp: value.timestamp,
+          };
+        } else {
+          // If key doesn't exist in existing data, add it
+          storedPrices[key] = value;
+        }
+      });
       // Convert to JSON and store in localStorage
-      localStorage.setItem('variantPrice', JSON.stringify(storedVariantPrices));
-      return storedVariantPrices[variantCode].price[forCode];
+      localStorage.setItem('variantPrice', JSON.stringify(storedPrices));
+      return storedPrices[variantCode].price[forCode];
     }
     const formattedPrice = defaultPrice ? utility.formatToLakhs(defaultPrice) : 'Not available';
     return formattedPrice;
@@ -111,13 +136,13 @@ export default async function decorate(block) {
     function showSlide(index) {
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
-        const video = slide.querySelector('video');
-        if (video) {
+        const videoEl = slide.querySelector('video');
+        if (videoEl) {
           if (i === index) {
-            video.play();
+            videoEl.play();
           } else {
-            video.pause();
-            video.currentTime = 0;
+            videoEl.pause();
+            videoEl.currentTime = 0;
           }
         }
       });
@@ -129,40 +154,40 @@ export default async function decorate(block) {
     }
 
     function handleOverlayBehavior(slide) {
-      const video = slide.querySelector('video');
+      const videoEl = slide.querySelector('video');
       const overlay = slide.querySelector('.hero__information-overlay');
 
-      if (video && overlay) {
+      if (videoEl && overlay) {
         let overlayShown = false;
 
-        video.addEventListener('timeupdate', () => {
-          const progress = (video.currentTime / video.duration) * 100;
+        videoEl.addEventListener('timeupdate', () => {
+          const progress = (videoEl.currentTime / videoEl.duration) * 100;
 
           if (progress >= 50 && !overlayShown) {
             overlayShown = true;
-            video.pause();
+            videoEl.pause();
             overlay.style.opacity = '1';
 
             setTimeout(() => {
               overlay.style.opacity = '0';
               setTimeout(() => {
-                video.play();
+                videoEl.play();
               }, 1000); // Wait for overlay fade-out before resuming video
             }, 3000);
           }
         });
 
-        video.addEventListener('ended', () => {
+        videoEl.addEventListener('ended', () => {
           overlayShown = false; // Reset for next play
         });
       }
     }
 
-    function setupVideo(video, slide) {
-      video.addEventListener('loadedmetadata', () => {
+    function setupVideo(videoEl, slide) {
+      videoEl.addEventListener('loadedmetadata', () => {
       });
 
-      video.addEventListener('ended', () => {
+      videoEl.addEventListener('ended', () => {
         nextSlide();
       });
 
@@ -170,9 +195,9 @@ export default async function decorate(block) {
     }
 
     slides.forEach((slide) => {
-      const video = slide.querySelector('video');
-      if (video) {
-        setupVideo(video, slide);
+      const videoEl = slide.querySelector('video');
+      if (videoEl) {
+        setupVideo(videoEl, slide);
       }
     });
 
@@ -182,15 +207,21 @@ export default async function decorate(block) {
 
   const filterTypes = filterList.split(',');
 
-  const getVideoHtml = (videoUrl) => `
-  <div class="hero__video-container">
-    <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
-  </div>
-`;
+  const getVideoHtml = (videoUrl, flag) => {
+    if (flag) {
+      video.setAttribute('src', videoUrl);
+      video.setAttribute('poster', thumbnail);
+      return videoDiv.outerHTML;
+    }
 
-  const getAssetHtml = (videoUrl) => {
+    return `<div class="hero__video-container">
+      <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
+    </div>`;
+  };
+
+  const getAssetHtml = (videoUrl, flag) => {
     if (videoUrl) {
-      return getVideoHtml(videoUrl);
+      return getVideoHtml(videoUrl, flag);
     }
     return '';
   };
@@ -210,9 +241,10 @@ export default async function decorate(block) {
     return typeHtml;
   };
 
-  const getVariantHtml = async (variant) => {
-    // eslint-disable-next-line
-    const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl) : getAssetHtml(variant.variantMobileVideo._publishUrl);
+  const getVariantHtml = async (variant, index) => {
+    const flag = index === 0;
+    /* eslint-disable-next-line no-underscore-dangle */
+    const assetHtml = window.matchMedia('(min-width: 999px)').matches ? getAssetHtml(variant.variantVideo._publishUrl, flag) : getAssetHtml(variant.variantMobileVideo._publishUrl, flag);
     return `
         ${assetHtml}
         <div class="hero__information-overlay" style="opacity: 0; transition: opacity 0.5s;">
@@ -225,7 +257,7 @@ export default async function decorate(block) {
               <div class="price-details">
                   <p class="ex-showroom-label">${exShowroomLabel}</p>
                   <div role="separator"></div>
-                  <p class="ex-showroom-price">${await fetchPrice(variant.variantId, variant.exShowroomPrice)} ${lakhLabel}</p>
+                  <p class="ex-showroom-price" data-target-index="${index}">${await fetchPrice(variant.variantId, variant.exShowroomPrice)} ${lakhLabel}</p>
               </div>
               <div class="hero__ctas">
                   <div class="cta cta__primary">
@@ -250,33 +282,53 @@ export default async function decorate(block) {
         </div>
         `;
   };
-
-  const graphQlEndpoint = `${publishDomain}/graphql/execute.json/msil-platform/VariantList;modelId=${carModelPath}`;
-
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const response = await fetch(graphQlEndpoint, requestOptions);
-  const { data } = await response.json();
-  const cars = data?.variantList?.items;
-  const div = document.createElement('div');
-  div.className = 'hero-banner__carousel';
   async function finalBlock() {
-    for (let i = 0; i < cars.length; i += 1) {
-      // eslint-disable-next-line
-      const html = await getVariantHtml(cars[i]);
-      const item = document.createElement('div');
-      item.classList.add('hero-banner__slides');
-      if (i === 0) {
-        item.classList.add('active');
-      }
-      item.innerHTML = html;
-      div.insertAdjacentElement('beforeend', item);
+    const tokenUrl = `${publishDomain}/content/nexa/services/token`;
+    try {
+      const auth = await fetch(tokenUrl);
+      authorization = await auth.text();
+    } catch (e) {
+      authorization = '';
     }
-    initCarousel(div);
+    const graphQlEndpoint = `${publishDomain}/graphql/execute.json/msil-platform/VariantList;modelId=${carModelPath}`;
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let data;
+    try {
+      const response = await fetch(graphQlEndpoint, requestOptions);
+      data = await response.json();
+    } catch (error) {
+      data = {};
+    }
+    const cars = data?.data?.variantList?.items;
+    if (cars) {
+      const htmlPromises = cars.map((car, index) => getVariantHtml(car, index));
+      const htmlResults = await Promise.all(htmlPromises);
+      let itemDiv;
+      htmlResults.forEach((html, i) => {
+        if (i !== 0) {
+          itemDiv = document.createElement('div');
+          itemDiv.classList.add('hero-banner__slides');
+          itemDiv.innerHTML = html;
+          div.insertAdjacentElement('beforeend', itemDiv);
+        } else {
+          item.innerHTML = html;
+          div.insertAdjacentElement('beforeend', item);
+        }
+      });
+      initCarousel();
+      document.addEventListener('updateLocation', (event) => {
+        forCode = event?.detail?.message;
+        div.querySelectorAll('.ex-showroom-price').forEach((e) => {
+          const index = parseInt(e.dataset.targetIndex, 10);
+          e.textContent = fetchPrice(cars[index].variantId, cars[index].exShowroomPrice);
+        });
+      });
+    }
   }
   block.innerHTML = '';
   block.append(div);
