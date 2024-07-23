@@ -1,5 +1,9 @@
 @import url("../carousel/fadecarousel.css");
 
+.hero-banner-carousel.block{
+  background: #EDEEEE;
+}
+
 .hero-banner-carousel__container {
   position: relative;
   background: #18171a;
@@ -99,6 +103,13 @@
 }
 
 .hero-banner-carousel__container
+  .hero-banner-carousel__carousel .carousel__slide:first-child
+  .hero-banner-carousel__bottom-section
+  .hero-banner-carousel__subtext {
+  max-width: 40%;
+}
+
+.hero-banner-carousel__container
   .hero-banner-carousel__bottom-section
   .hero-banner-carousel__subtext
   p {
@@ -156,7 +167,7 @@
   visibility: visible;
 }
 
-.hero-banner-carousel__container .carousel__navigation {
+.hero-banner-carousel__container .fade-carousel__wrapper .carousel__navigation {
   justify-content: start;
   padding: 0 0 40px 20px;
   display: flex;
@@ -252,6 +263,13 @@
     max-width: 320px;
   }
 
+    .hero-banner-carousel__container 
+      .hero-banner-carousel__slides .carousel__slide:first-child 
+      .hero-banner-carousel__bottom-section 
+      .hero-banner-carousel__subtext {
+      max-width: 220px;
+    }
+
   .hero-banner-carousel__container
     .hero-banner-carousel__bottom-section
     .hero-banner-carousel__mute-btn {
@@ -267,12 +285,16 @@
 
   .hero-banner-carousel__container .hero-banner-carousel__cta-container {
     display: inline-block;
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    text-align: center;
-    color: #fff;
-    transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      text-align: center;
+      transform: translateX(-50%);
+      background: var(--gradient-3, linear-gradient(34deg, #C9D3D7 18.09%, #EBEBEB 102.51%, #EBEBEB 102.51%));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: default;
   }
 
   .hero-banner-carousel__container .hero-banner-carousel__cta-container p {

@@ -11,10 +11,10 @@ export default async function decorate(block) {
   if (ctaVisibility === 'true' && ctaLink) {
     const href = ctaLink?.href;
     ctaHtml = `
-    <div class="hero-banner-carousel__cta-container">
+    <a href="${href}" class="hero-banner-carousel__cta-container">
       ${(ctaText) ? `<p>${ctaText}</p>` : ''}
-      <a href="${href}" class="hero-banner-carousel__primary-btn"></a>
-    </div>
+      <span class="hero-banner-carousel__primary-btn"></span>
+    </a>
     `;
   }
   const { publishDomain } = await fetchPlaceholders();
@@ -54,7 +54,10 @@ export default async function decorate(block) {
     } if (image) {
       return getImageHtml(image);
     }
-    return '';
+    return `
+      <div class="hero-banner__asset">
+      </div>
+    `;
   };
 
   const bannerItems = bannerItemsEl?.map((itemEl) => {
@@ -95,7 +98,7 @@ export default async function decorate(block) {
               ${(title) ? title.outerHTML : ''}
               ${(subTitle) ? `<p class="hero-banner-carousel__subtitle">${subTitle}</p>` : ''}
           </div>
-          <div class="hero-banner-carousel__bottom-section">
+          <div class="hero-banner-carousel__bottom-section ${(!(desktopVideoUrl || mobileVideoUrl)) ? 'hero-banner-carousel__bottom-section--no-action' : ''}">
             ${(desktopVideoUrl || mobileVideoUrl) ? '<div class="hero-banner-carousel__mute-btn hero-banner-carousel__mute-btn--muted"></div>' : ''}
             ${(subText) ? `<div class="hero-banner-carousel__subtext">${subText}</div>` : ''}
           </div>
