@@ -735,7 +735,7 @@ body {
     line-height: 22px;
   }
 
-  .panel .teaser__description :first-child {
+  .panel .teaser__description{
     font-size: 16px;
     font-weight: 300;
     line-height: 20px;
