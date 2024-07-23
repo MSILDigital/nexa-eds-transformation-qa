@@ -70,8 +70,8 @@ export default function decorate(block) {
   }
 
   function setupScrollHighlight() {
-    const ctaElements = document.querySelectorAll('.hero-banner-dealer__action .cta-text');
-    const scrollBar = document.querySelector('.hero-banner-dealer__action .scroll-bar');
+    const ctaElements = block.querySelectorAll('.hero-banner-dealer__action .cta-text');
+    const scrollBar = block.querySelector('.hero-banner-dealer__action .scroll-bar');
 
     // Initial highlight setup
     function highlightFirstCTA() {

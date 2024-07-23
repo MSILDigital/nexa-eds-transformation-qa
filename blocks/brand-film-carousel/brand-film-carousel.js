@@ -14,12 +14,12 @@ export default async function decorate(block) {
     return el.outerHTML;
   }).join('');
   const thumbnail = thumbnailEl.querySelector('img')?.src;
-  const videos = videosEl.map((videoEl) => {
+  const videos = videosEl.map((videoEl, index) => {
     const [videoPathEl] = videoEl.children;
     const path = videoPathEl?.querySelector('a')?.textContent?.trim();
-    videoEl.classList?.add('brand-film__video-container', 'brand-film__video--paused');
+    videoEl.classList?.add('brand-film__video-container');
     videoEl.innerHTML = `
-      <video class="brand-film__video" src="${publishDomain + path}" poster=${thumbnail} width="100%" playsinline preload="none">
+      <video class="brand-film__video" src="${publishDomain + path}" poster=${thumbnail} width="100%" playsinline preload="${(index === 0) ? 'metadata' : 'none'}">
       </video>
       <span class="brand-film__play-btn"></span>
     `;
@@ -36,7 +36,7 @@ export default async function decorate(block) {
             <button class="brand-film__pip-btn">Pip</button>
           </div>
           <div class="brand-film__close-btn"></div>
-          <div class="brand-film__slides">
+          <div class="brand-film__slides brand-film__video--paused">
             ${videos.join('')}
           </div>
         </div>
@@ -52,13 +52,19 @@ export default async function decorate(block) {
     </div>
   `);
 
-  const onChange = (currentSlide, targetSlide) => {
-    currentSlide.querySelector('video')?.pause();
+  let isEnded = false;
+  const onChange = (currentSlide, targetSlide, direction) => {
+    const currentVideo = currentSlide.querySelector('video');
+    currentVideo?.pause();
     const video = targetSlide.querySelector('video');
     if (document.pictureInPictureElement) {
       video?.requestPictureInPicture();
     }
-    video?.play();
+    video?.play().then(() => {
+      if (direction !== 0) {
+        currentVideo.currentTime = 0;
+      }
+    });
   };
 
   const controller = carouselUtils.init(
@@ -74,32 +80,51 @@ export default async function decorate(block) {
   );
 
   let isPlayed = false;
+  const initPlay = () => {
+    if (!isPlayed) {
+      block.querySelectorAll('.brand-film__video-container video')?.forEach((vd) => {
+        vd.removeAttribute('preload');
+      });
+      isPlayed = true;
+    }
+  };
+
   block.querySelectorAll('.brand-film__video-container')?.forEach((el) => {
     const video = el.querySelector('video');
     if (video) {
       el.addEventListener('click', () => {
+        isEnded = false;
         if (video.paused) {
-          video.play();
-          if (!isPlayed) {
-            block.querySelectorAll('.brand-film__video-container video')?.forEach((vd) => {
-              vd.removeAttribute('preload');
-            });
-            isPlayed = true;
-          }
+          video.play().then(() => {
+            initPlay();
+          });
         } else {
           video?.pause();
         }
       });
       video.addEventListener('ended', () => {
+        isEnded = true;
+        block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
         if (!controller.next()) {
           controller.reset();
         }
       });
       video.addEventListener('playing', () => {
-        el.classList.remove('brand-film__video--paused');
+        isEnded = false;
+        if (!block.querySelector('.carousel__slide--active video').paused) {
+          block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
+        }
+        video.removeAttribute('poster');
+        initPlay();
       });
       video.addEventListener('pause', () => {
-        el.classList.add('brand-film__video--paused');
+        isEnded = (parseFloat(video.currentTime) === parseFloat(video.duration));
+        if (!isEnded && block.querySelector('.carousel__slide--active video').paused) {
+          block.querySelector('.brand-film__slides').classList.add('brand-film__video--paused');
+        }
+      });
+      video.addEventListener('waiting', () => {
+        block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
       });
     }
   });
