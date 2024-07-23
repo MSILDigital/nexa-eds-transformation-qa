@@ -59,10 +59,12 @@ function generateHighlightItemHTML(highlightItem, index) {
             <p>${subtitle}</p>
           </div>
         </div>
-        <div class="hotspots">
+        <div class="hotspots-wrapper">
+          <div class="hotspots">
             ${image ? image.outerHTML : ''}
             ${hotspotsHTML || ''}
           </div>
+        </div>  
     `);
 
   highlightItem.classList.add('safetyTabItem', `switch-index-${index}`);

@@ -16,7 +16,7 @@
 .safetyTabItem {
   display: flex;
   flex-direction: column;
-  gap: 200px;
+  gap: 150px;
   padding: 32px 20px 129px 20px;
   @media (min-width: 999px) {
     flex-direction: row;
@@ -59,7 +59,15 @@
     }
   }
 }
-.safetyTabItem .hotspots {
+.safetyTabItem .hotspots-wrapper {
+  position: relative;
+  @media (min-width: 999px) {
+    padding-top: 156px;
+  }
+}
+
+.safetyTabItem .hotspots-wrapper .hotspots {
+  position: relative;
   @media (min-width: 999px) {
     margin-top: 108px;
   }
@@ -91,7 +99,7 @@
   }
 }
 
-.safetyTabItem .hotspots .hotspot-img {
+.safetyTabItem .hotspots-wrapper .hotspots .hotspot-img {
   object-fit: cover;
   width: 100%;
   height: auto;
@@ -154,11 +162,8 @@
 
 /*----------------------------------------------------*/
 
-.safetyTabItem .hotspots {
-  position: relative;
-}
 
-.safetyTabItem .hotspots .circle {
+.safetyTabItem .hotspots-wrapper .hotspots .circle {
   position: absolute;
   width: 16px;
   height: 16px;
@@ -171,7 +176,7 @@
     width: 34px;
   }
 }
-.safetyTabItem .hotspots .moved {
+.safetyTabItem .hotspots-wrapper .hotspots .moved {
   background-image: url("../../icons/small-circle_hotspot.svg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -191,7 +196,7 @@
   background-color: #F2F2F2;
 }
 
-.safetyTabItem .hotspots .circle .text-container {
+.safetyTabItem .hotspots-wrapper .hotspots .circle .text-container {
   display: none;
   position: absolute;
   color: #f2f2f2;
