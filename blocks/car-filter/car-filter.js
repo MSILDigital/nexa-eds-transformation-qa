@@ -241,6 +241,7 @@ export default async function decorate(block) {
         // eslint-disable-next-line
         img.src = car.carImage._publishUrl;
         img.alt = car.altText;
+        img.loading = "lazy";
         cardImage.appendChild(img);
 
         const cardContent = document.createElement('div');

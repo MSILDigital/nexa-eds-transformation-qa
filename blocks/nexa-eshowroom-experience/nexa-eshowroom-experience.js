@@ -10,7 +10,7 @@ export default async function decorate(block) {
       return '';
     }
     return `
-            <video id="video1" class="e-showroom__video active-video" muted>
+            <video id="video1" class="e-showroom__video active-video" muted playsinline>
                 <source src="${videoUrl}" type="video/mp4">
             </video>
         `;
@@ -21,7 +21,7 @@ export default async function decorate(block) {
       return '';
     }
     return `
-            <video id="video2" class="e-showroom__video-rev" muted>
+            <video id="video2" class="e-showroom__video-rev" muted playsinline>
                 <source src="${videoUrl}" type="video/mp4">
             </video>
         `;

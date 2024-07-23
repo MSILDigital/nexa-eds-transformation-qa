@@ -245,6 +245,16 @@ footer.footer__arena .footer__info-left {
     }
   }
 
+  footer .col-md-7{
+    flex-basis: 59.3333%;
+    max-width: 59.3333%;
+  }
+
+  footer .col-md-5{
+    flex-basis: 40.6667%;
+    max-width: 40.6667%;
+  }
+
   .footer__info-left p,
   .footer__info-right p {
     display: block;
@@ -254,6 +264,10 @@ footer.footer__arena .footer__info-left {
     font-style: italic;
     font-weight: 300;
     line-height: 14px;
+  }
+
+  .footer__info-left p:nth-of-type(3){
+    margin-top: 5px;
   }
 
   footer .default-content-wrapper p {
@@ -286,6 +300,11 @@ footer.footer__arena .footer__info-left {
     letter-spacing: -0.16px;
   }
 
+  footer .footer__columns-contact .default-content-wrapper .tollfree__element strong {
+    font-size: 16px;
+  }
+
+
   .footer__columns-contact {
     display: flex;
     flex-direction: column;
@@ -303,6 +322,10 @@ footer.footer__arena .footer__info-left {
 
   footer .link-grid-column .links-container li:first-child {
     padding-top: 0;
+  }
+
+  footer .link-grid-column .links-container li a:hover {
+    color: var(--tertiary-white);
   }
 
   .footer__separator {
@@ -346,6 +369,15 @@ footer.footer__arena .footer__info-left {
     padding-bottom: 22px;
   }
 
+  footer .user__contact__icons a {
+    filter: brightness(0) invert(1);
+  }
+
+  footer .user__contact__icons a:hover {
+    transform: scale(1.2);
+    background-color: unset;
+  }
+
   footer .footer__columns .footer__columns-contact p {
     font-size: 16px;
     padding-bottom: 10px;
@@ -386,10 +418,18 @@ footer.footer__arena .footer__info-left {
     height: 20px;
   }
 
+  footer .centre-align{
+    align-items: center;
+  }
+
   .footer__info-left,
   .footer__info-right {
     padding-top: 32px;
     padding-bottom: 32px;
+  }
+
+  .footer__info-right {
+    margin-right: 5%;
   }
 
   .footer__copyright-right ul {
@@ -402,6 +442,11 @@ footer.footer__arena .footer__info-left {
     color: var(--tertiary-white);
     font-size: 14px;
     text-decoration-line: none;
+    line-height: 20px;
+  }
+
+  .footer__copyright-left p {
+    color: var(--tertiary-White);
   }
 
   .footer__copyright-left {
@@ -490,5 +535,25 @@ footer.footer__arena .footer__info-left {
     background-image: url("../../icons/call.svg");
     position: absolute;
     left: 0;
+  }
+
+  @media (width >= 1280px) and (width<1920px){
+    .footer .container {
+      width: 100%;
+      margin-right: unset;
+      margin-left: unset;
+      padding-right: 64px;
+      padding-left: 64px;
+    }
+  }
+
+  @media (width >= 1024px){
+    .footer .container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 64px;
+      padding-left: 64px;
+    }
   }
 }

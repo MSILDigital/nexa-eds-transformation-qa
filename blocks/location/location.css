@@ -6,6 +6,7 @@
   color: #f2f2f2;
   background-color: #18171a;
   border: none;
+  padding:none;
   display:flex;
   align-items: center;
 }
@@ -15,7 +16,7 @@
     display: inline-block;
     width: 24px;
     height: 24px;
-    background-image: url("../../icons/collapes.svg");
+    background-image: url("../../icons/dropdown.svg");
     background-size: contain;
     background-repeat: no-repeat;
 }

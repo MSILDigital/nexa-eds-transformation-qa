@@ -125,6 +125,7 @@ export default async function decorate(block) {
     const locationButton = block.querySelector('.location-btn');
     locationButton.textContent = cityName;
     locationButton.setAttribute('data-forcode', forCode);
+    dispatchLocationChangeEvent(forCode);
     block.querySelector('.geo-location').style.display = 'none';
   }
   // Function to auto-select the nearest city based on user's location
@@ -247,8 +248,6 @@ export default async function decorate(block) {
         updateLocationButton(selectedCity, selectedForCode);
         searchInput.value = '';
         populateAllCities();
-        const forCode = e.target.dataset?.forcode;
-        dispatchLocationChangeEvent(forCode);
       }
     });
 
@@ -258,8 +257,6 @@ export default async function decorate(block) {
         const selectedCity = e.target.textContent;
         const selectedForCode = e.target.getAttribute('data-forcode');
         updateLocationButton(selectedCity, selectedForCode);
-        const forCode = e.target.dataset?.forcode;
-        dispatchLocationChangeEvent(forCode);
       }
     });
   } catch (e) {

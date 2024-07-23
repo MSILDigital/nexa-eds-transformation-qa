@@ -28,8 +28,7 @@
 }
 
 .user__account__list-icon img {
-  width: 16px;
-  height: 16px;
+  display:flex;
 }
 
 .user__account > a {
@@ -44,7 +43,8 @@
   z-index: 999;
   position: absolute;
   top: var(--nav-height);
-  right: 5px;
+  right: 0;
+  min-width:300px;
 }
 
 .user__dropdown {
@@ -54,7 +54,7 @@
   padding: 24px;
 }
 
-@media (width >= 768px) {
+@media (width >=999px) {
   .user__account__list-icon {
     background: none;
   }
@@ -73,15 +73,6 @@
   }
 }
 
-/* .sign-in-teaser{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  @media(min-width:768px){
-  display:none;
-  } 
-} */
 .sign-in-teaser {
   display: flex;
   border-radius: 2px;
@@ -157,7 +148,7 @@
   background-position: center;
 }
 
-@media (width >= 768px) {
+@media (width >=999px) {
   .sign-in-teaser {
     display: none;
   }

@@ -9,7 +9,7 @@ export default function decorate(block) {
 
   const htmlLiteral = `
             <span>
-                <a class="logo" href="${link}">
+                <a class="logo__picture" href="${link}">
                     ${picture?.outerHTML || ''}
                 </a>
             </span>
