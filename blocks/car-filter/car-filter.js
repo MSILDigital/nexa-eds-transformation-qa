@@ -11,7 +11,7 @@ export default async function decorate(block) {
   ] = block.children;
 
   const {
-    publishDomain, apiKey, allFilterText,
+    publishDomain, apiKey, allFilterText, cfPrefix,
   } = await fetchPlaceholders();
   let authorization;
   try {
@@ -220,7 +220,8 @@ export default async function decorate(block) {
         const card = document.createElement('a');
         card.classList.add('card');
         // eslint-disable-next-line no-underscore-dangle
-        card.href = car.carDetailsPagePath?._path || '#';
+        const carDetailPath = car.carDetailsPagePath?._path || '#';
+        card.href = carDetailPath.replace(cfPrefix, '');
 
         if (componentVariation === 'arena-variant') {
           const cardLogoImage = document.createElement('div');
@@ -241,7 +242,7 @@ export default async function decorate(block) {
         // eslint-disable-next-line
         img.src = car.carImage._publishUrl;
         img.alt = car.altText;
-        img.loading = "lazy";
+        img.loading = 'lazy';
         cardImage.appendChild(img);
 
         const cardContent = document.createElement('div');
