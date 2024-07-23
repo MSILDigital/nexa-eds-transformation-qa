@@ -680,11 +680,26 @@
         "label": "Select Top Cities",
         "valueType": "string",
         "options": [
-          { "name": "Gurugram", "value": "95" },
-          { "name": "Bengaluru", "value": "02" },
-          { "name": "Mumbai", "value": "05" },
-          { "name": "Kolkata", "value": "06" },
-          { "name": "Pune", "value": "19" }
+          {
+            "name": "Gurugram",
+            "value": "95"
+          },
+          {
+            "name": "Bengaluru",
+            "value": "02"
+          },
+          {
+            "name": "Mumbai",
+            "value": "05"
+          },
+          {
+            "name": "Kolkata",
+            "value": "06"
+          },
+          {
+            "name": "Pune",
+            "value": "19"
+          }
         ]
       }
     ]
@@ -766,10 +781,22 @@
         "label": "Select Required Filters",
         "valueType": "string",
         "options": [
-          { "name": "Body Types", "value": "bodyType" },
-          { "name": "Fuel Options", "value": "fuelOptions" },
-          { "name": "Technology", "value": "technology" },
-          { "name": "Additional Specifications", "value": "additionalSpecifications" }
+          {
+            "name": "Body Types",
+            "value": "bodyType"
+          },
+          {
+            "name": "Fuel Options",
+            "value": "fuelOptions"
+          },
+          {
+            "name": "Technology",
+            "value": "technology"
+          },
+          {
+            "name": "Additional Specifications",
+            "value": "additionalSpecifications"
+          }
         ]
       }
     ]
@@ -1051,7 +1078,12 @@
         "name": "ctaText",
         "label": "CTA Text",
         "condition": {
-          "===": [ { "var": "ctaVisibility" }, true ]
+          "===": [
+            {
+              "var": "ctaVisibility"
+            },
+            true
+          ]
         }
       },
       {
@@ -1060,7 +1092,12 @@
         "name": "ctaLink",
         "label": "CTA Link",
         "condition": {
-          "===": [ { "var": "ctaVisibility" }, true ]
+          "===": [
+            {
+              "var": "ctaVisibility"
+            },
+            true
+          ]
         }
       }
     ]
@@ -1088,7 +1125,12 @@
         "label": "Mobile Video",
         "multi": false,
         "condition": {
-          "===": [ { "var": "allowMobileVideo" }, true ]
+          "===": [
+            {
+              "var": "allowMobileVideo"
+            },
+            true
+          ]
         }
       },
       {
@@ -1111,7 +1153,12 @@
         "label": "Mobile Image",
         "multi": false,
         "condition": {
-          "===": [ { "var": "addMobileImage" }, true ]
+          "===": [
+            {
+              "var": "addMobileImage"
+            },
+            true
+          ]
         }
       },
       {
@@ -1313,7 +1360,6 @@
         "valueType": "string",
         "description": "Description for the offers",
         "required": true
-
       },
       {
         "component": "text-input",
@@ -1370,7 +1416,14 @@
         "name": "desktopImageAlt",
         "valueType": "string",
         "required": true,
-        "condition": { "!==": [{"var" : "desktopImage"}, ""] }
+        "condition": {
+          "!==": [
+            {
+              "var": "desktopImage"
+            },
+            ""
+          ]
+        }
       },
       {
         "component": "reference",
@@ -1718,9 +1771,18 @@
         "label": "Select Required Specifications",
         "valueType": "string",
         "options": [
-          { "name": "Engine", "value": "engine" },
-          { "name": "Power", "value": "power" },
-          { "name": "Mileage", "value": "mileage" }
+          {
+            "name": "Engine",
+            "value": "engine"
+          },
+          {
+            "name": "Power",
+            "value": "power"
+          },
+          {
+            "name": "Mileage",
+            "value": "mileage"
+          }
         ]
       },
       {
@@ -1799,8 +1861,16 @@
         "name": "thumbnail",
         "label": "Video Thumbnail",
         "multi": false
+      },
+      {
+        "component": "number",
+        "name": "number",
+        "label": "Content Display Time (in seconds)",
+        "valueType": "contentDisplayTime",
+        "value": 6,
+        "description": "Provide how many seconds the content should be displayed"
       }
-   ]
+    ]
   },
   {
     "id": "hero-banner-dealer",

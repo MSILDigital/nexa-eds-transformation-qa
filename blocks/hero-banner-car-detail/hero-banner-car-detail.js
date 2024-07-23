@@ -17,6 +17,7 @@ export default async function decorate(block) {
     secondaryTargetEl,
     termsAndConditionsTextEl,
     thumbnailEl,
+    contentDisplayTimeEl,
   ] = block.children;
   const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
   title.removeAttribute('id');
@@ -36,13 +37,16 @@ export default async function decorate(block) {
   const secondaryLink = secondaryLinkEl?.querySelector('.button-container a')?.href;
   const secondaryTarget = secondaryTargetEl?.textContent?.trim() || '_self';
   const thumbnail = thumbnailEl?.querySelector('img')?.src || '';
+  const contentDisplayTime = parseInt(contentDisplayTimeEl?.textContent?.trim() ?? 6, 10);
   const div = document.createElement('div');
   div.className = 'hero-banner__carousel';
   const video = document.createElement('video');
   video.setAttribute('poster', thumbnail);
+  video.setAttribute('playsinline', true);
   video.setAttribute('muted', 'muted');
   video.setAttribute('width', '100%');
   video.setAttribute('autoplay', '');
+  video.setAttribute('preload', 'metadata');
   video.setAttribute('src', '');
   const item = document.createElement('div');
   item.classList.add('hero-banner__slides');
@@ -173,7 +177,7 @@ export default async function decorate(block) {
               setTimeout(() => {
                 videoEl.play();
               }, 1000); // Wait for overlay fade-out before resuming video
-            }, 3000);
+            }, contentDisplayTime * 1000);
           }
         });
 
@@ -215,7 +219,7 @@ export default async function decorate(block) {
     }
 
     return `<div class="hero__video-container">
-      <video src="${videoUrl}" muted="muted" width="100%" autoplay></video>
+      <video src="${videoUrl}" muted="muted" width="100%" autoplay playsinline preload="none"></video>
     </div>`;
   };
 
@@ -319,6 +323,9 @@ export default async function decorate(block) {
           item.innerHTML = html;
           div.insertAdjacentElement('beforeend', item);
         }
+      });
+      block.querySelectorAll('video').forEach((vd) => {
+        vd.removeAttribute('preload');
       });
       initCarousel();
       document.addEventListener('updateLocation', (event) => {

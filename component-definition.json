@@ -555,7 +555,8 @@
                 "template": {
                   "name": "Hero Banner Car Detail",
                   "model": "hero-banner-car-detail",
-                  "filter": "hero-banner-car-detail"
+                  "filter": "hero-banner-car-detail",
+                  "contentDisplayTime": 6
                 }
               }
             }
