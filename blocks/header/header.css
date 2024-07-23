@@ -175,6 +175,14 @@ header nav[aria-expanded="true"] .nav-sections {
   align-self: start;
 }
 
+.menu-list > li {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+}
+
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
@@ -241,15 +249,6 @@ header nav .nav-sections ul > li > ul > li {
     margin: 0;
     font-size: var(--body-font-size-xs);
   }
-
-/* 
-  .menu-list > li {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #f1f1f1;
-    cursor: pointer;
-  } */
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
@@ -431,14 +430,6 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.menu-list li {
-  display: flex;
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #f1f1f1;
-  cursor: pointer;
 }
 
 .menu-list li:hover {
