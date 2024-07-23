@@ -33,7 +33,12 @@ const teaser = {
     const pretitle = pretitleEl?.textContent?.trim();
     const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
     title?.classList?.add('teaser__title-text');
-    const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.outerHTML).join('');
+    let description = '';
+    if (descriptionEl?.children?.length === 1 && descriptionEl?.firstElementChild?.tagName === 'DIV') {
+      description = descriptionEl?.querySelector('div')?.innerHTML;
+    } else {
+      description = descriptionEl?.innerHTML;
+    }
     const primaryCta = ctaUtils.getLink(primaryCtaLinkEl, primaryCtaTextEl, primaryCtaTargetEl, 'primary__btn');
     const secondaryCta = ctaUtils.getLink(secondaryCtaLinkEl, secondaryCtaTextEl, secondaryCtaTargetEl, 'secondary__btn');
     const theme = themeEl?.textContent?.trim();
