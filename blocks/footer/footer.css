@@ -440,18 +440,13 @@ footer.footer__arena .footer__info-left {
 
   .footer__copyright-right ul li a {
     color: var(--tertiary-white);
-    font-family: Roboto;
     font-size: 14px;
     text-decoration-line: none;
-    font-weight: 400;
     line-height: 20px;
   }
 
   .footer__copyright-left p {
-    font-family: "Anek Latin";
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 36px; 
+    color: var(--tertiary-White);
   }
 
   .footer__copyright-left {
