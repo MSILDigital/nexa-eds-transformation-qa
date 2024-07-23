@@ -783,7 +783,7 @@ body {
   }
 
   .nexa.panel .link-grid-column .links-container li a {
-    color: #000;
+    color: black;
     min-height: auto;
   }
 
