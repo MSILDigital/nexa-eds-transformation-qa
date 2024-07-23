@@ -9,7 +9,6 @@ function createHotspotsHTML(hotspotsEl) {
         point.querySelectorAll('p'),
       ).map((p) => p?.textContent?.trim() || '');
 
-
       // Check if topPercent or leftPercent is '0'
       if (topPercent === undefined || leftPercent === undefined || (topPercent === '0' && leftPercent === '0')) {
         return ''; // Return an empty string for invalid positions
@@ -221,4 +220,3 @@ export default function decorate(block) {
 
   return block;
 }
-
