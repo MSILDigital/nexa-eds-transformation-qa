@@ -5,53 +5,63 @@
     font-size: unset;
     line-height: unset;
   }
+
   background-color: #18171a;
   padding-bottom: 36px;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), 74% calc(100% - 25px), calc(74% - 15px) 100%, 0 100%);
-  @media (min-width: 999px) {
+
+  @media (width >= 999px) {
     padding-bottom: 90px;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 74% calc(100% - 30px), calc(74% - 25px) 100%, 0 100%);
   }
 }
+
 .safetyTabItem {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 150px;
-  padding: 32px 20px 129px 20px;
-  @media (min-width: 999px) {
+  padding: 32px 20px 129px;
+
+  @media (width >= 999px) {
     flex-direction: row;
     gap: 130px;
-    padding: 72px 65px 96px 65px;
+    padding: 72px 65px 96px;
   }
 }
+
 .safetyTabItem .text-section {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  color: #ffffff;
-  @media (min-width: 999px) {
+  color: #fff;
+
+  @media (width >= 999px) {
     gap: 64px;
   }
+
   .title h1, h2, h3, h4, h5, h6 {
     font-family: "Kepler Std";
     font-size: 32px;
     font-weight: 600;
     line-height: 40px;
     letter-spacing: 0.64px;
-    @media (min-width: 999px) {
+
+    @media (width >= 999px) {
       font-size: 64px;
       line-height: 72px;
       letter-spacing: 1.28px;
       width: 397px;
     }
   }
+
   .description p {
     font-family: "Fira Sans";
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    width: calc(100%-85px);
-    @media (min-width: 999px) {
+    width: calc(100% - 85px);
+
+    @media (width >= 999px) {
       font-size: 18px;
       font-weight: 300;
       line-height: 24px;
@@ -59,21 +69,25 @@
     }
   }
 }
+
 .safetyTabItem .hotspots-wrapper {
   position: relative;
-  @media (min-width: 999px) {
+
+  @media (width >= 999px) {
     padding-top: 156px;
   }
 }
 
 .safetyTabItem .hotspots-wrapper .hotspots {
   position: relative;
-  @media (min-width: 999px) {
+
+  @media (width >= 999px) {
     margin-top: 108px;
   }
 }
+
 .safety-tabs .switch-list-section {
-  padding: 12px 20px 0px 20px;
+  padding: 12px 20px 0;
   margin-top: 16px;
   display: flex;
   justify-content: center;
@@ -81,20 +95,19 @@
   .switch-list {
     list-style-type: none;
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: auto hidden;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
 
-    @media (min-width: 999px) {
+    @media (width >= 999px) {
       gap: 24px;
       justify-content: center;
       margin-top: 36px;
     }
   }
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     position: relative;
   }
 }
@@ -104,10 +117,12 @@
   width: 100%;
   height: auto;
   aspect-ratio: 319/180;
-  @media (min-width: 999px) {
+
+  @media (width >= 999px) {
     aspect-ratio: 709/402;
   }
 }
+
 .safety-tabs .switch-list-section .switch-list .switch-list-item {
   cursor: pointer;
   color: #b2b2b2;
@@ -122,7 +137,7 @@
   padding-right: 8px;
   padding-bottom: 8px;
 
-  @media (min-width: 999px) {
+  @media (width >= 999px) {
     font-size: 16px;
     line-height: 20px;
     width: 210px;
@@ -140,28 +155,25 @@
     content: "";
     display: block;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
     width: 100%;
     border-bottom: 1px solid #b2b2b2;
   }
 
   &.active {
-    color: #ffffff;
+    color: #fff;
     font-weight: 500;
 
     &::after {
-      border-bottom: 3px solid #ffffff;
+      border-bottom: 3px solid #fff;
     }
   }
 }
 
-.safetyTabItem {
-  display: none;
-}
 
-/*----------------------------------------------------*/
 
+/* ---------------------------------------------------- */
 
 .safetyTabItem .hotspots-wrapper .hotspots .circle {
   position: absolute;
@@ -171,11 +183,13 @@
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
-  @media (min-width: 999px) {
+
+  @media (width >= 999px) {
     height: 34px;
     width: 34px;
   }
 }
+
 .safetyTabItem .hotspots-wrapper .hotspots .moved {
   background-image: url("../../icons/small-circle_hotspot.svg");
   background-size: cover;
@@ -204,14 +218,17 @@
   width: 219px;
   margin-bottom: 24px;
   margin-left: 13px;
+
   .hotspot__title {
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
-    @media (min-width: 999px) {
+
+    @media (width >= 999px) {
       font-size: 16px;
     }
   }
+
   .hotspot__description {
     margin-top: 4px;
     font-size: 12px;
@@ -221,13 +238,15 @@
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Show at least 2 lines */
     -webkit-box-orient: vertical;
-    @media (min-width: 999px) {
+
+    @media (width >= 999px) {
       font-size: 16px;
       font-weight: 300;
       line-height: 20px;
     }
   }
-  @media (min-width: 999px) {
+
+  @media (width >= 999px) {
     width: 187px;
     margin-bottom: 11px;
     margin-left: 20px;
