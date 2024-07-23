@@ -139,18 +139,18 @@ export default async function decorate(block) {
   const menuList = document.querySelector('.menu-list');
 
   menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
-  
+
   list.forEach((el, i) => {
-    const linkTitle = document.createElement("div");
-    const desktopPanel = document.createElement("div");
-    const heading = document.createElement("span");
-    linkTitle.classList.add("link-title");
+    const linkTitle = document.createElement('div');
+    const desktopPanel = document.createElement('div');
+    const heading = document.createElement('span');
+    linkTitle.classList.add('link-title');
     heading.textContent = el.heading;
     linkTitle.append(heading);
     desktopPanel.classList.add(
-      "desktop-panel",
-      "panel",
-      el.heading?.split(" ")[0].toLowerCase()
+      'desktop-panel',
+      'panel',
+      el.heading?.split(' ')[0].toLowerCase(),
     );
 
     if (el.content || el.teaser) {
@@ -168,9 +168,9 @@ export default async function decorate(block) {
       <span class="icon">${el.icon}</span>
       <span class="menu-title">${el.heading}</span>
     </li>
-    <div class="panel">${el.content?.innerHTML || ""}${
-        el.teaser?.innerHTML || ""
-      }</div>`;
+    <div class="panel">${el.content?.innerHTML || ''}${
+  el.teaser?.innerHTML || ''
+}</div>`;
     } else {
       menuList.innerHTML += `<li id="menu-item-${i}" class="nav-link ${el.heading?.toLowerCase()}">
       <span class="icon">${el.icon}</span>

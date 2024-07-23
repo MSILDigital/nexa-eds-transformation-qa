@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
 
-  @media (min-width:999px) {
+  @media (width >=999px) {
     justify-content: start;
   }
   

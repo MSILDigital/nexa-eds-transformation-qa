@@ -242,13 +242,14 @@ header nav .nav-sections ul > li > ul > li {
     font-size: var(--body-font-size-xs);
   }
 
+/* 
   .menu-list > li {
     display: flex;
     align-items: center;
     padding: 15px 20px;
     border-bottom: 1px solid #f1f1f1;
     cursor: pointer;
-  }
+  } */
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
@@ -432,7 +433,7 @@ body {
   margin: 0;
 }
 
-.menu-list > li {
+.menu-list li {
   display: flex;
   align-items: center;
   padding: 15px 20px;
@@ -440,7 +441,7 @@ body {
   cursor: pointer;
 }
 
-.menu-list > li:hover {
+.menu-list li:hover {
   border-bottom: 1px solid #dfdfdf;
   border-top: 1px solid #dfdfdf;
 }

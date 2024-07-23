@@ -54,7 +54,7 @@
   padding: 24px;
 }
 
-@media (min-width:999px) {
+@media (width >=999px) {
   .user__account__list-icon {
     background: none;
   }
@@ -148,7 +148,7 @@
   background-position: center;
 }
 
-@media (min-width:999px) {
+@media (width >=999px) {
   .sign-in-teaser {
     display: none;
   }
