@@ -1928,5 +1928,220 @@
         "valueType": "string"
       }
     ]
+  },
+
+  {
+    "id": "safety-item",
+    "fields": [
+      {
+        "component": "text-input",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "text-input",
+        "name": "subtitle",
+        "label": "SubTitle",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "tabname",
+        "label": "Tab Name",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "label": "Image Alt",
+        "name": "imageAlt",
+        "valueType": "string",
+        "required": true,
+        "condition": { "!==": [{ "var": "image" }, ""] }
+      },
+      {
+        "component": "number",
+        "name": "hotspot1_yPos",
+        "label": "Hotspot_1 Y-axis Position in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+          }
+      },
+      {
+        "component": "number",
+        "name": "hotspot1_xPos",
+        "label": "Hotspot_1 X-Axis Postion in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+        }
+      },
+      {
+        "component": "text-input",
+        "name": "hotspot1_title",
+        "label": "Hotspot_1 Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "hotspot1_description",
+        "label": "Hotspot_1 Description",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "number",
+        "name": "hotspot2_yPos",
+        "label": "Hotspot_2 Y-axis Position in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+          }
+      },
+      {
+        "component": "number",
+        "name": "hotspot2_xPos",
+        "label": "Hotspot_2 X-Axis Postion in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+        }
+      },
+      {
+        "component": "text-input",
+        "name": "hotspot2_title",
+        "label": "Hotspot_2 Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "hotspot2_description",
+        "label": "Hotspot_2 Description",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "number",
+        "name": "hotspot3_yPos",
+        "label": "Hotspot_3 Y-axis Position in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+          }
+      },
+      {
+        "component": "number",
+        "name": "hotspot3_xPos",
+        "label": "Hotspot_3 X-Axis Postion in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+        }
+      },
+      {
+        "component": "text-input",
+        "name": "hotspot3_title",
+        "label": "Hotspot_3 Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "hotspot3_description",
+        "label": "Hotspot_3 Description",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "number",
+        "name": "hotspot4_yPos",
+        "label": "Hotspot_4 Y-axis Position in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+          }
+      },
+      {
+        "component": "number",
+        "name": "hotspot4_xPos",
+        "label": "Hotspot_4 X-Axis Postion in %",
+        "valueType": "number",
+        "validation": {
+          "numberMin": 0,
+          "numberMax": 100,
+          "customErrorMsg": "Value should be between 0-100"
+        }
+      },
+      {
+        "component": "text-input",
+        "name": "hotspot4_title",
+        "label": "Hotspot_4 Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "hotspot4_description",
+        "label": "Hotspot_4 Description",
+        "valueType": "string",
+        "required": true
+      }
+    ]
   }
 ]
