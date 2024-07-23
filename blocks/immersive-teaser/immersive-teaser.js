@@ -7,8 +7,8 @@ export default function decorate(block) {
     const [
       imageEl,
       altTextEl,
-      pretitleEl,
       titleEl,
+      subtitleEl,
       descriptionEl,
       ctaTextEl,
       ctaLinkEl,
@@ -22,17 +22,16 @@ export default function decorate(block) {
       const alt = altTextEl?.textContent?.trim() || 'image';
       img.setAttribute('alt', alt);
     }
-
-    const pretitle = pretitleEl?.textContent?.trim();
     const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
     title?.classList?.add('immersive__title');
-    const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.outerHTML).join('');
+    const subtitle = subtitleEl?.textContent?.trim();
+    const description = descriptionEl?.querySelector('div')?.innerHTML;
     const cta = (ctaLinkEl) ? ctaUtils.getLink(ctaLinkEl, ctaTextEl, ctaTargetEl) : null;
 
     return {
       image,
-      pretitle,
       title,
+      subtitle,
       description,
       cta,
     };
@@ -49,9 +48,9 @@ export default function decorate(block) {
   const immersiveTeaserHtml = utility.sanitizeHtml(`
         ${(immersiveTeaser.image) ? `<div class="immersive__image">${immersiveTeaser.image.outerHTML}</div>` : ''}
          <div class="immersive__content">
-           ${(immersiveTeaser.pretitle) ? `<p>${immersiveTeaser.pretitle}</p>` : ''}
            ${(immersiveTeaser.title) ? `${immersiveTeaser.title.outerHTML}` : ''}
-           ${(immersiveTeaser.description) ? `${immersiveTeaser.description}` : ''}
+           ${(immersiveTeaser.subtitle) ? `<p class="immersive__subtitle">${immersiveTeaser.subtitle}</p>` : ''}
+           ${(immersiveTeaser.description) ? `<div class="immersive__description">${immersiveTeaser.description}</div>` : ''}
            ${(immersiveTeaser.cta) ? `<div class="immersive__action"><div class="cta__primary">${immersiveTeaser.cta.outerHTML}</div></div>` : ''}
           </div>
     `);

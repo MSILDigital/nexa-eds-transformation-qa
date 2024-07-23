@@ -1,0 +1,192 @@
+.view360__container {
+  width: 100%;
+  padding: 0 20px 80px;
+  background-color: #F2F2F2;
+}
+
+.view360__container .view360__top-section {
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.view360__container .view360__right-section{
+  padding-top: 32px;
+  padding-left: 84px;
+  align-self: flex-end;
+}
+
+.view360__container .view360__title {
+  color: #18171A;
+  font-family: var(--font-secondary-nexa);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.view360__container .view360__description p {
+  color: #767879;
+  font-family: var(--font-primary-nexa);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  margin: 0;
+}
+
+.view360__container .cta__primary {
+  width: fit-content;
+}
+
+.view360__container .view360__primary-btn {
+  background-color: #18171A;
+  color: #FFF;
+  font-family: var(--font-primary-nexa);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  margin-top: 19px;
+  padding: 8px 20px;
+}
+
+.view360__container .view360__tabs-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-top: 52px;
+}
+
+.view360__container .view360__tabs {
+  display: inline-block;
+  border-bottom: 1px solid #B2B2B2;
+}
+
+.view360__container .view360__tabs .view360__tab-label {
+  color: #B2B2B2;
+  font-family: var(--font-primary-nexa);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  padding-bottom: 12px;
+  display: inline-block;
+  width: 90px;
+  cursor: pointer;
+  position: relative;
+  bottom: -1px;
+}
+
+.view360__container .view360__tabs .view360__tab-label::after {
+  border-bottom: 1px solid #B2B2B2;
+  display: inline-block;
+}
+
+.view360__container .view360__tabs .view360__tab-label--active {
+  color: #18171A;
+  font-weight: 500;
+  border-bottom: 2px solid #18171A;
+}
+
+@media (width >= 999px) {
+  .view360__container {
+    width: 100%;
+    padding: 0 64px;
+    padding-bottom: 64px;
+    background-color: #F2F2F2;
+  }
+
+  .view360__container .view360__top-section {
+    padding-top: 64px;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: row;
+  }
+
+  .view360__container .view360__right-section {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .view360__container .view360__title {
+    color: #18171A;
+    font-family: var(--font-secondary-nexa);
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 72px;
+    letter-spacing: 1.28px;
+    width: 613px;
+    margin: 0;
+  }
+
+  .view360__container .view360__description p {
+    color: #18171A;
+    font-family: var(--font-primary-nexa);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    width: 316px;
+    margin-top: 6px;
+  }
+
+  .view360__container .cta__primary {
+    align-self: flex-start;
+  }
+
+  .view360__container .view360__primary-btn {
+    padding: 8px 28px;
+  }
+
+  .view360__container .view360__bottom-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 64px;
+  }
+
+  .view360__container .view360__tabs-wrapper {
+    order: 1;
+    width: unset;
+    flex-grow: 1;
+    text-align: left;
+    margin: 0;
+  }
+
+  .view360__container .view360__colors-wrapper {
+    order: 2;
+    min-width: 316px;
+  }
+
+  .view360__container .view360__content {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .view360__container .view360__tabs .view360__tab-label {
+    color: #B2B2B2;
+    font-family: var(--font-primary-nexa);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #B2B2B2;
+    cursor: pointer;
+  }
+
+  .view360__container .view360__tabs .view360__tab-label--active {
+    color: #18171A;
+    font-weight: 500;
+    border-bottom: 2px solid #18171A;
+  }
+}

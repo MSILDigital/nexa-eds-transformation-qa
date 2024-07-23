@@ -68,7 +68,7 @@ main .immersive-teaser-container > div {
       text-align: left;
     }
 
-    p strong {
+    .immersive__subtitle {
       margin-top: 12px;
       color: white;
       font-size: 16px;
@@ -79,8 +79,13 @@ main .immersive-teaser-container > div {
       text-align: left;
     }
 
-    p {
+    .immersive__description {
       margin-top: 12px;
+      width: 70%;
+    }
+
+    .immersive__description p {
+      margin: 0;
       color: white;
       font-size: 12px;
       font-family: var(--font-primary-nexa);
@@ -88,7 +93,6 @@ main .immersive-teaser-container > div {
       line-height: 16px;
       word-wrap: break-word;
       text-align: left;
-      width: 70%;
     }
   }
 
@@ -223,17 +227,20 @@ main .immersive-teaser-container > div {
       letter-spacing: 1.28px;
     }
 
-    p strong {
+    .immersive__subtitle {
       font-size: 24px;
       font-weight: 500;
       line-height: 40px;
     }
 
-    p {
+    .immersive__description {
+      width: 45%;
+    }
+
+    .immersive__description p {
       font-size: 18px;
       font-weight: 300;
       line-height: 24px;
-      width: 45%;
     }
   }
 
