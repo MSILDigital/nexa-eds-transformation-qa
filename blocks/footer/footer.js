@@ -59,12 +59,12 @@ export default async function decorate(block) {
   if (bottomSectionHtmlText.length === columnCount) {
     bottomFirstSectionHtml = `
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
           <div class="footer__info-left">
             ${bottomSectionHtmlText[0]}
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="footer__info-right">
             ${bottomSectionHtmlText[1]}
           </div>
@@ -83,7 +83,7 @@ export default async function decorate(block) {
     `;
   }
 
-  let bottomSecondSectionHtml = '<div class="row">';
+  let bottomSecondSectionHtml = '<div class="row centre-align">';
   bottomSecondSection?.querySelectorAll('p')?.forEach((bottomElement) => {
     const anchor = bottomElement.querySelector('a');
     if (anchor) {
