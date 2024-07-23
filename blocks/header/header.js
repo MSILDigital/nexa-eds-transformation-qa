@@ -152,23 +152,31 @@ export default async function decorate(block) {
       'panel',
       el.heading?.split(' ')[0].toLowerCase(),
     );
-    if (el.content) desktopPanel.append(el.content);
-    if (el.teaser) desktopPanel.append(el.teaser);
-    linkEl.append(linkTitle, desktopPanel);
+
+    if (el.content || el.teaser) {
+      if (el.content) desktopPanel.append(el.content);
+      if (el.teaser) desktopPanel.append(el.teaser);
+      linkEl.append(linkTitle, desktopPanel);
+    } else {
+      linkEl.append(linkTitle);
+    }
+
     if (i === 0) return;
-    menuList.innerHTML += `<li id="menu-item-${i}" class="${
-      el.content?.innerHTML ? 'accordion nav-link' : ''
-    } ${el.heading?.toLowerCase()}" ><span class="icon">${
-      el.icon
-    }</span> <span class="menu-title">${el.heading}</span></li>
-    ${
-  el.content?.innerHTML || el.teaser?.innerHTML
-    ? `<div class="panel">${el.content?.innerHTML || ''}${
-      el.teaser?.innerHTML || ''
-    }</div>`
-    : ''
-}
-    `;
+
+    if (el.content?.innerHTML || el.teaser?.innerHTML) {
+      menuList.innerHTML += `<li id="menu-item-${i}" class="accordion nav-link ${el.heading?.toLowerCase()}">
+      <span class="icon">${el.icon}</span>
+      <span class="menu-title">${el.heading}</span>
+    </li>
+    <div class="panel">${el.content?.innerHTML || ''}${
+  el.teaser?.innerHTML || ''
+}</div>`;
+    } else {
+      menuList.innerHTML += `<li id="menu-item-${i}" class="nav-link ${el.heading?.toLowerCase()}">
+      <span class="icon">${el.icon}</span>
+      <span class="menu-title">${el.heading}</span>
+    </li>`;
+    }
   });
 
   if (!window.matchMedia('(min-width: 999px)').matches) {
