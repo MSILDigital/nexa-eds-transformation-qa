@@ -652,6 +652,7 @@ body {
 
   .panel .link-container-section {
     flex-direction: row;
+    gap:24px;
   }
 
   .panel .accordian-item,
@@ -774,15 +775,15 @@ body {
 
   .nexa.panel .link-grid-column .links-container {
     flex-direction: row;
-    gap: 56px;
+    gap: 100px;
   }
 
   .navbar-nexa .user__account > a {
     border-bottom: 1px solid #f2f2f2f2;
   }
 
-  .nexa.panel .link-grid-column .links-container a {
-    color: black;
+  .nexa.panel .link-grid-column .links-container li a {
+    color: #000;
     min-height: auto;
   }
 
