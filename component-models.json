@@ -1974,14 +1974,12 @@
       {
         "component": "text-input",
         "name": "subtitle",
-        "value": "",
         "label": "SubTitle",
         "valueType": "string"
       },
       {
         "component": "text-input",
         "name": "tabname",
-        "value": "",
         "label": "Tab Name",
         "valueType": "string"
       },
@@ -2025,7 +2023,6 @@
       {
         "component": "text-input",
         "name": "hotspot1_title",
-        "value": "Hotspot_1 Title",
         "label": "Hotspot_1 Title",
         "valueType": "string",
         "required": true
@@ -2033,7 +2030,6 @@
       {
         "component": "richtext",
         "name": "hotspot1_description",
-        "value": "",
         "label": "Hotspot_1 Description",
         "valueType": "string",
         "required": true
@@ -2063,7 +2059,6 @@
       {
         "component": "text-input",
         "name": "hotspot2_title",
-        "value": "Hotspot_2 Title",
         "label": "Hotspot_2 Title",
         "valueType": "string",
         "required": true
@@ -2071,7 +2066,6 @@
       {
         "component": "richtext",
         "name": "hotspot2_description",
-        "value": "",
         "label": "Hotspot_2 Description",
         "valueType": "string",
         "required": true
@@ -2101,7 +2095,6 @@
       {
         "component": "text-input",
         "name": "hotspot3_title",
-        "value": "Hotspot_3 Title",
         "label": "Hotspot_3 Title",
         "valueType": "string",
         "required": true
@@ -2109,7 +2102,6 @@
       {
         "component": "richtext",
         "name": "hotspot3_description",
-        "value": "",
         "label": "Hotspot_3 Description",
         "valueType": "string",
         "required": true
@@ -2139,7 +2131,6 @@
       {
         "component": "text-input",
         "name": "hotspot4_title",
-        "value": "Hotspot_4 Title",
         "label": "Hotspot_4 Title",
         "valueType": "string",
         "required": true
@@ -2147,7 +2138,6 @@
       {
         "component": "richtext",
         "name": "hotspot4_description",
-        "value": "",
         "label": "Hotspot_4 Description",
         "valueType": "string",
         "required": true
