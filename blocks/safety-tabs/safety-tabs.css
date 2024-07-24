@@ -80,6 +80,7 @@
 
 .safetyTabItem .hotspots-wrapper .hotspots {
   position: relative;
+  padding-top: 50px;
 
   @media (width >= 999px) {
     margin-top: 108px;
@@ -113,7 +114,7 @@
 }
 
 .safetyTabItem .hotspots-wrapper .hotspots .hotspot-img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: auto;
   aspect-ratio: 319/180;

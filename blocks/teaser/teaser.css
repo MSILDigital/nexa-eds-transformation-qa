@@ -732,7 +732,6 @@ main .teaser-container > div {
 @media (width >= 999px) {
   .dark-teaser .teaser__card--unfocused .teaser__content {
     background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, #000 100%);
-    background-color: rgb(201 211 215 / 50%);
     mix-blend-mode: luminosity;
   }
 }
