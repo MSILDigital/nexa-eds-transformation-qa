@@ -133,7 +133,7 @@
   height: 40px;
   background-color: #fff;
   padding: 8px 12px;
-  clip-path: polygon(2% 0, 100% 0, 100% 88%, 98% 100%, 0 100%, 0 12%);
+  clip-path: polygon(4% 0, 100% 0, 100% 75%, 96% 100%, 0 100%, 0 25%);
 
   .btn-title {
     text-decoration: none;
@@ -147,7 +147,6 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
-      margin-right: 12px;
     }
   }
 
