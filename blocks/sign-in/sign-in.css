@@ -1,27 +1,19 @@
-.user__account {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 .user__account--link {
   display: flex;
   align-self: stretch;
   text-decoration: none;
   align-items: center;
-  gap: 12px;
   color: var(--Primary-Main, #18171a);
   font-family: var(--font-primary-nexa);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  padding-bottom: 16px;
 }
 
 .user__account__list-icon {
   display: flex;
-  padding: 4px;
+  padding: 4px !important;
   align-items: center;
   border-radius: 12px;
   background: var(--Tertiary-Light-grey, #f2f2f2);
@@ -29,10 +21,8 @@
 
 .user__account__list-icon img {
   display:flex;
-}
-
-.user__account > a {
-  font-size: 14px;
+  height:16px;
+  width:16px;
 }
 
 .hide-sm {
@@ -44,23 +34,33 @@
   position: absolute;
   top: var(--nav-height);
   right: 0;
-  min-width:300px;
-}
-
-.user__dropdown {
-  background: var(--Tertiary-White, #fff);
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
 }
 
 @media (width >=999px) {
+  .user__dropdown {
+    background: var(--Tertiary-White, #fff);
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    padding: 24px;
+    min-width: 331px;
+  }
+  
+  .user__account {
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    align-items: flex-start;
+  }
   .user__account__list-icon {
     background: none;
+    padding:0;
   }
 
   .user__account--link {
     font-size: 16px;
+    padding:16px 0;
+    gap:12px;
   }
 
   .hide-sm {
