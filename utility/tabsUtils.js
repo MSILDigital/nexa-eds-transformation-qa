@@ -36,18 +36,18 @@ const TabsUtils = {
           highlightItem.style.display = 'none';
         });
       }
-      
+
       if (highlightContentItems.length > 0) {
         highlightContentItems.forEach((highlightContentItem) => {
           highlightContentItem.style.display = 'none';
         });
       }
-      
-      if (highlightItems.length > index){
+
+      if (highlightItems.length > index) {
         highlightItems[index].style.display = 'flex';
-      } 
-      
-      if(highlightContentItems.length >  index) {
+      }
+
+      if (highlightContentItems.length > index) {
         highlightContentItems[index].style.display = 'block';
       }
 

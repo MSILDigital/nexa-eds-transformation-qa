@@ -158,7 +158,7 @@ function initializeHotspotExpansion(block) {
         if (!this.dataset.originalLeft) {
           this.dataset.originalLeft = this.style.left;
         }
-        this.dataset.circle = `${Math.random().toString(36).substr(2, 9)}`;
+        this.dataset.circle = `${Math.random().toString(36).substring(2, 9)}`;
 
         const isMobile = window.matchMedia('(max-width: 400px)').matches;
         const isTablet = window.matchMedia('(min-width: 401px) and (max-width: 999px)').matches;

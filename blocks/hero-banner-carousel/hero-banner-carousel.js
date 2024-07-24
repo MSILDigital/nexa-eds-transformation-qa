@@ -36,11 +36,14 @@ export default async function decorate(block) {
     return image;
   };
 
-  const getVideoHtml = (videoUrl) => `
+  const getVideoHtml = (videoUrl, image) => {
+    const poster = image?.querySelector('img')?.src;
+    return `
       <div class="hero-banner-carousel__asset hero-banner-carousel__video-container">
-        <video src="${videoUrl}" muted="muted" width="100%" autoplay loop playsinline></video>
+        <video src="${videoUrl}" muted="muted" width="100%" autoplay loop playsinline ${(poster) ? `poster="${poster}"` : ''}></video>
       </div>
     `;
+  };
 
   const getImageHtml = (image) => `
       <div class="hero-banner-carousel__asset hero-banner-carousel__image-container">
@@ -50,8 +53,9 @@ export default async function decorate(block) {
 
   const getAssetHtml = (videoUrl, image) => {
     if (videoUrl) {
-      return getVideoHtml(videoUrl);
-    } if (image) {
+      return getVideoHtml(videoUrl, image);
+    }
+    if (image) {
       return getImageHtml(image);
     }
     return `

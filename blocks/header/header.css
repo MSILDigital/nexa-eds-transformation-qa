@@ -443,6 +443,7 @@ body {
   color: gray;
   padding: 0;
 }
+
 .menu-list .user__account__list-icon {
   margin-right: 10px;
   font-size: 20px;
@@ -524,7 +525,7 @@ body {
   right: 0;
   width: 100%;
   background-color: #f4f4f4;
-  padding: 10px;
+  padding: 0;
   z-index: 11;
   transition: opacity 0.3s ease;
   opacity: 0;

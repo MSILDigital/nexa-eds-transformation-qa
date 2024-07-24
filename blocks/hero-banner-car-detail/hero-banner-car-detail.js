@@ -66,7 +66,13 @@ export default async function decorate(block) {
   }
   async function fetchPrice(variantCode, defaultPrice) {
     const storedPrices = getLocalStorage('variantPrice') ? JSON.parse(getLocalStorage('variantPrice')) : {};
-    if (storedPrices[variantCode] && storedPrices[variantCode].price[forCode]) {
+    if (storedPrices[variantCode]?.price[forCode]) {
+      const expiryTimestamp = storedPrices[variantCode].timestamp;
+      const currentTimestamp = new Date().getTime();
+      if (currentTimestamp > expiryTimestamp) {
+        localStorage.removeItem('variantPrice');
+        return fetchPrice(variantCode, defaultPrice);
+      }
       const storedPrice = storedPrices[variantCode].price[forCode];
       return storedPrice;
     }
@@ -262,6 +268,7 @@ export default async function decorate(block) {
                   <p class="ex-showroom-label">${exShowroomLabel}</p>
                   <div role="separator"></div>
                   <p class="ex-showroom-price" data-target-index="${index}">${await fetchPrice(variant.variantId, variant.exShowroomPrice)} ${lakhLabel}</p>
+                  <div class="i-icon">i</div>
               </div>
               <div class="hero__ctas">
                   <div class="cta cta__primary">
@@ -330,9 +337,9 @@ export default async function decorate(block) {
       initCarousel();
       document.addEventListener('updateLocation', (event) => {
         forCode = event?.detail?.message;
-        div.querySelectorAll('.ex-showroom-price').forEach((e) => {
+        div.querySelectorAll('.ex-showroom-price').forEach(async (e) => {
           const index = parseInt(e.dataset.targetIndex, 10);
-          e.textContent = fetchPrice(cars[index].variantId, cars[index].exShowroomPrice);
+          e.textContent = `${await fetchPrice(cars[index].variantId, cars[index].exShowroomPrice)} ${lakhLabel}`;
         });
       });
     }

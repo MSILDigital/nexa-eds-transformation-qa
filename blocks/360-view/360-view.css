@@ -41,6 +41,13 @@
   width: fit-content;
 }
 
+.view360__container .cta__primary a::after {
+  filter: invert(1);
+  scale: 1.25;
+  position: relative;
+  top: -2px;
+}
+
 .view360__container .view360__primary-btn {
   background-color: #18171A;
   color: #FFF;
