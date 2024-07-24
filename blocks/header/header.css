@@ -437,12 +437,20 @@ body {
   border-top: 1px solid #dfdfdf;
 }
 
-.menu-list li .icon,
-.menu-list .user__account__list-icon {
+.menu-list li .icon{
   margin-right: 10px;
   font-size: 20px;
   color: gray;
   padding: 0;
+}
+.menu-list .user__account__list-icon {
+  margin-right: 10px;
+  font-size: 20px;
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--Tertiary-Light-grey, #f2f2f2);
 }
 
 .menu-list li .expand-icon {
