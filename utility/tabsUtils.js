@@ -58,7 +58,7 @@ const TabsUtils = {
     // Initial setup
     const defaultHighlightItem = container.querySelector(`.${className}.switch-index-0`);
     if (defaultHighlightItem) {
-      defaultHighlightItem.style.display = 'block';
+      defaultHighlightItem.style.display = 'flex';
     }
 
     const firstSwitchItem = container.querySelector('.switch-list-item');
