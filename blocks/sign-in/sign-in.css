@@ -11,14 +11,6 @@
   line-height: 20px;
 }
 
-.user__account__list-icon {
-  display: flex;
-  padding: 4px !important;
-  align-items: center;
-  border-radius: 12px;
-  background: var(--Tertiary-Light-grey, #f2f2f2);
-}
-
 .user__account__list-icon img {
   display:flex;
   height:16px;
