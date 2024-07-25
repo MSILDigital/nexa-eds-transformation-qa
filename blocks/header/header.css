@@ -376,6 +376,7 @@ header nav .nav-tools {
   display: flex;
   align-items: center;
   gap:24px;
+  min-width: 215px;
 }
 
 .navbar .right > img {
@@ -590,6 +591,11 @@ body {
     display: flex;
   }
 
+  .menu-nexa .menu-list .panel .teaser__card {
+    display: none;
+  }
+}
+
   .menu-nexa .sign-in-teaser {
     display: grid;
     grid-template-columns: 1.5fr auto;
@@ -601,7 +607,6 @@ body {
     width: 100%;
     object-fit: cover;
   }
-}
 
 .panel .link-container-section {
   flex-direction: column;
@@ -803,3 +808,4 @@ body {
     background-image: url("../../icons/account_circle.svg");
   }
 }
+
