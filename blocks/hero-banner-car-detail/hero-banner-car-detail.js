@@ -286,6 +286,14 @@ export default async function decorate(block) {
                   ${getTypesHtml(variant)}
                 </div>
             </div>
+            <div class="hero__ctas element_visibility">
+                  <div class="cta cta__primary">
+                      <a href="${primaryLink}" target="${primaryTarget}">${primaryCtaText}</a>
+                  </div>
+                  <div class="cta cta__secondary">
+                      <a href="${secondaryLink}" target="${secondaryTarget}">${secondaryCtaText}</a>
+                  </div>
+            </div>            
             <div class="hero__disclaimer-container">
               <p>${variant.variantName} ${termsAndConditionsText}</p>
             </div>
