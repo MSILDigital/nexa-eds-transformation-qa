@@ -8,6 +8,10 @@
   --content-background-gradient-end: rgb(91 91 91 / 60%);
 }
 
+.highlight-tabs-wrapper {
+    background: var(--tertiary-light-grey);
+}
+
 .highlight-tabs {
   p {
     margin: unset;

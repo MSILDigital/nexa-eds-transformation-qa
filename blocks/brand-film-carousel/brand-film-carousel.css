@@ -1,5 +1,9 @@
 @import url("../carousel/fadecarousel.css");
 
+.brand-film-carousel.block{
+  background: var(--tertiary-light-grey);
+}
+
 .brand-film__container {
   position: relative;
   padding: 24px;

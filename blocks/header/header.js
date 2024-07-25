@@ -191,10 +191,10 @@ export default async function decorate(block) {
 
   const acc = document.getElementsByClassName('accordion');
 
-  for (let i = 0; i < acc.length; i += 1) {
-    acc[i].addEventListener('click', function accordionClicked(e) {
+  Array.from(acc).forEach((el) => {
+    el.addEventListener('click', function accordionClicked(e) {
       this.classList.toggle('active');
-      const index = parseInt(e.target.id.split('-')[2], 10);
+      const index = parseInt(e.currentTarget.id.split('-')[2], 10);
       const menuListIconWrapper = this.querySelector('.icon');
       const menuListTitle = this.querySelector('.menu-title');
       const { icon, iconClicked } = list[index];
@@ -209,5 +209,5 @@ export default async function decorate(block) {
         panel.style.maxHeight = `${panel.scrollHeight}px`;
       }
     });
-  }
+  });
 }

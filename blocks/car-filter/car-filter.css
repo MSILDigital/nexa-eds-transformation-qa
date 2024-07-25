@@ -255,7 +255,7 @@
 
 @media (width >= 999px) {
   .car-filter {
-    padding: 24px 64px;
+    padding: 24px 64px 64px;
 
     .car-filter-list {
       padding: 0;
@@ -358,7 +358,7 @@
       }
 
       .card-list::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: linear-gradient(34deg, #C9D3D7 0%, #EBEBEB 100%, #EBEBEB 100%);
       }
 
       .card-list::-webkit-scrollbar-thumb {
@@ -367,7 +367,7 @@
       }
 
       .teaser-list {
-        flex-basis: 24%;
+        flex-basis: 266px;
         flex-direction: column;
         overflow: hidden;
         gap: 0;
@@ -409,6 +409,7 @@
             font-weight: 300;
             line-height: 20px; /* 142.857% */
             margin: 0 0 28px;
+            width: 60%;
           }
 
           &::after {
@@ -436,9 +437,10 @@
 
           .teaser__image {
             width: 100%;
-
+            
             img {
               clip-path: none;
+              border-radius: 4px;
             }
           }
 

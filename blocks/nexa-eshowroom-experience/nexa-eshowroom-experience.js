@@ -47,7 +47,7 @@ export default async function decorate(block) {
   const secondaryBtnText = secondaryBtnTextE1?.textContent.trim();
   const secondaryBtnCta = secondaryBtnCtaE1?.querySelector('a')?.textContent?.trim();
 
-  let forCode = '48';
+  let forCode = '08';
 
   const parentDiv = document.querySelector('.nexa-eshowroom-experience-container');
   parentDiv.setAttribute('id', componentId);
@@ -72,7 +72,13 @@ export default async function decorate(block) {
 
   async function fetchPrice(modelCode, exShowRoomPrice) {
     const storedPrices = await getLocalStorage('modelPrice') ? JSON.parse(await getLocalStorage('modelPrice')) : {};
-    if (storedPrices[modelCode] && storedPrices[modelCode].price[forCode]) {
+    if (storedPrices[modelCode]?.price[forCode]) {
+      const expiryTimestamp = storedPrices[modelCode].timestamp;
+      const currentTimestamp = new Date().getTime();
+      if (currentTimestamp > expiryTimestamp) {
+        localStorage.removeItem('modelPrice');
+        return fetchPrice(modelCode, exShowRoomPrice);
+      }
       return storedPrices[modelCode].price[forCode];
     }
     const channel = 'EXC';

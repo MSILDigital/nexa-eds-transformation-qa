@@ -292,7 +292,6 @@
       transform: translateX(-50%);
       background: var(--gradient-3, linear-gradient(34deg, #C9D3D7 18.09%, #EBEBEB 102.51%, #EBEBEB 102.51%));
       background-clip: text;
-      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       cursor: default;
   }

@@ -14,17 +14,59 @@ export default async function decorate(block) {
     return el.outerHTML;
   }).join('');
   const thumbnail = thumbnailEl.querySelector('img')?.src;
+  let isSupported = false;
+  if ((document.createElement('div').requestFullscreen
+    || document.createElement('div').webkitRequestFullscreen)
+    && document.pictureInPictureEnabled
+  ) {
+    isSupported = true;
+  } else if (document.createElement('video').webkitSupportsFullscreen) {
+    isSupported = false;
+  }
+  const sources = [];
   const videos = videosEl.map((videoEl, index) => {
     const [videoPathEl] = videoEl.children;
     const path = videoPathEl?.querySelector('a')?.textContent?.trim();
-    videoEl.classList?.add('brand-film__video-container');
-    videoEl.innerHTML = `
-      <video class="brand-film__video" src="${publishDomain + path}" poster=${thumbnail} width="100%" playsinline preload="none">
-      </video>
-      <span class="brand-film__play-btn"></span>
-    `;
+    const source = publishDomain + path;
+    if (isSupported) {
+      videoEl.classList?.add('brand-film__video-container');
+      videoEl.innerHTML = `
+        <video class="brand-film__video" src="${source}" poster=${thumbnail} width="100%" playsinline preload="none">
+        </video>
+        <span class="brand-film__play-btn"></span>
+      `;
+    } else {
+      videoEl.dataset.targetIndex = index;
+      videoEl.innerHTML = '';
+      sources.push({
+        src: source,
+        time: 0,
+      });
+    }
     return videoEl.outerHTML;
   });
+
+  let videosHtml = '';
+  if (isSupported) {
+    videosHtml = `
+    <div class="brand-film__slides brand-film__video--paused">
+      ${videos.join('')}
+    </div>
+    `;
+  } else {
+    videosHtml = `
+    <div class="brand-film__sources">
+      ${videos.join('')}
+    </div>
+    <div class="brand-film__slides">
+      <div class="brand-film__video-container brand-film__video--paused">
+        <video class="brand-film__video" src="${sources[0].src}" poster=${thumbnail} width="100%" playsinline preload="none">
+        </video>
+        <span class="brand-film__play-btn"></span>
+      </div>
+    </div>
+    `;
+  }
 
   block.innerHTML = utility.sanitizeHtml(`
     <div class="brand-film__container">
@@ -36,9 +78,7 @@ export default async function decorate(block) {
             <button class="brand-film__pip-btn">Pip</button>
           </div>
           <div class="brand-film__close-btn"></div>
-          <div class="brand-film__slides brand-film__video--paused">
-            ${videos.join('')}
-          </div>
+          ${videosHtml}
         </div>
       </div>
       <div class="brand-film__content">
@@ -52,24 +92,37 @@ export default async function decorate(block) {
     </div>
   `);
 
-  let isEnded = false;
   const onChange = (currentSlide, targetSlide, direction) => {
-    const currentVideo = currentSlide.querySelector('video');
-    currentVideo?.pause();
-    const video = targetSlide.querySelector('video');
-    if (document.pictureInPictureElement) {
-      video?.requestPictureInPicture();
-    }
-    video?.play().then(() => {
-      if (direction !== 0) {
-        currentVideo.currentTime = 0;
+    if (isSupported) {
+      const currentVideo = currentSlide.querySelector('video');
+      currentVideo?.pause();
+      const video = targetSlide.querySelector('video');
+      if (document.pictureInPictureElement) {
+        video?.requestPictureInPicture();
       }
-    });
+      video?.play().then(() => {
+        if (direction !== 0) {
+          currentVideo.currentTime = 0;
+        }
+      });
+    } else {
+      const currentIndex = parseInt(currentSlide.dataset.targetIndex, 10) ?? 0;
+      const index = parseInt(targetSlide.dataset.targetIndex, 10) ?? 0;
+      const video = block.querySelector('video');
+      if (direction !== 0) {
+        sources[currentIndex].time = 0;
+      } else {
+        sources[currentIndex].time = parseFloat(video.currentTime);
+      }
+      video.src = sources[index].src;
+      video.currentTime = sources[index].time;
+      video.play();
+    }
   };
 
   const controller = carouselUtils.init(
     block.querySelector('.brand-film__container'),
-    'brand-film__slides',
+    (isSupported) ? 'brand-film__slides' : 'brand-film__sources',
     'fade',
     {
       onChange,
@@ -84,11 +137,13 @@ export default async function decorate(block) {
     if (!isPlayed) {
       block.querySelectorAll('.brand-film__video-container video')?.forEach((vd) => {
         vd.removeAttribute('preload');
+        vd.removeAttribute('poster');
       });
       isPlayed = true;
     }
   };
 
+  let isEnded = false;
   block.querySelectorAll('.brand-film__video-container')?.forEach((el) => {
     const video = el.querySelector('video');
     if (video) {
@@ -111,20 +166,31 @@ export default async function decorate(block) {
       });
       video.addEventListener('playing', () => {
         isEnded = false;
-        if (!block.querySelector('.carousel__slide--active video').paused) {
-          block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
+        if (isSupported) {
+          if (!block.querySelector('.carousel__slide--active video').paused) {
+            block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
+          }
+        } else {
+          el.classList.remove('brand-film__video--paused');
         }
-        video.removeAttribute('poster');
         initPlay();
       });
       video.addEventListener('pause', () => {
         isEnded = (parseFloat(video.currentTime) === parseFloat(video.duration));
-        if (!isEnded && block.querySelector('.carousel__slide--active video').paused) {
-          block.querySelector('.brand-film__slides').classList.add('brand-film__video--paused');
+        if (!isEnded) {
+          if (isSupported && block.querySelector('.carousel__slide--active video').paused) {
+            block.querySelector('.brand-film__slides').classList.add('brand-film__video--paused');
+          } else if (!isSupported) {
+            el.classList.add('brand-film__video--paused');
+          }
         }
       });
       video.addEventListener('waiting', () => {
-        block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
+        if (isSupported) {
+          block.querySelector('.brand-film__slides').classList.remove('brand-film__video--paused');
+        } else {
+          el.classList.remove('brand-film__video--paused');
+        }
       });
     }
   });
@@ -203,6 +269,14 @@ export default async function decorate(block) {
     clearTimeout(hideCloseBtn);
   };
 
+  const setupFullscreen = (el) => {
+    el.classList.add('brand-film__wrapper--fullscreen', 'brand-film__wrapper--fullscreen-controls');
+    hideCloseBtn = setTimeout(() => {
+      block.querySelector('.brand-film__wrapper--fullscreen')?.classList?.remove('brand-film__wrapper--fullscreen-controls');
+    }, 3000);
+    el.addEventListener('mousemove', controlHandler);
+  };
+
   block.querySelector('.brand-film__fullscreen-btn')?.addEventListener('click', async () => {
     const el = block.querySelector('.brand-film__wrapper');
     if (el) {
@@ -211,18 +285,24 @@ export default async function decorate(block) {
       } else if (el.classList.contains('brand-film__wrapper--pip')) {
         resetPip(el, el.querySelector('.brand-film__asset'));
       }
+      const modeVideo = block.querySelector('video');
+      const options = { navigationUI: 'hide' };
       if (document.fullscreenElement) {
         document.exitFullscreen();
         resetFullScreen();
+      } else if (document.webkitFullscreenElement) {
+        document.webkitExitFullscreen();
+        resetFullScreen();
+      } else if (modeVideo.webkitDisplayingFullscreen) {
+        modeVideo.webkitExitFullscreen();
       } else if (el.requestFullscreen) {
-        el.classList.add('brand-film__wrapper--fullscreen', 'brand-film__wrapper--fullscreen-controls');
-        const options = { navigationUI: 'hide' };
-        el.requestFullscreen(options).then(() => {
-          hideCloseBtn = setTimeout(() => {
-            block.querySelector('.brand-film__wrapper--fullscreen')?.classList?.remove('brand-film__wrapper--fullscreen-controls');
-          }, 3000);
-          el.addEventListener('mousemove', controlHandler);
-        });
+        el.requestFullscreen(options);
+        setupFullscreen(el);
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen(options);
+        setupFullscreen(el);
+      } else if (modeVideo.webkitEnterFullscreen) {
+        modeVideo.webkitEnterFullscreen();
       }
     }
   });
@@ -252,7 +332,11 @@ export default async function decorate(block) {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture();
     } else if (document.pictureInPictureEnabled) {
-      block.querySelector('.brand-film__slides .carousel__slide--active video').requestPictureInPicture();
+      if (isSupported) {
+        block.querySelector('.brand-film__slides .carousel__slide--active video').requestPictureInPicture();
+      } else {
+        block.querySelector('video').requestPictureInPicture();
+      }
     } else {
       const wrapper = block.querySelector('.brand-film__wrapper');
       if (wrapper.classList.contains('brand-film__wrapper--pip')) {

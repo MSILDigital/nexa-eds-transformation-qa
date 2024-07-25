@@ -65,7 +65,7 @@ export default function decorate(block) {
   const section = document.querySelector('.secondary-navigation').closest('.section');
 
   window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const currentScroll = window.scrollY || document.documentElement.scrollTop;
     const navbar = block.querySelector('.secondary-navbar-container');
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;

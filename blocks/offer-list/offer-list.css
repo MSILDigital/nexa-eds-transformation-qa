@@ -650,7 +650,6 @@
     }
 
     .image-container {
-      /* max-height: 180px; */
       clip-path: polygon(
         0 0,
         100% 0,
@@ -663,8 +662,6 @@
 
     .image-container img {
       height: 100%;
-
-      /* clip-path: polygon(0 0, 100% 0, 100% 165px, 195px 165px, 185px 100%, 0 100%); */
     }
 
     .teaser__card.teaser-dark {

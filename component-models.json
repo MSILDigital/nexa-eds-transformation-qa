@@ -2213,5 +2213,86 @@
         "required": true
       }
     ]
+  },
+  {
+    "id": "dealer-locator-filter",
+    "fields": [
+      {
+        "component": "text-input",
+        "name": "pincodeText",
+        "value": "",
+        "label": "PinCode Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "pincodeTextValue",
+        "value": "",
+        "label": "PinCode Text Value",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "cityText",
+        "value": "",
+        "label": "City Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "visitingText",
+        "value": "",
+        "label": "Visiting Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "dealerShowroomLabel",
+        "value": "",
+        "label": "Dealer Showroom Label",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "serviceCenterLabel",
+        "value": "",
+        "label": "Service Centers Label",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "showcasingText",
+        "value": "",
+        "label": "Showcasing Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "radiusText",
+        "value": "",
+        "label": "Radius Text",
+        "valueType": "string"
+      },
+      {
+        "component": "multiselect",
+        "name": "radiusTextValue",
+        "label": "Select Radius Text",
+        "valueType": "string",
+        "options": [
+          { "name": "10", "value": "10" },
+          { "name": "20", "value": "20" },
+          { "name": "30", "value": "30" },
+          { "name": "40", "value": "40" },
+          { "name": "50", "value": "50" }
+        ]
+      },
+      {
+        "component": "text-input",
+        "name": "distanceText",
+        "value": "",
+        "label": "Distance Text",
+        "valueType": "string"
+      }
+    ]
   }
 ]
