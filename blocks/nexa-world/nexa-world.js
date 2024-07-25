@@ -115,15 +115,19 @@ export default function decorate(block) {
   // Replace the block's HTML with the constructed Nexa World HTML and teaser if present
   block.innerHTML = utility.sanitizeHtml(`
     <div class="nexa-world__container">
+      <div class="nexa-world__content__container">
       ${nexaWorldHtml}
       ${nexaWorldTeaser}
+      </div>
+      <div class="nexa-world__image">
+      </div>
     </div>`);
 
   // Function to handle hover effects
   function updateHoverEffects() {
     const links = document.querySelectorAll('.nexa-world__links a');
     const teaser = document.querySelector('.nexa-world__teaser');
-    const container = document.querySelector('.nexa-world__container');
+    const container = document.querySelector('.nexa-world__image');
     const isMobile = window.matchMedia('(max-width: 999px)').matches;
     const backgroundImage = links[0].querySelector('img');
 
