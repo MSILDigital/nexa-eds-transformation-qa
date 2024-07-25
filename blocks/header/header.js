@@ -194,7 +194,7 @@ export default async function decorate(block) {
   Array.from(acc).forEach((el) => {
     el.addEventListener('click', function accordionClicked(e) {
       this.classList.toggle('active');
-      const index = parseInt(e.target.id.split('-')[2], 10);
+      const index = parseInt(e.currentTarget.id.split('-')[2], 10);
       const menuListIconWrapper = this.querySelector('.icon');
       const menuListTitle = this.querySelector('.menu-title');
       const { icon, iconClicked } = list[index];
