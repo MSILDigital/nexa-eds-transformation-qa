@@ -594,7 +594,6 @@ body {
   .menu-nexa .menu-list .panel .teaser__card {
     display: none;
   }
-}
 
   .menu-nexa .sign-in-teaser {
     display: grid;
@@ -607,6 +606,7 @@ body {
     width: 100%;
     object-fit: cover;
   }
+}
 
 .panel .link-container-section {
   flex-direction: column;
