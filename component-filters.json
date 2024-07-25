@@ -51,7 +51,8 @@
       "hero-banner-dealer",
       "360-view",
       "safety-tabs",
-      "dealer-locator-filter"
+      "dealer-locator-filter",
+      "link-column"
     ]
   },
   {
@@ -136,6 +137,12 @@
     "id": "safety-tabs",
     "components": [
       "safety-item"
+    ]
+  },
+  {
+    "id":"link-column",
+    "components": [
+      "cta"
     ]
   }
 ]
