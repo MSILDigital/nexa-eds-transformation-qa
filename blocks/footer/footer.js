@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import utility from '../../utility/utility.js';
 
 /**
  * Loads and decorates the footer
@@ -22,7 +23,10 @@ export default async function decorate(block) {
   }
 
   const topSection = footer.querySelector('.footer-top-section');
-  const linkGridSection = footer.querySelector('.link-grid-wrapper');
+
+  // const linkGridSection = footer.querySelector('.link-grid-wrapper');
+  const linkColumns = Array.from(footer.querySelectorAll('.link-grid-column'));
+  const linkColumnHTML = (linkColumns.length > 0) ? linkColumns.map((column) => column.outerHTML).join('') : '';
   const contactUsSection = footer.querySelector(
     '.footer-center-section .default-content-wrapper',
   );
@@ -141,13 +145,17 @@ export default async function decorate(block) {
       });
   };
 
-  block.innerHTML = `
+  block.innerHTML = utility.sanitizeHtml(`
     <div class="footer">
       <div class="container">
         ${topSectionHtml}
         <div class="row">
           <div class="col-md-9 footer__columns">
-            ${(linkGridSection) ? linkGridSection.innerHTML : ''}
+            <div class="link-grid-wrapper">
+                <div class="link-container-section">
+                  ${linkColumnHTML || ''}
+                </div>  
+            </div>  
           </div>
           <div class="col-md-3 footer__columns footer__columns-contact">
             ${(contactUsHeadingSection) ? contactUsHeadingSection.outerHTML : ''}
@@ -168,7 +176,7 @@ export default async function decorate(block) {
         <!-- Footer copyright end -->
       </div>
     </div>
-  `;
+  `);
 
   const footerSeparatorElement = block.querySelector('.footer__separator');
   footerSeparatorElement.addEventListener(
