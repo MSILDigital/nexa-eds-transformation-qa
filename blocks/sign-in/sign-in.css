@@ -84,7 +84,6 @@
 
 .sign-in-teaser__desc {
   display: flex;
-  width: 186px;
   padding: 15px;
   flex-direction: column;
   align-items: flex-start;
