@@ -77,9 +77,11 @@ export default function decorate(block) {
         if (moreContent.style.display !== 'none') {
           moreContent.style.display = 'none';
           moreContentExpanded.style.display = 'block';
+          highlightItem.classList.add('highlightItem-content-expanded');
         } else {
           moreContent.style.display = 'block';
           moreContentExpanded.style.display = 'none';
+          highlightItem.classList.remove('highlightItem-content-expanded');
         }
 
         // Toggle button text
