@@ -61,6 +61,7 @@ footer .link-grid-column .links-container li:last-child {
 
 footer .link-grid-column .links-container li a {
   min-height: inherit;
+  color: var(--tertiary-medium-grey);
 }
 
 footer .default-content-wrapper {
