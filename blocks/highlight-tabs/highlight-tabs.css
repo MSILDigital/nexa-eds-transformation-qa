@@ -196,7 +196,6 @@
     align-items: end;
     overflow-wrap: break-word;
     white-space: pre-wrap;
-    padding-bottom: 14px;
 
     &::after {
       content: "";
@@ -207,6 +206,7 @@
       width: 100%;
       border-bottom: 1px solid var(--secondary-color);
     }
+    
     &.active {  
       &::after {
         border-bottom: 2px solid var(--primary-color);

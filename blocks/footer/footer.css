@@ -224,16 +224,6 @@ footer.footer__arena .footer__info-left {
     gap: 0;
   }
 
-  footer .link-container-section .link-grid-column:first-child{
-    flex-basis: 18%;
-    max-width: 18%;
-  }
-
-  footer .link-container-section .link-grid-column{
-    flex-basis: 27%;
-    max-width: 27%;
-  }
-
   footer .link-grid-column h3,
   footer .contactUs__Heading {
     font-size: 18px;
@@ -347,6 +337,16 @@ footer.footer__arena .footer__info-left {
 
   footer .link-grid-column .links-container li:first-child {
     padding-top: 0;
+  }
+
+  footer .link-container-section .link-grid-column{
+    flex-basis: 27%;
+    max-width: 27%;
+  }
+
+  footer .link-container-section .link-grid-column:first-child{
+    flex-basis: 18%;
+    max-width: 18%;
   }
 
   .footer__copyright-right ul li a {
