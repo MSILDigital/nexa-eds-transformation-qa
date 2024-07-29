@@ -1,10 +1,9 @@
 .secondary-navbar-container {
   width: 100%;
-  padding: 0 20px;
+  padding: 48px 0 0 20px;
   background: var(--Tertiary-Light-grey, #f2f2f2);
   transition: top 0.3s;
   z-index: 1000;
-  padding-top: 48px;
 }
 
 .secondary-navbar-container .secondary-navbar {
@@ -38,6 +37,11 @@
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  p{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .secondary-navbar-container .buttons-container::-webkit-scrollbar {
