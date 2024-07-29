@@ -146,10 +146,10 @@ export default async function decorate(block) {
       <div class="container">
         ${topSectionHtml}
         <div class="row">
-          <div class="col-md-9 footer__columns">
+          <div class="col-md-10 footer__columns">
             ${(linkGridSection) ? linkGridSection.innerHTML : ''}
           </div>
-          <div class="col-md-3 footer__columns footer__columns-contact">
+          <div class="col-md-2 footer__columns footer__columns-contact">
             ${(contactUsHeadingSection) ? contactUsHeadingSection.outerHTML : ''}
             <div class="contactUs__section hide__section__mobile">
               ${(contactUsSection) ? contactUsSection.outerHTML : ''}

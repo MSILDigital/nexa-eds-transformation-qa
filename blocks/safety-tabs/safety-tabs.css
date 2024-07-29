@@ -88,7 +88,7 @@
 }
 
 .safety-tabs .switch-list-section {
-  padding: 12px 20px 0;
+  padding: 12px 0 0 20px;
   margin-top: 16px;
   display: flex;
   justify-content: center;
@@ -136,7 +136,7 @@
   position: relative;
   padding-left: 8px;
   padding-right: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
 
   @media (width >= 999px) {
     font-size: 16px;
@@ -150,25 +150,28 @@
     align-items: end;
     overflow-wrap: break-word;
     white-space: pre-wrap;
-  }
 
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-bottom: 1px solid #b2b2b2;
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid #b2b2b2;
+    }
+
+    &.active {  
+      &::after {
+        border-bottom: 3px solid #fff;
+      }
+    }
   }
 
   &.active {
     color: #fff;
     font-weight: 500;
-
-    &::after {
-      border-bottom: 3px solid #fff;
-    }
+    border-bottom: 2px solid var(--primary-color);
   }
 }
 
