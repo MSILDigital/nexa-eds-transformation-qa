@@ -2335,6 +2335,26 @@
           {
             "name": "h6",
             "value": "h6"
+          },
+          {
+            "name": "p",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "Orientation",
+        "label": "orientation",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Horizontal",
+            "value": "horizontal"
+          },
+          {
+            "name": "Vertical",
+            "value": "vertical"
           }
         ]
       }
