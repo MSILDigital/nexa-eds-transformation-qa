@@ -107,11 +107,14 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    border-bottom: 1px solid #B2B2B2;
+    gap: 16px;
 
     @media (width >= 999px) {
       gap: 24px;
       justify-content: center;
       margin-top: 36px;
+      border-bottom: none;
     }
   }
 
@@ -171,7 +174,7 @@
 
     &.active {  
       &::after {
-        border-bottom: 3px solid #fff;
+        border-bottom: 2px solid #fff;
       }
     }
   }
