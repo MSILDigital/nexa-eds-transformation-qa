@@ -128,6 +128,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 319/180;
+  margin-top: 25px;
 
   @media (width >= 999px) {
     aspect-ratio: 709/402;
