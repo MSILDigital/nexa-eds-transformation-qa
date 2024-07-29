@@ -240,15 +240,19 @@ export default async function decorate(block) {
     let typeHtml = '';
     filterTypes.forEach((type, index) => {
       const typeValue = variant[`${type}`]?.trim();
-      const del = typeValue.indexOf(' ');
-      const value = typeValue.substring(0, del);
-      const label = typeValue.substring(del + 1);
-      typeHtml
-        += `<div class="legend-item">
-        <p class="legend-title">${value}</p>
-        <p class="legend-desc">${label}</p>
-      </div>
-    ${index === filterTypes.length - 1 ? '' : '<div role="separator"></div>'}`;
+      const delimeter = typeValue?.indexOf(' ');
+      if (delimeter !== undefined && delimeter !== null) {
+        const value = typeValue.substring(0, delimeter);
+        const label = typeValue.substring(delimeter + 1);
+        typeHtml
+          += `
+          <div class="legend-item">
+            <p class="legend-title">${value}</p>
+            <p class="legend-desc">${label}</p>
+          </div>
+          ${index === filterTypes.length - 1 ? '' : '<div role="separator"></div>'}
+      `;
+      }
     });
     return typeHtml;
   };
@@ -297,7 +301,7 @@ export default async function decorate(block) {
                   </div>
             </div>            
             <div class="hero__disclaimer-container">
-              <p>${variant.variantName} ${termsAndConditionsText}</p>
+              <p>${variant.variantDesc} ${termsAndConditionsText}</p>
             </div>
           </div>
         </div>
