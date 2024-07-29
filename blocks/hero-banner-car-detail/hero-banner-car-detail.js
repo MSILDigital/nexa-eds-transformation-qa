@@ -26,7 +26,7 @@ export default async function decorate(block) {
   const lakhLabel = lakhLabelEl?.textContent?.trim();
   const filterList = filterSelectEl?.textContent?.trim();
   const tagline = taglineEl?.textContent?.trim();
-  const carModelPath = carModelPathEl.querySelector('a')?.textContent?.trim();
+  const variantsPath = carModelPathEl.querySelector('a')?.textContent?.trim();
   const termsAndConditionsText = termsAndConditionsTextEl?.textContent?.trim() || '';
 
   const primaryCtaText = primaryTextEl?.textContent?.trim() || '';
@@ -166,7 +166,13 @@ export default async function decorate(block) {
     function handleOverlayBehavior(slide) {
       const videoEl = slide.querySelector('video');
       const overlay = slide.querySelector('.hero__information-overlay');
-
+      const playVideo = () => {
+        videoEl.play();
+      };
+      const handleContent = () => {
+        overlay.style.opacity = '0';
+        setTimeout(playVideo, 1000); // Wait for overlay fade-out before resuming video
+      };
       if (videoEl && overlay) {
         let overlayShown = false;
 
@@ -177,13 +183,7 @@ export default async function decorate(block) {
             overlayShown = true;
             videoEl.pause();
             overlay.style.opacity = '1';
-
-            setTimeout(() => {
-              overlay.style.opacity = '0';
-              setTimeout(() => {
-                videoEl.play();
-              }, 1000); // Wait for overlay fade-out before resuming video
-            }, contentDisplayTime * 1000);
+            setTimeout(handleContent, contentDisplayTime * 1000);
           }
         });
 
@@ -239,12 +239,14 @@ export default async function decorate(block) {
   const getTypesHtml = (variant) => {
     let typeHtml = '';
     filterTypes.forEach((type, index) => {
-      const typeLabel = `${type}Label`;
-      const typeValue = `${type}Value`;
+      const typeValue = variant[`${type}`]?.trim();
+      const del = typeValue.indexOf(' ');
+      const value = typeValue.substring(0, del);
+      const label = typeValue.substring(del + 1);
       typeHtml
         += `<div class="legend-item">
-        <p class="legend-title">${variant[`${typeValue}`]}</p>
-        <p class="legend-desc">${variant[`${typeLabel}`]}</p>
+        <p class="legend-title">${value}</p>
+        <p class="legend-desc">${label}</p>
       </div>
     ${index === filterTypes.length - 1 ? '' : '<div role="separator"></div>'}`;
     });
@@ -267,7 +269,7 @@ export default async function decorate(block) {
               <div class="price-details">
                   <p class="ex-showroom-label">${exShowroomLabel}</p>
                   <div role="separator"></div>
-                  <p class="ex-showroom-price" data-target-index="${index}">${await fetchPrice(variant.variantId, variant.exShowroomPrice)} ${lakhLabel}</p>
+                  <p class="ex-showroom-price" data-target-index="${index}">${await fetchPrice(variant.variantCd, variant.exShowroomPrice)} ${lakhLabel}</p>
                   <div class="i-icon">i</div>
               </div>
               <div class="hero__ctas">
@@ -309,7 +311,7 @@ export default async function decorate(block) {
     } catch (e) {
       authorization = '';
     }
-    const graphQlEndpoint = `${publishDomain}/graphql/execute.json/msil-platform/VariantList;modelId=${carModelPath}`;
+    const graphQlEndpoint = `${publishDomain}/graphql/execute.json/msil-platform/VariantList;variantsPath=${variantsPath}`;
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -323,7 +325,7 @@ export default async function decorate(block) {
     } catch (error) {
       data = {};
     }
-    const cars = data?.data?.variantList?.items;
+    const cars = data?.data?.carVariantList?.items;
     if (cars) {
       const htmlPromises = cars.map((car, index) => getVariantHtml(car, index));
       const htmlResults = await Promise.all(htmlPromises);
@@ -347,7 +349,7 @@ export default async function decorate(block) {
         forCode = event?.detail?.message;
         div.querySelectorAll('.ex-showroom-price').forEach(async (e) => {
           const index = parseInt(e.dataset.targetIndex, 10);
-          e.textContent = `${await fetchPrice(cars[index].variantId, cars[index].exShowroomPrice)} ${lakhLabel}`;
+          e.textContent = `${await fetchPrice(cars[index].variantCd, cars[index].exShowroomPrice)} ${lakhLabel}`;
         });
       });
     }

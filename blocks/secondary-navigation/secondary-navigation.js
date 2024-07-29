@@ -36,11 +36,15 @@ export default function decorate(block) {
     return element.innerHTML;
   }).join('');
 
+  const removeActive = (btn) => {
+    btn.classList.remove('active');
+  };
+
   function setupNavButtons(navButtons) {
     navButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
         event.preventDefault();
-        navButtons.forEach((btn) => btn.classList.remove('active'));
+        navButtons.forEach(removeActive);
         button.classList.add('active');
       });
     });
@@ -58,10 +62,12 @@ export default function decorate(block) {
         </nav>
     </div>
     `);
+
   const navbarbuttons = block.querySelectorAll('.nav-button');
   setupNavButtons(navbarbuttons);
 
   let lastScrollTop = 0;
+  let firstScroll = true;
   const section = document.querySelector('.secondary-navigation').closest('.section');
 
   window.addEventListener('scroll', () => {
@@ -72,19 +78,29 @@ export default function decorate(block) {
     const sectionBottom = sectionTop + sectionHeight;
 
     if (currentScroll < sectionTop) {
+      navbar.classList.remove('fade-out');
       navbar.style.visibility = 'visible';
       navbar.style.position = 'relative';
+      firstScroll = true;
     } else if (currentScroll >= sectionTop && currentScroll < sectionBottom) {
       navbar.style.visibility = 'visible';
       navbar.style.position = 'fixed';
 
       if (lastScrollTop <= currentScroll) {
         navbar.style.top = '0';
+        navbar.classList.remove('fade-out');
+
+        if (!navbar.classList.contains('fade-in') && !firstScroll) {
+          navbar.classList.add('fade-in');
+        }
       } else {
-        navbar.style.visibility = 'hidden';
+        navbar.classList.remove('fade-in');
+        navbar.classList.add('fade-out');
+        firstScroll = false;
       }
     } else {
-      navbar.style.visibility = 'hidden';
+      navbar.classList.remove('fade-in');
+      navbar.classList.add('fade-out');
     }
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });

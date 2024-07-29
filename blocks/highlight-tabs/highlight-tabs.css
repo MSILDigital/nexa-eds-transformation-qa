@@ -97,7 +97,7 @@
   justify-content: left;
   padding: 56.25px 20px 48px;
 
-  .top-left {
+  .top-left .highlight-tabs__title {
     font-family: var(--font-secondary-nexa);
     color: #fff;
     font-size: 32px;
@@ -105,6 +105,7 @@
     line-height: 40px;
     letter-spacing: 0.64px;
     z-index: 1;
+    margin: 0;
   }
 
   .top-right {
@@ -120,7 +121,7 @@
   @media (width >= 999px) {
     display: inherit;
 
-    .top-left {
+    .top-left .highlight-tabs__title {
       position: absolute;
       top: 120px;
       left: 5%;
@@ -142,7 +143,7 @@
     }
   }
 }
-  
+
 .highlight-tabs .switch-list-section {
   padding: 12px 0 0 20px;
   margin-top: 16px;
@@ -206,8 +207,8 @@
       width: 100%;
       border-bottom: 1px solid var(--secondary-color);
     }
-    
-    &.active {  
+
+    &.active {
       &::after {
         border-bottom: 2px solid var(--primary-color);
       }
@@ -236,9 +237,6 @@
   font-family: var(--font-primary-nexa);
   font-size: 12px;
   font-weight: 400;
-  /* transition: clip-path 0.3s ease; */
-
-  /* transition: transform 0.5s ease-in-out, max-height 0.5s ease-in-out; */
   transform-origin: top;
   z-index: 10;
 

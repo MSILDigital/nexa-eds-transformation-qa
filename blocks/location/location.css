@@ -27,7 +27,6 @@
 }
 
 .location .geo-location {
-  display: none;
   z-index:999;
   position:absolute;
   top:var(--nav-height);

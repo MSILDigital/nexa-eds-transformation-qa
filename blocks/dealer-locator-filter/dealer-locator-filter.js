@@ -155,7 +155,7 @@ export default async function decorate(block) {
 
   async function updateCities() {
     const urlWithParams = 'https://api.preprod.developersatmarutisuzuki.in/dms/v1/api/common/msil/dms/dealer-only-cities?channel=EXC';
-    let result;
+    let result = '';
     try {
       const response = await fetch(urlWithParams, {
         method: 'GET',
@@ -167,7 +167,6 @@ export default async function decorate(block) {
         requestLocationPermission();
       });
     } catch (e) {
-      result = '';
       throw new Error('Network response was not ok', e);
     }
     const cityValueDiv = block.querySelector('#city');

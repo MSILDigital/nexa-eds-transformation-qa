@@ -6,15 +6,18 @@ const list = [];
 
 function toggleMenu() {
   document.getElementById('menu').classList.toggle('hidden');
+  document.querySelector('header')?.classList.toggle('lift-up');
 }
 
 function toggleCarMenu() {
   document.getElementById('carFilterMenu').classList.toggle('hidden');
+  document.querySelector('header')?.classList.toggle('lift-up');
 }
 
 function toggleUserDropdown() {
   const navRight = document.getElementById('nav-right');
   navRight.querySelector('.sign-in-wrapper').classList.toggle('hidden');
+  document.querySelector('.geo-location').classList.add('hidden');
 }
 
 export default async function decorate(block) {
@@ -209,5 +212,17 @@ export default async function decorate(block) {
         panel.style.maxHeight = `${panel.scrollHeight}px`;
       }
     });
+  });
+
+  const header = document.querySelector('header');
+
+  document.querySelector('.navbar .links')?.addEventListener('mouseenter', () => {
+    header.classList.toggle('lift-up');
+    document.querySelector('.sign-in-wrapper').classList.add('hidden');
+    document.querySelector('.geo-location').classList.add('hidden');
+  });
+
+  document.querySelector('.navbar .links')?.addEventListener('mouseleave', () => {
+    header.classList.toggle('lift-up');
   });
 }

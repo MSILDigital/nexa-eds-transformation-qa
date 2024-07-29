@@ -1,9 +1,41 @@
+.fade-out {
+  animation: fade-out 0.3s ease-out forwards;
+}
+
+.fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 .secondary-navbar-container {
   width: 100%;
-  padding: 48px 0 0 20px;
+  padding: 0 20px;
   background: var(--Tertiary-Light-grey, #f2f2f2);
   transition: top 0.3s;
-  z-index: 1000;
+  z-index: 998;
+  padding-top: 48px;
 }
 
 .secondary-navbar-container .secondary-navbar {
@@ -37,11 +69,6 @@
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-
-  p{
-    margin-top: 0;
-    margin-bottom: 0;
-  }
 }
 
 .secondary-navbar-container .buttons-container::-webkit-scrollbar {
@@ -65,7 +92,7 @@
   border-bottom: 2px solid black;
 }
 
-@media (width >= 999px) {
+@media (width >=999px) {
   .secondary-navbar-container {
     padding: 0 64px;
   }
