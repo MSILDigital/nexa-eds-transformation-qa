@@ -51,6 +51,7 @@ export default async function decorate(block) {
 
   const parentDiv = document.querySelector('.nexa-eshowroom-experience-container');
   parentDiv.setAttribute('id', componentId);
+  block.innerHTML = '';
 
   async function formatCurrency(value) {
     const numericValue = String(value).replace(/[^\d.]/g, '');
@@ -306,6 +307,7 @@ export default async function decorate(block) {
       const data = await response.json();
       await carModelInfo(data);
     } catch (e) {
+      block.innerHTML = utility.sanitizeHtml('<div class="e-showroom__container"></div>');
       throw new Error('GraphQL response was not ok');
     }
   }

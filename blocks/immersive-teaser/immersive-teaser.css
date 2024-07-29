@@ -46,7 +46,7 @@ main .immersive-teaser-container > div {
       position: absolute;
       top: 0;
       left: 0;
-      background: linear-gradient(89deg, #18171a 0%, rgb(24 23 26 / 0%) 96%);
+      background: linear-gradient(125deg, #18171a 25%, rgb(24 23 26 / 0%) 100%);
     }
   }
 

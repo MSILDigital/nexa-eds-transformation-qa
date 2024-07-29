@@ -6,6 +6,13 @@
     line-height: unset;
   }
 
+  h2{
+    margin:unset;
+    font-family:unset;
+    font-size:unset;
+    line-height:unset;
+  }
+
   background-color: #18171a;
   padding-bottom: 36px;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), 74% calc(100% - 25px), calc(74% - 15px) 100%, 0 100%);
@@ -19,12 +26,12 @@
 .safetyTabItem {
   display: none;
   flex-direction: column;
-  gap: 150px;
+  gap: 222px;
   padding: 32px 20px 129px;
 
   @media (width >= 999px) {
     flex-direction: row;
-    gap: 130px;
+    justify-content: space-between;
     padding: 72px 65px 96px;
   }
 }
@@ -74,16 +81,16 @@
   position: relative;
 
   @media (width >= 999px) {
-    padding-top: 156px;
+    padding-top: 0;
   }
 }
 
 .safetyTabItem .hotspots-wrapper .hotspots {
   position: relative;
-  padding-top: 50px;
 
   @media (width >= 999px) {
     margin-top: 108px;
+    margin-right:50px;
   }
 }
 
@@ -121,6 +128,7 @@
 
   @media (width >= 999px) {
     aspect-ratio: 709/402;
+    margin-top:50px;
   }
 }
 
@@ -199,13 +207,13 @@
   width: 10px;
 }
 
-.line.vertical-line {
+.safetyTabItem .hotspots-wrapper .hotspots .line.vertical-line {
   position: absolute;
   width: 1.5px;
   background-color: #F2F2F2;
 }
 
-.line.horizontal-line {
+.safetyTabItem .hotspots-wrapper .hotspots .line.horizontal-line {
   position: absolute;
   height: 1.5px;
   background-color: #F2F2F2;

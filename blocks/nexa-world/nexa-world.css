@@ -1,10 +1,11 @@
 .nexa-world__container {
   background-color: black;
-  color: white;
-  font-family: var(--font-primary-nexa);
-  padding-top: 48px;
-  padding-left: 20px;
-  height: auto;
+  display: flex;
+  flex-direction: column;
+
+  @media (width >= 999px) {
+    flex-direction: row;
+  }
 
   p {
     margin: unset;
@@ -19,9 +20,41 @@
   ul {
     margin: unset;
   }
+}
 
-  @media (width >= 1280px) {
-    padding: 84px 64px;
+.nexa-world__content__container {
+  color: white;
+  font-family: var(--font-primary-nexa);
+  padding-top: 48px;
+  padding-left: 20px;
+  height: auto;
+
+  @media (width >= 999px) {
+    padding: 30px 0 30px 64px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  @media(width >=1300px){
+    padding: 85px 0 85px 64px;
+  }
+}
+
+.nexa-world__image {
+  display: none;
+
+  
+  @media (width >= 999px) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 905/816; 
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -49,6 +82,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  white-space: nowrap;
 
   .pre-title {
     font-family: var(--font-secondary-nexa);
@@ -85,9 +119,14 @@
   padding-bottom: 45%;
 
   @media (width >=999px) {
-    padding-top: 30%;
+    background-size:cover;
+    padding-top: 0;
     margin-top: 0;
-    padding-bottom: 85.5px;
+    padding-bottom: 0;
+  }
+
+  @media(width >= 1300px){
+    padding-top:30%;
   }
 }
 
@@ -113,6 +152,13 @@
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
+      width:82px;
+      display:flex;
+      justify-content:flex-start;
+
+      @media(width >=999px){
+      justify-content: center;
+      }
 
       img {
         display: none;
@@ -133,7 +179,7 @@
   height: 40px;
   background-color: #fff;
   padding: 8px 12px;
-  clip-path: polygon(2% 0, 100% 0, 100% 88%, 98% 100%, 0 100%, 0 12%);
+  clip-path: polygon(4% 0, 100% 0, 100% 75%, 96% 100%, 0 100%, 0 25%);
 
   .btn-title {
     text-decoration: none;
@@ -147,7 +193,6 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
-      margin-right: 12px;
     }
   }
 
@@ -172,17 +217,17 @@
   }
 }
 
-.nexa-world__container,
+.nexa-world__image,
 .nexa-world__teaser {
   background-size: cover;
   background-position: center;
-  display: block;
-  height: auto;
+  background-repeat:no-repeat;
 }
 
 @media (width <= 999px) {
-  .nexa-world__container {
+  .nexa-world__image {
     background-image: none;
+    width:100%;
     height: auto;
   }
 

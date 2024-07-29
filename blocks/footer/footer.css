@@ -262,6 +262,8 @@ footer.footer__arena .footer__info-left {
     font-style: italic;
     font-weight: 300;
     line-height: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   footer .default-content-wrapper p {

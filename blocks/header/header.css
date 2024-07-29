@@ -376,6 +376,7 @@ header nav .nav-tools {
   display: flex;
   align-items: center;
   gap:24px;
+  min-width: 215px;
 }
 
 .navbar .right > img {
@@ -588,6 +589,10 @@ body {
 
   .nav-hamburger {
     display: flex;
+  }
+
+  .menu-nexa .menu-list .panel .teaser__card {
+    display: none;
   }
 
   .menu-nexa .sign-in-teaser {
@@ -803,3 +808,4 @@ body {
     background-image: url("../../icons/account_circle.svg");
   }
 }
+
