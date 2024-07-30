@@ -69,6 +69,10 @@
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  p{
+    margin: unset;
+  }
 }
 
 .secondary-navbar-container .buttons-container::-webkit-scrollbar {
