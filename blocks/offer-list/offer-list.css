@@ -33,7 +33,7 @@
     @media (width >= 999px) {
       display: inherit;
       text-align: center;
-      padding: 80px 64px 105px 64px;
+      padding: 80px 64px 105px;
       background-color: #f2f2f2;
     }
   }
@@ -76,6 +76,19 @@
     }
   }
 
+  .right-container__card-1 .right-container__content .offerList__content{
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height:100%;
+  }
+
+  .right-container__card-1 .right-container__content .offerList__content .teaser__heading{
+      display:flex;
+      flex-direction: column;
+      gap:12px;
+  }
+
   /* Styles for the teaser title within the first card */
   .right-container__card-1 .teaser__title p {
     margin-bottom: 10px;
@@ -85,7 +98,7 @@
   .offerList__wrapper-light .offerList__content p {
     color: var(--Primary-Main, #18171a);
     font-family: var(--font-primary-nexa);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     margin-top: 48px;
@@ -107,11 +120,13 @@
     width:100%;
     }
   }
+
   .left-container .teaser__content .teaser__description p{
     @media(width >=999px){
     width:90%;
     }
   }
+
   .offerList__wrapper-light .sub-container .offerList__content p {
     color: inherit;
     font-family: var(--font-primary-nexa);
@@ -119,13 +134,10 @@
     font-weight: 400;
     margin: 0;
     line-height: 20px;
-    margin-top: 16px;
     min-width: 210px;
     display: block;
 
     @media (width >=999px) {
-      margin-top: 12px;
-      margin-bottom: 20px;
       font-size: 16px;
       font-weight: 300;
       line-height: 24px;
@@ -138,28 +150,19 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
-    line-height: 22px;
+    line-height: 32px;
     letter-spacing: 0.36px;
-    margin: 18px 0;
+    margin:0;
 
     @media (width >= 999px) {
       font-size: 32px;
-      margin: 32px 0;
+      line-height:40px;
     }
   }
 
   .offerList__wrapper-light .offerList__action {
     display: inline-flex;
     align-items: center;
-    margin-top: 18px;
-
-    @media (width >= 999px) {
-      position: absolute;
-      margin-top: 0;
-    }
-  }
-
-  .offerList__wrapper .offerList__content .offerList__action {
     margin-top: 18px;
   }
 
@@ -183,8 +186,6 @@
     text-decoration: none;
 
     @media (width >= 999px) {
-      position: relative;
-      top: 32px;
       font-size: 16px;
       padding: 8px 18px 8px 20px;
       margin: 0;
@@ -256,14 +257,8 @@
   /* Styles for the image inside picture */
   .right-container__card-1 img {
     max-width: 100%;
-
-    /* Ensure the image does not exceed its container */
     height: auto;
-
-    /* Maintain aspect ratio */
     object-fit: cover;
-
-    /* Ensure the image covers the entire container */
   }
 
   .offerList__wrapper-light .sub-container .left-container img,
@@ -326,18 +321,12 @@
     }
   }
 
-  /* General styles for the right container
-  .right-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
-
   .offerList__wrapper-light .sub-container .right-container {
     position: relative;
     display:flex;
     flex-direction: column;
     flex-grow: 1;
+
     @media(width >= 999px){
       display:grid;
       grid-auto-flow: row;
@@ -353,14 +342,10 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
     width: 100%;
+
     @media(width >= 999px){
       grid-gap:24px;
     }
-  }
-
-  /* Styles for the content within the first card */
-  .right-container__card-1 .right-container__content {
-    padding: 0;
   }
 
   .offerList__wrapper-light
@@ -368,11 +353,15 @@
     .right-container
     .right-container__content {
     position: absolute;
-    left: 5%;
-    top: 2px;
-    gap: 24px;
+    top:0;
+    padding:26px;
     color: white;
     z-index: 1;
+    height:100%;
+
+    @media(width >= 999px){
+      padding:32px;
+    }
   }
 
   .offerList__wrapper-light
@@ -430,6 +419,7 @@
   .light-teaser.buyers-guide-teaser {
     height: 100%;
   }
+
   .right-container-subcontainer > :first-child .light-teaser.buyers-guide-teaser{
     @media(width >= 999px){
     padding-top: 13px;
@@ -443,8 +433,9 @@
     );
     color: #18171a;
     padding-top: 32px;
+
     @media(width >= 999px){
-      padding-top: 24px;
+      padding-top: 27px;
     }
   }
 
@@ -452,6 +443,7 @@
     background: var(--Primary-Main, #18171a);
     color: white;
     padding-top: 32px;
+
     @media(width >= 999px){
       padding-top:40px;
     }
@@ -561,7 +553,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-    @media(min-width >= 999px){
+
+    @media(width >= 999px){
       gap:20px;
     }
   }
@@ -576,7 +569,6 @@
   .light-teaser.buyers-guide-teaser .teaser__info .teaser__title p {
     font-family: var(--font-secondary-nexa);
     font-size: 18px;
-    font-style: normal;
     font-weight: 600;
     line-height: 22px;
     letter-spacing: 0.36px;
@@ -615,7 +607,6 @@
       font-size: 32px;
       line-height: 40px;
       letter-spacing: 0.64;
-      /* padding: 8px 0 16px; */
     }
   }
 
@@ -656,7 +647,6 @@
     color: var(--Primary-Main, #18171a);
   }
 
-  /* Responsive Design */
   @media (width <= 500px) {
     .right-container,
     .right-container__card-1,
@@ -666,8 +656,6 @@
 
     .right-container__card-1 {
       max-width: none;
-
-      /* Reset max-width for smaller screens */
     }
 
     .image-container {
@@ -710,8 +698,6 @@
 
     .right-container__card-1 {
       max-width: none;
-
-      /* Reset max-width for smaller screens */
     }
 
     .image-container {
@@ -836,16 +822,12 @@
   @media (width >= 1024px) {
     .right-container,
     .right-container__card-1,
-    /* .right-container-subcontainer {
-      width: 650px;
-    } */
 
     .left-container {
       min-width: 350px;
     }
 
     .image-container {
-      /* max-height: 250px; */
       clip-path: polygon(
         0 0,
         100% 0,
@@ -854,6 +836,7 @@
         58% 100%,
         0 100%
       );
+
       @media(width >= 999px){
         clip-path: polygon(
         0 0,
@@ -872,6 +855,7 @@
 
     .teaser__card.teaser-dark {
       clip-path: polygon(0 16px, 18% 16px, 22% 0, 100% 0, 100% 100%, 0 100%);
+
       @media (width >= 999px){
         clip-path: polygon(0 28px, 20% 28px, 28% 0, 100% 0, 100% 100%, 0 100%);
       }
