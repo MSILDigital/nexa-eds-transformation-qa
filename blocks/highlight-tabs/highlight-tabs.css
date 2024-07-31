@@ -237,12 +237,9 @@
   font-family: var(--font-primary-nexa);
   font-size: 12px;
   font-weight: 400;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 130px) calc(100% - 15px), calc(100% - 150px) 100%, 0 100%);
   transform-origin: top;
   z-index: 10;
-
-  @media (width < 999px) {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 96px) calc(100% - 16px), calc(100% - 108px) 100%, 0 100%);
-  }
 
   @media (width >= 999px) {
     position: absolute;
@@ -254,12 +251,7 @@
     padding: 32px;
     font-size: 16px;
     font-weight: 300;
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 65% 90%, 60% 100%, 0 100%);
   }
-}
-
-.highlightItem .highlightItem-content-expanded{
-  clip-path: polygon(0 0, 100% 0, 100% 95%, 65% 95%, 60% 100%, 0 100%)
 }
 
 .highlightItem-content .more-content,

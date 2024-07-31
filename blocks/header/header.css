@@ -593,6 +593,7 @@ body {
     display: grid;
     grid-template-columns: 1.5fr auto;
     width: 100%;
+    margin:9px 0;
   }
 
   .menu-nexa .sign-in-teaser img {
