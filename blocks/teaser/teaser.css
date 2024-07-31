@@ -92,8 +92,12 @@ main .teaser-container > div {
   }
 }
 
-.light-teaser.buyers-guide-teaser .teaser__description p {
+.light-teaser.buyers-guide-teaser .teaser__description {
   margin-top: 16px;
+}
+
+.light-teaser.buyers-guide-teaser .teaser__description p {
+  margin: 0;
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
