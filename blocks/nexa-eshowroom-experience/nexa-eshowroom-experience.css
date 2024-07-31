@@ -4,12 +4,11 @@
   position: relative;
 }
 
-.nexa-eshowroom-experience.block::after {
+.e-showroom__container .e-showroom-carousel::after {
   position: absolute;
   content: "";
   height: 16px;
   background-color: #18171a;
-  display: block;
   bottom: -1px;
   right: 0;
   left: 0;
@@ -305,7 +304,7 @@
 }
 
 @media (width >=999px) {
-  .nexa-eshowroom-experience.block::after {
+  .e-showroom__container .e-showroom-carousel::after {
     height: 30px;
     clip-path: polygon(calc(18% + 30px) 0, 100% 0, 100% 100%, 18% 100%);
   }
