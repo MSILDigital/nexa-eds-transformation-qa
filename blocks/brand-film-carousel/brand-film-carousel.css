@@ -65,8 +65,8 @@
 }
 
 /* Hide the Pip/full screen button */
-.brand-film__pip-btn,
-.brand-film__fullscreen-btn {
+.brand-film__container .brand-film__pip-btn,
+.brand-film__container .brand-film__fullscreen-btn {
   display: none;
 }
 
