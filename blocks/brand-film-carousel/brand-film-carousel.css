@@ -6,7 +6,7 @@
 
 .brand-film__container {
   position: relative;
-  padding: 24px;
+  padding: 48px 20px 0;
   background-color: #18171a;
   clip-path: polygon(
     0 0,
@@ -35,7 +35,7 @@
 }
 
 .brand-film__container .brand-film__content {
-  padding: 16px 24px 0;
+  padding: 16px 16px 24px;
 
   .brand-film__title {
     color: white;
@@ -63,6 +63,13 @@
 .brand-film__container .brand-film__asset {
   position: relative;
 }
+
+/* Hide the Pip/full screen button */
+.brand-film__container .brand-film__pip-btn,
+.brand-film__container .brand-film__fullscreen-btn {
+  display: none;
+}
+
 
 .brand-film__container .brand-film__video-container {
   width: 100%;
