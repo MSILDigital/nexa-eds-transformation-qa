@@ -25,7 +25,8 @@ export default function decorate(block) {
       img.setAttribute('alt', alt);
     }
 
-    const title = titleEl?.textContent?.trim() || '';
+    const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
+    title?.classList?.add('highlight-tabs__title');
     const subtitle = subtitleEl?.textContent?.trim() || '';
     const description = Array.from(descriptionEl.querySelectorAll('p')).map((p) => p.textContent.trim()).join('');
     const descriptionEx = Array.from(descriptionExEl.querySelectorAll('p')).map((p) => p.textContent.trim()).join('');
@@ -38,7 +39,7 @@ export default function decorate(block) {
     const newHTML = utility.sanitizeHtml(`
         <div class="text-section">
           <div class="top-left">
-            <p>${title}</p>
+            ${(title) ? title.outerHTML : ''}
           </div>
           <div class="top-right">
             <p>${subtitle}</p>

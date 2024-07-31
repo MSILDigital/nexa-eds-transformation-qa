@@ -158,16 +158,10 @@ export default async function decorate(block) {
     const carItemsPromises = cars.map(async (itemEl, index) => {
       const car = cars[index];
       const {
-        modelId,
-      } = car;
-      const {
-        carDescription,
-      } = car;
-      const exShowRoomPrice = car.exShowroomPrice;
-      const {
+        modelCd,
+        modelTagline,
+        exShowRoomPrice,
         eshowroomDescription,
-      } = car;
-      const {
         eshowroomPrimaryCtaText,
       } = car;
       // eslint-disable-next-line
@@ -195,14 +189,14 @@ export default async function decorate(block) {
         return '';
       }
 
-      const carPrice = await fetchPrice(modelId, exShowRoomPrice);
+      const carPrice = await fetchPrice(modelCd, exShowRoomPrice);
       const formattedCarPrice = await formatCurrency(carPrice);
 
       return `
                   <div>
                       <div class="e-showroom__info-container">
                           <div>
-                              <h2 class="text-heading-primary">${carDescription}</h2>
+                              <h2 class="text-heading-primary">${modelTagline}</h2>
                               <div class="e-showroom__price-text">${priceText}
                                   <span class="e-showroom__price">${formattedCarPrice}</span>
                               </div>
@@ -214,7 +208,7 @@ export default async function decorate(block) {
                                   <a target="_blank" href="${carDetailsPagePath}" title="${eshowroomPrimaryCtaText}" target="_self">${eshowroomPrimaryCtaText}</a>
                                   </div>
                                    <div class="cta cta__secondary">
-                                  <a target="_blank" href="${secondaryBtnCta}?${modelId}" title="${secondaryBtnText}" target="_self">${secondaryBtnText}</a>
+                                  <a target="_blank" href="${secondaryBtnCta}?modelCd=${modelCd}" title="${secondaryBtnText}" target="_self">${secondaryBtnText}</a>
                                   </div>
                               </div>
                           </div>

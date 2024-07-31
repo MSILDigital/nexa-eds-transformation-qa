@@ -254,7 +254,7 @@ export default async function decorate(block) {
 
           const logoImg = document.createElement('img');
           // eslint-disable-next-line
-          logoImg.src = car.carLogoImage._publishUrl;
+          logoImg.src = car.carLogoImage?._publishUrl;
           logoImg.alt = car.logoImageAltText;
           cardLogoImage.appendChild(logoImg);
           card.appendChild(cardLogoImage);
@@ -265,7 +265,7 @@ export default async function decorate(block) {
 
         const img = document.createElement('img');
         // eslint-disable-next-line
-        img.src = car.carImage._publishUrl;
+        img.src = car.carImage?._publishUrl;
         img.alt = car.altText;
         img.loading = 'lazy';
         cardImage.appendChild(img);
@@ -275,12 +275,12 @@ export default async function decorate(block) {
 
         const heading = document.createElement('h3');
         heading.classList.add('card-title');
-        heading.textContent = car.carName;
+        heading.textContent = car.modelDesc;
         cardContent.appendChild(heading);
 
         const description = document.createElement('p');
         description.classList.add('card-description');
-        description.textContent = car.fuelOptions.join(' / ');
+        description.textContent = car.fuelType?.join(' / ');
 
         cardContent.appendChild(description);
         const priceTextElement = document.createElement('p');
@@ -291,7 +291,7 @@ export default async function decorate(block) {
         priceElement.dataset.targetIndex = index;
         cardContent.appendChild(priceElement);
 
-        fetchPrice(car.modelId, priceElement, priceTextElement, car.exShowroomPrice);
+        fetchPrice(car.modelCd, priceElement, priceTextElement, car.exShowroomPrice);
 
         card.appendChild(cardImage);
         card.appendChild(cardContent);
@@ -385,8 +385,8 @@ export default async function decorate(block) {
       if (priceElement) {
         const priceTextElement = el.querySelector('.card-price-text');
         const index = parseInt(priceElement.dataset.targetIndex, 10);
-        const { modelId, exShowroomPrice } = cars[index];
-        fetchPrice(modelId, priceElement, priceTextElement, exShowroomPrice);
+        const { modelCd, exShowroomPrice } = cars[index];
+        fetchPrice(modelCd, priceElement, priceTextElement, exShowroomPrice);
       }
     });
   });

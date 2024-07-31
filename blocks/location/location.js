@@ -126,7 +126,7 @@ export default async function decorate(block) {
     locationButton.textContent = cityName;
     locationButton.setAttribute('data-forcode', forCode);
     dispatchLocationChangeEvent(forCode);
-    block.querySelector('.geo-location').style.display = 'none';
+    block.querySelector('.geo-location').classList.add('hidden');
   }
   // Function to auto-select the nearest city based on user's location
   function autoSelectNearestCity(latitude, longitude) {
@@ -183,6 +183,7 @@ export default async function decorate(block) {
     citiesObject = processData(filteredData);
     const locationButton = block.querySelector('.location-btn');
     const geoLocationDiv = block.querySelector('.geo-location');
+    geoLocationDiv.classList.add('hidden');
     const findLocation = block.querySelector('.find-location__text');
     const separator = block.querySelector('.separator');
     const geoLocationText = block.querySelector('.geo-location__text');
@@ -216,17 +217,11 @@ export default async function decorate(block) {
     });
 
     locationButton.addEventListener('click', () => {
-      if (
-        geoLocationDiv.style.display === 'none'
-        || geoLocationDiv.style.display === ''
-      ) {
-        geoLocationDiv.style.display = 'block';
-      } else {
-        geoLocationDiv.style.display = 'none';
-      }
+      document.querySelector('.sign-in-wrapper').classList.add('hidden');
+      geoLocationDiv.classList.toggle('hidden');
     });
     detectLocationCTA.addEventListener('click', () => {
-      geoLocationDiv.style.display = 'none';
+      geoLocationDiv.classList.add('hidden');
       requestLocationPermission();
     });
     findLocation.addEventListener('click', () => {

@@ -88,13 +88,15 @@ export default function decorate(block) {
     requestAnimationFrame(highlightFirstCTA);
 
     // Add hover effects
+    const removeHightlight = () => {
+      ctaElements.forEach((ctaElement) => {
+        ctaElement.classList.remove('highlight');
+      });
+    };
     ctaElements.forEach((cta) => {
       cta.addEventListener('mouseover', () => {
-        ctaElements.forEach((ctaElement) => {
-          ctaElement.classList.remove('highlight');
-        });
+        removeHightlight();
         cta.classList.add('highlight');
-
         const ctaIndex = Array.from(ctaElements).indexOf(cta);
         const ctaHeight = getCTAHeight();
         const ctaOffsetTop = ctaIndex * ctaHeight;
