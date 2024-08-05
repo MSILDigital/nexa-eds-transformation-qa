@@ -219,7 +219,7 @@
   right: 90px;
 }
 
-.brand-film__container video:not([controls]):picture-in-picture {
+.brand-film__container .brand-film__video-container:has(video:picture-in-picture) video:not([controls]):picture-in-picture {
   opacity: 0;
 }
 
