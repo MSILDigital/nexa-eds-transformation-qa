@@ -144,11 +144,5 @@
     "components": [
       "safety-item"
     ]
-  },
-  {
-    "id":"link-column",
-    "components": [
-      "cta"
-    ]
   }
 ]
