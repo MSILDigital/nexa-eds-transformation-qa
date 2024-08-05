@@ -604,8 +604,15 @@ body {
 }
 
 .panel .link-container-section {
+  display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+.panel .link-container-section .link-grid-column.link-column-horizontal .links-container {
+  flex-flow: column nowrap;
+  flex-basis: unset;
+  gap: unset;
 }
 
 .panel .link-grid,
@@ -807,7 +814,8 @@ body {
     background-color: var(--nav-background-color);
   }
 
-  .nexa.panel .link-grid-column .links-container {
+  .nexa.panel .link-grid-column .links-container,
+  .panel .link-container-section .link-grid-column.link-column-horizontal .links-container {
     flex-direction: row;
     gap: 100px;
   }
