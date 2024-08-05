@@ -432,4 +432,8 @@ footer .footer-bottom-section .link-column-horizontal .links-container {
     scale: 1;
     opacity: 1;
   }
+
+  footer .footer__columns .column.contact-section .user__contact .user__contact__icons a:hover {
+    scale: 1.2;
+  }
 }
