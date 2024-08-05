@@ -2,25 +2,25 @@ import { getMetadata } from '../../scripts/aem.js';
 import utility from '../../utility/utility.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-const list = [];
-
-function toggleMenu() {
-  document.getElementById('menu').classList.toggle('hidden');
-  document.querySelector('header')?.classList.toggle('lift-up');
-}
-
-function toggleCarMenu() {
-  document.getElementById('carFilterMenu').classList.toggle('hidden');
-  document.querySelector('header')?.classList.toggle('lift-up');
-}
-
-function toggleUserDropdown() {
-  const navRight = document.getElementById('nav-right');
-  navRight.querySelector('.sign-in-wrapper').classList.toggle('hidden');
-  document.querySelector('.geo-location').classList.add('hidden');
-}
-
 export default async function decorate(block) {
+  const list = [];
+
+  function toggleMenu() {
+    document.getElementById('menu')?.classList.toggle('hidden');
+    document.querySelector('header')?.classList.toggle('lift-up');
+  }
+
+  function toggleCarMenu() {
+    document.getElementById('carFilterMenu')?.classList.toggle('hidden');
+    document.querySelector('header')?.classList.toggle('lift-up');
+  }
+
+  function toggleUserDropdown() {
+    const navRight = document.getElementById('nav-right');
+    navRight?.querySelector('.sign-in-wrapper')?.classList.toggle('hidden');
+    document.querySelector('.geo-location')?.classList.add('hidden');
+  }
+
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta
@@ -40,7 +40,20 @@ export default async function decorate(block) {
       const heading = el.querySelector('.icontitle :is(h1,h2,h3,h4,h5,h6)');
       const icon = el.querySelector('.icon');
       const iconClicked = el.querySelector('.iconClicked');
-      const [content] = Array.from(el.children).slice(1);
+      let content;
+      if (el.querySelector('.link-column-wrapper')) {
+        const gridContainer = document.createElement('div');
+        const grid = document.createElement('div');
+        grid.className = 'link-grid block';
+        const contentSection = document.createElement('div');
+        contentSection.className = 'link-container-section';
+        Array.from(el.querySelectorAll('.link-column-wrapper .link-grid-column')).forEach((item) => contentSection.insertAdjacentElement('beforeend', item));
+        grid.append(contentSection);
+        gridContainer.append(grid);
+        content = gridContainer;
+      } else {
+        [content] = Array.from(el.children).slice(1);
+      }
       let teaserWrappers;
       let combinedTeaserHTML = '';
       let teaser;
@@ -68,16 +81,16 @@ export default async function decorate(block) {
       });
     });
   const logo = nav.querySelector('.logo-wrapper');
-  const carIcon = nav.children[1].querySelector('.icon')?.innerHTML;
+  const carIcon = nav.children[1]?.querySelector('.icon')?.innerHTML;
   const carFilter = nav.querySelector('.car-filter');
   const userDropDownDiv = nav.querySelector(
     '.sign-in-wrapper .user__dropdown',
   );
   const contact = nav.querySelector('.contact-wrapper');
-  userDropDownDiv.append(contact);
+  userDropDownDiv?.append(contact);
   const userDropdown = nav.querySelector('.sign-in-wrapper');
-  userDropdown.classList.add('hidden');
-  const userAccountLinkItems = userDropDownDiv.querySelectorAll('.user__account>a');
+  userDropdown?.classList.add('hidden');
+  const userAccountLinkItems = userDropDownDiv?.querySelectorAll('.user__account>a');
   const signInTeaser = nav.querySelector('.sign-in-teaser');
   const locationHtml = nav.querySelector('.location-wrapper');
 
@@ -88,13 +101,13 @@ export default async function decorate(block) {
         <span class="nav-hamburger-icon"></span>
       </button>
     </div>
-      ${logo.outerHTML}
+      ${logo?.outerHTML ?? ''}
       <div class="links"></div>
       <div class="right" id="nav-right">
         <div id="user-img"></div>
-        ${userDropdown.outerHTML}
+        ${userDropdown?.outerHTML ?? ''}
       </div>
-      <div class="car-icon">${carIcon}</div>
+      <div class="car-icon">${carIcon ?? ''}</div>
     </div>
     <div class="car-filter-menu hidden car-filter-nexa" id="carFilterMenu">
     <div class="car-panel-header">
@@ -128,20 +141,20 @@ export default async function decorate(block) {
   const caricon = document.querySelector('.navbar .car-icon');
   const carFilterClose = document.querySelector('.car-filter-close');
   [navHamburger, backArrow, closeIcon].forEach((element) => {
-    element.addEventListener('click', toggleMenu);
+    element?.addEventListener('click', toggleMenu);
   });
 
-  caricon.addEventListener('click', toggleCarMenu);
-  carFilterClose.addEventListener('click', toggleCarMenu);
+  caricon?.addEventListener('click', toggleCarMenu);
+  carFilterClose?.addEventListener('click', toggleCarMenu);
 
   document
     .querySelector('#user-img')
-    .addEventListener('click', () => toggleUserDropdown());
+    ?.addEventListener('click', () => toggleUserDropdown());
 
   const linkEl = document.querySelector('.links');
   const menuList = document.querySelector('.menu-list');
 
-  menuList.innerHTML += `<li>${signInTeaser.outerHTML}</li>`;
+  menuList.innerHTML += `<li>${signInTeaser?.outerHTML ?? ''}</li>`;
 
   list.forEach((el, i) => {
     const linkTitle = document.createElement('div');
@@ -153,31 +166,29 @@ export default async function decorate(block) {
     desktopPanel.classList.add(
       'desktop-panel',
       'panel',
-      el.heading?.split(' ')[0].toLowerCase(),
+      el.heading?.split(' ')[0]?.toLowerCase(),
     );
 
     if (el.content || el.teaser) {
       if (el.content) desktopPanel.append(el.content);
       if (el.teaser) desktopPanel.append(el.teaser);
-      linkEl.append(linkTitle, desktopPanel);
+      linkEl?.append(linkTitle, desktopPanel);
     } else {
-      linkEl.append(linkTitle);
+      linkEl?.append(linkTitle);
     }
 
     if (i === 0) return;
 
     if (el.content?.innerHTML || el.teaser?.innerHTML) {
       menuList.innerHTML += `<li id="menu-item-${i}" class="accordion nav-link ${el.heading?.toLowerCase()}">
-      <span class="icon">${el.icon}</span>
-      <span class="menu-title">${el.heading}</span>
+      <span class="icon">${el.icon ?? ''}</span>
+      <span class="menu-title">${el.heading ?? ''}</span>
     </li>
-    <div class="panel">${el.content?.innerHTML || ''}${
-  el.teaser?.innerHTML || ''
-}</div>`;
+    <div class="panel">${el.content?.innerHTML ?? ''}${el.teaser?.innerHTML ?? ''}</div>`;
     } else {
       menuList.innerHTML += `<li id="menu-item-${i}" class="nav-link ${el.heading?.toLowerCase()}">
-      <span class="icon">${el.icon}</span>
-      <span class="menu-title">${el.heading}</span>
+      <span class="icon">${el.icon ?? ''}</span>
+      <span class="menu-title">${el.heading ?? ''}</span>
     </li>`;
     }
   });
@@ -186,11 +197,13 @@ export default async function decorate(block) {
     block.querySelector('.car-filter-menu')?.append(carFilter);
   }
 
-  Array.from(userAccountLinkItems).slice(1).forEach((el) => {
-    menuList.innerHTML += `<li>${el.outerHTML}</li>`;
-  });
+  if (userAccountLinkItems) {
+    Array.from(userAccountLinkItems).slice(1).forEach((el) => {
+      menuList.innerHTML += `<li>${el.outerHTML ?? ''}</li>`;
+    });
+  }
 
-  menuList.innerHTML += `<li>${contact.outerHTML}</li>`;
+  menuList.innerHTML += `<li>${contact?.outerHTML ?? ''}</li>`;
 
   const acc = document.getElementsByClassName('accordion');
 
@@ -217,12 +230,12 @@ export default async function decorate(block) {
   const header = document.querySelector('header');
 
   document.querySelector('.navbar .links')?.addEventListener('mouseenter', () => {
-    header.classList.toggle('lift-up');
-    document.querySelector('.sign-in-wrapper').classList.add('hidden');
-    document.querySelector('.geo-location').classList.add('hidden');
+    header?.classList.toggle('lift-up');
+    document.querySelector('.sign-in-wrapper')?.classList.add('hidden');
+    document.querySelector('.geo-location')?.classList.add('hidden');
   });
 
   document.querySelector('.navbar .links')?.addEventListener('mouseleave', () => {
-    header.classList.toggle('lift-up');
+    header?.classList.toggle('lift-up');
   });
 }

@@ -32,7 +32,7 @@
       "teaser",
       "ctaWithIcon",
       "contact",
-      "link-grid",
+      "link-column",
       "sign-in",
       "icontitle",
       "location",
@@ -58,6 +58,12 @@
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id":"link-column",
+    "components": [
+      "cta"
     ]
   },
   {

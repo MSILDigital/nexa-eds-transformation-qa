@@ -371,51 +371,67 @@
     ]
   },
   {
-    "id": "link-list",
+    "id": "link-column",
     "fields": [
       {
-        "component": "tab",
-        "label": "Column 1",
-        "name": "col1"
-      },
-      {
-        "component": "richtext",
-        "name": "rte",
-        "label": "Rich Text - List",
+        "component": "text-input",
+        "name": "title",
+        "value": "",
+        "label": "Title",
         "valueType": "string"
       },
       {
-        "component": "tab",
-        "label": "Column 2",
-        "name": "col2"
+        "component": "select",
+        "name": "titleType",
+        "value": "h2",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          },
+          {
+            "name": "Paragraph",
+            "value": "p"
+          }
+        ]
       },
       {
-        "component": "richtext",
-        "name": "rte2",
-        "label": "Rich Text - List",
-        "valueType": "string"
-      },
-      {
-        "component": "tab",
-        "label": "Column 3",
-        "name": "col3"
-      },
-      {
-        "component": "richtext",
-        "name": "rte3",
-        "label": "Rich Text - List",
-        "valueType": "string"
-      },
-      {
-        "component": "tab",
-        "label": "Column 4",
-        "name": "col4"
-      },
-      {
-        "component": "richtext",
-        "name": "rte4",
-        "label": "Rich Text - List",
-        "valueType": "string"
+        "component": "select",
+        "name": "orientation",
+        "label": "Orientation",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Horizontal",
+            "value": "link-column-horizontal"
+          },
+          {
+            "name": "Vertical",
+            "value": "link-column-vertical"
+          }
+        ]
       }
     ]
   },
@@ -1673,6 +1689,23 @@
         "valueType": "string",
         "name": "ctaLink",
         "label": "CTA Link"
+      },
+      {
+        "component": "select",
+        "name": "ctaLinkTarget",
+        "value": "",
+        "label": "Open link in New Page ?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "_blank"
+          },
+          {
+            "name": "No",
+            "value": "_self"
+          }
+        ]
       }
     ]
   },

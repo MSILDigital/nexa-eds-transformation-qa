@@ -21,176 +21,201 @@ export default async function decorate(block) {
     footer.append(fragment.firstElementChild);
   }
 
-  const topSection = footer.querySelector('.footer-top-section');
-  const linkGridSection = footer.querySelector('.link-grid-wrapper');
-  const contactUsSection = footer.querySelector(
-    '.footer-center-section .default-content-wrapper',
-  );
-  const socialLinks = footer.querySelector(
-    '.footer-center-section .contact-wrapper',
-  );
-  const bottomSection = footer.querySelector('.footer-bottom-section');
-  const bottomFirstSection = bottomSection?.querySelectorAll(
-    '.columns-wrapper > div > div > div',
-  );
-  const bottomSecondSection = bottomSection?.querySelector(
-    '.default-content-wrapper',
-  );
-
-  const contactUsHeadingSection = contactUsSection?.querySelector('h3');
-  if (contactUsHeadingSection) {
-    contactUsSection?.removeChild(contactUsHeadingSection);
-    contactUsHeadingSection.classList.add('contactUs__Heading');
-  }
-  contactUsSection?.querySelector('p')?.classList?.add('tollfree__element');
-
-  const bottomSectionHtmlText = [];
-  bottomFirstSection?.forEach((bottomElement) => {
-    const pElement = bottomElement.querySelectorAll('p');
-    let pElementString = '';
-    pElement.forEach((pStr) => {
-      pElementString += `<p>${pStr.innerText}</p>`;
-    });
-    bottomSectionHtmlText.push(pElementString);
-  });
-
-  let bottomFirstSectionHtml = '';
-  const columnCount = 2;
-  if (bottomSectionHtmlText.length === columnCount) {
-    bottomFirstSectionHtml = `
-      <div class="row">
-        <div class="col-md-7">
-          <div class="footer__info-left">
-            ${bottomSectionHtmlText[0]}
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="footer__info-right">
-            ${bottomSectionHtmlText[1]}
-          </div>
-        </div>
-      </div>
-    `;
-  } else {
-    bottomFirstSectionHtml = `
-      <div class="row">
-        <div class="col-md-12">
-          <div class="footer__info-left">
-            ${(bottomFirstSectionHtml) ? bottomSectionHtmlText[0] : ''}
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  let bottomSecondSectionHtml = '<div class="row centre-align">';
-  bottomSecondSection?.querySelectorAll('p')?.forEach((bottomElement) => {
-    const anchor = bottomElement.querySelector('a');
-    if (anchor) {
-      bottomSecondSectionHtml += ` <li><a href=${anchor.href}>${anchor.textContent}</a></li>`;
-    } else {
-      bottomSecondSectionHtml += `<div class="col-md-3 footer__copyright-left"><p>${bottomElement.textContent}</p></div><div class="col-md-9 footer__copyright-right"><ul>`;
+  const getHeading = (el) => {
+    if (!el) {
+      return undefined;
     }
-  });
-  bottomSecondSectionHtml += '</ul></div>';
+    if (el.children?.length === 1) {
+      return footer.firstElementChild.querySelector('.default-content-wrapper');
+    }
+    return undefined;
+  };
 
-  let topSectionHtml = '';
-  if (topSection?.innerHTML) {
-    topSectionHtml = `
-      <div class="row">
-        <div class="col-md-12">
-          ${topSection.innerHTML}
-        </div>
-      </div>
-    `;
+  let columnStart = 0;
+  let columnEnd = footer.children.length;
+
+  const heading = getHeading(footer.firstElementChild);
+  if (heading) {
+    columnStart = 1;
+    heading.classList.add('row', 'footer-top-section');
   }
 
-  // Define the external function for the click event
-  function accordionClick() {
-    const ulElement = this.parentElement.querySelector('ul');
-    if (ulElement.classList.contains('hide__section__mobile')) {
-      this.classList.add('expand');
-      this.classList.remove('collapse');
-      ulElement.classList.remove('hide__section__mobile');
+  const getBottomDiv = () => {
+    if (footer.children.length > 1) {
+      const bottomDiv = footer.children[footer.children.length - 1];
+      bottomDiv.className = 'row footer-bottom-section';
+      return bottomDiv;
+    }
+    if (!heading && footer?.firstElementChild?.querySelector('.link-grid-horizontal')) {
+      const bottomDiv = footer.firstElementChild;
+      bottomDiv.className = 'row footer-bottom-section';
+    }
+    return undefined;
+  };
+
+  const bottomDiv = getBottomDiv();
+  if (bottomDiv) {
+    if (footer.children.length > 1) {
+      columnEnd = footer.children.length - 1;
     } else {
-      this.classList.add('collapse');
-      this.classList.remove('expand');
-      ulElement.classList.add('hide__section__mobile');
+      columnEnd = -1;
     }
   }
 
-  const collapseSection = () => {
-    block.querySelector('.contactUs__section').classList.add('hide__section');
-    block
-      .querySelector('.link-container-section')
-      .querySelectorAll('ul')
-      .forEach((element) => {
-        element.classList.add('hide__section');
-      });
-  };
-
-  const expandSection = () => {
-    block
-      .querySelector('.contactUs__section')
-      .classList.remove('hide__section');
-    block
-      .querySelector('.link-container-section')
-      .querySelectorAll('ul')
-      .forEach((element) => {
-        element.classList.remove('hide__section');
-      });
-  };
-
-  block.innerHTML = `
-    <div class="footer">
-      <div class="container">
-        ${topSectionHtml}
-        <div class="row">
-          <div class="col-md-10 footer__columns">
-            ${(linkGridSection) ? linkGridSection.innerHTML : ''}
-          </div>
-          <div class="col-md-2 footer__columns footer__columns-contact">
-            ${(contactUsHeadingSection) ? contactUsHeadingSection.outerHTML : ''}
-            <div class="contactUs__section hide__section__mobile">
-              ${(contactUsSection) ? contactUsSection.outerHTML : ''}
-              ${(socialLinks) ? socialLinks.innerHTML : ''}
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="footer__separator"></div>
-          </div>
-        </div>
-        <!-- Footer info text begins -->
-        ${bottomFirstSectionHtml}
-        <!-- Footer info text end -->
-        <!-- Footer copyright begins -->
-        ${bottomSecondSectionHtml}
-        <!-- Footer copyright end -->
-      </div>
-    </div>
-  `;
-
-  const footerSeparatorElement = block.querySelector('.footer__separator');
-  footerSeparatorElement.addEventListener(
-    'click',
-    () => {
-      if (footerSeparatorElement.classList.contains('element__expand')) {
-        footerSeparatorElement.classList.remove('element__expand');
-        expandSection();
-      } else {
-        footerSeparatorElement.classList.add('element__expand');
-        collapseSection();
+  let sections = [];
+  if (columnStart > 0 && columnEnd < footer.children.length) {
+    sections = Array
+      .from(footer.children)
+      .slice(columnStart, columnEnd);
+  }
+  const columns = [];
+  const columnsDiv = document.createElement('div');
+  if (sections.length > 0) {
+    let i = 0;
+    const isLinkColumn = (section) => {
+      if (section.classList.contains('link-column-container')) {
+        return Array.from(section.children).find((el) => !el.classList.contains('link-column-wrapper')) !== null;
       }
-    },
-    false,
-  );
+      return false;
+    };
+    sections
+      .forEach((item) => {
+        if (isLinkColumn(item)) {
+          item.classList.remove('section');
+          Array.from(item.querySelectorAll('.link-column-wrapper')).forEach((el) => {
+            const div = document.createElement('div');
+            div.className = `link-column-container column column-${i}`;
+            el.remove();
+            div.append(el);
+            columns.push(div);
+            i += 1;
+          });
+          item.classList.remove('link-column-container');
+          if (item.children.length > 0) {
+            item.classList.add('column', `column-${i}`);
+            columns.push(item);
+            i += 1;
+          }
+        } else {
+          item.classList.add('column', `column-${i}`);
+          columns.push(item);
+          i += 1;
+        }
+      });
+    columnsDiv.classList.add('row', 'footer__columns');
+  }
 
-  const accordionItems = block.querySelectorAll('.accordian-item');
-  accordionItems.forEach((element) => {
-    element.parentElement
-      .querySelector('ul')
-      .classList.add('hide__section__mobile');
-    element.classList.add('collapse');
-    element.addEventListener('click', accordionClick, false);
+  const initCollapsable = (el, finalEl) => {
+    if (!el || !finalEl) {
+      return;
+    }
+    if (el === finalEl) {
+      return;
+    }
+    let sibling = el.nextElementSibling;
+    while (sibling) {
+      sibling.classList.add('collpsable');
+      sibling = sibling.nextElementSibling;
+    }
+    initCollapsable(el.parentElement, finalEl);
+  };
+
+  let isContactAdded = false;
+  columns?.forEach((item) => {
+    const colHeading = item.firstElementChild?.querySelector(':is(h1,h2,h3,h4,h5,h6');
+    if (colHeading) {
+      colHeading.classList?.add('column__heading');
+      initCollapsable(colHeading, item);
+    } else {
+      item.classList.add('collpsable');
+    }
+    if (!isContactAdded && item.classList.contains('contact-container')) {
+      item.classList.add('contact-section');
+      isContactAdded = true;
+    }
+    columnsDiv.insertAdjacentElement('beforeend', item);
   });
+
+  const footerSeparator = document.createElement('div');
+  footerSeparator.className = 'footer__separator';
+
+  block.innerHTML = '';
+  if (heading) {
+    block.append(heading);
+  }
+  if (columnsDiv.children.length > 0) {
+    block.insertAdjacentElement('beforeend', columnsDiv);
+    block.insertAdjacentElement('beforeend', footerSeparator);
+    if (columnsDiv.querySelectorAll('.link-column-container').length === 4) {
+      columnsDiv.classList.add('footer__link-grid-container');
+    }
+  }
+  if (bottomDiv) {
+    block.insertAdjacentElement('beforeend', bottomDiv);
+    const columnsWrapper = bottomDiv.querySelector('.columns-wrapper .columns.block > div');
+    if (columnsWrapper?.children?.length === 2) {
+      columnsWrapper.classList.add('footer__two-column-section');
+    }
+  }
+
+  const adjustHeight = () => {
+    const isDesktop = window.matchMedia('(min-width: 999px)').matches;
+    if (isDesktop && !block.querySelector('.footer__columns--collapsed')) {
+      columnsDiv.querySelectorAll('.collpsable:not(p)')?.forEach((item) => {
+        item.style.height = `${item.scrollHeight}px`;
+      });
+    }
+    if (!isDesktop) {
+      block.querySelectorAll('.accordian-content').forEach((el) => {
+        if (!el.classList.contains('accordian-content--expanded') && !el.parentElement?.classList?.contains('link-column-horizontal')) {
+          el.style.height = '0';
+        }
+      });
+    }
+  };
+
+  footerSeparator.addEventListener('click', () => {
+    columnsDiv.querySelectorAll('.collpsable')?.forEach((item) => {
+      if (item.classList.contains('hide__section')) {
+        item.classList.remove('hide__section');
+        item.style.height = `${item.scrollHeight}px`;
+        columnsDiv.classList.remove('footer__columns--collapsed');
+        footerSeparator.classList.remove('footer__separator--collapsed');
+      } else {
+        item.classList.add('hide__section');
+        item.style.height = '0';
+        columnsDiv.classList.add('footer__columns--collapsed');
+        footerSeparator.classList.add('footer__separator--collapsed');
+      }
+    });
+  });
+
+  block.querySelectorAll('.accordian-item').forEach((item) => {
+    if (item.parentElement?.classList?.contains('link-column-horizontal')) {
+      return;
+    }
+    item.addEventListener('click', () => {
+      if (window.matchMedia('(min-width: 999px').matches) {
+        return;
+      }
+      const content = item.parentElement.querySelector('.accordian-content');
+      if (content) {
+        if (item.classList.contains('accordian-item--expanded')) {
+          content.classList.remove('accordian-content--expanded');
+          item.classList.remove('accordian-item--expanded');
+          content.style.height = '0';
+        } else {
+          content.classList.add('accordian-content--expanded');
+          item.classList.add('accordian-item--expanded');
+          content.style.height = `${content.scrollHeight + 16}px`;
+        }
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    adjustHeight();
+  });
+
+  adjustHeight();
 }
