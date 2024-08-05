@@ -64,13 +64,6 @@
   position: relative;
 }
 
-/* Hide the Pip/full screen button */
-.brand-film__container .brand-film__pip-btn,
-.brand-film__container .brand-film__fullscreen-btn {
-  display: none;
-}
-
-
 .brand-film__container .brand-film__video-container {
   width: 100%;
   height: 377px;
@@ -225,6 +218,15 @@
   bottom: -2px;
   right: 90px;
 }
+
+.brand-film__container .brand-film__video-container:has(video:picture-in-picture) video:not([controls]):picture-in-picture {
+  opacity: 0;
+}
+
+.brand-film__container .brand-film__video-container:has(video:picture-in-picture) {
+  background-color: black;
+}
+
 
 @media (width >= 999px) {
   .brand-film__container {
