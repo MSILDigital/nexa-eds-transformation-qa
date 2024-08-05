@@ -802,8 +802,8 @@
             "value": "bodyType"
           },
           {
-            "name": "Fuel Options",
-            "value": "fuelOptions"
+            "name": "Fuel Type",
+            "value": "fuelType"
           },
           {
             "name": "Technology",
@@ -1788,16 +1788,16 @@
         "valueType": "string",
         "options": [
           {
-            "name": "Engine",
-            "value": "engine"
+            "name": "Displacement",
+            "value": "displacement"
           },
           {
-            "name": "Power",
-            "value": "power"
+            "name": "Max Power",
+            "value": "maxPower"
           },
           {
-            "name": "Mileage",
-            "value": "mileage"
+            "name": "Fuel Efficiency",
+            "value": "fuelEfficiency"
           }
         ]
       },

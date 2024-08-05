@@ -2,14 +2,15 @@ import utility from './utility.js';
 import ctaUtils from './ctaUtils.js';
 
 const teaser = {
-  getTeaser(block) {
-    function initImage(image, altTextEl) {
-      const img = image.querySelector('img');
-      img.removeAttribute('width');
-      img.removeAttribute('height');
+  getTeaser: (block) => {
+    const initImage = (image, altTextEl) => {
+      const img = image?.querySelector('img');
+      img?.removeAttribute('width');
+      img?.removeAttribute('height');
       const alt = altTextEl?.textContent?.trim() || 'image';
-      img.setAttribute('alt', alt);
-    }
+      img?.setAttribute('alt', alt);
+    };
+
     const [
       imageEl,
       altTextEl,
@@ -26,10 +27,7 @@ const teaser = {
       themeTypeEl,
     ] = block.children;
     const image = imageEl?.querySelector('picture');
-    if (image) {
-      initImage(image, altTextEl);
-    }
-
+    initImage(image, altTextEl);
     const pretitle = pretitleEl?.textContent?.trim();
     const title = titleEl?.querySelector(':is(h1,h2,h3,h4,h5,h6)');
     title?.classList?.add('teaser__title-text');

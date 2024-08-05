@@ -104,8 +104,10 @@ export default function decorate(block) {
     </picture>
     <div class="right-container__content">
       <div class="offerList__content img-over-text">
+       <div class="teaser__heading">
         <div class="teaser__title">${title ? `<p>${title}</p>` : ''}</div>
         ${description ? `<p>${description}</p>` : ''}
+        </div>
         <div class="offerList__action">${a ? a.outerHTML : ''}</div>
       </div>
     </div>
