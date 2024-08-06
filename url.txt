@@ -1,2 +1,2 @@
-https://<yoursiteurl>/com/in/en/car-detail
+https://<yoursiteurl>/com/in/en/cars/grand-vitara
 https://<yoursiteurl>/com/in/en/nexa-demo
