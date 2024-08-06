@@ -1,0 +1,2 @@
+https://<yoursiteurl>/com/in/en/car-detail
+https://<yoursiteurl>/com/in/en/nexa-demo
