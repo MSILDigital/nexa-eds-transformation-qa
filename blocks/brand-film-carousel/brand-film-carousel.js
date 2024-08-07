@@ -74,8 +74,8 @@ export default async function decorate(block) {
       <div class="brand-film__wrapper">
         <div class="brand-film__asset">
           <div class="brand-film__actions">
-            <button class="brand-film__fullscreen-btn">Full Screen</button>
-            <button class="brand-film__pip-btn">Pip</button>
+            <span class="brand-film__fullscreen-btn"></span>
+            <span class="brand-film__pip-btn"></span>
           </div>
           <div class="brand-film__close-btn"></div>
           ${videosHtml}
