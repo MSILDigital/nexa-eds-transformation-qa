@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p135331-e1341966.adobeaemcloud.com/bin/franklin.delivery/msildigital/nexa-eds-transformation/main"
+    url: "https://author-p135331-e1368241.adobeaemcloud.com/bin/franklin.delivery/msildigital/nexa-eds-transformation-qa/main"
     type: "markup"
     suffix: ".html"
